@@ -40,7 +40,7 @@ public class UcitajListuSo extends OpstaSo1{
     }*/
 
     @Override
-    public void izvrsenjeSo(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws SQLException {
+    public void izvrsenjeSo(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws Exception {
         b.vratiSve(lista, odo);
     }
 }
