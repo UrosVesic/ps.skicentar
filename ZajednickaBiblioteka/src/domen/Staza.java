@@ -74,7 +74,7 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
     @Override
     public String postaviVrednostiAtributa() {
         return "brojStaze = " + brojStaze + ", " + "nazivStaze = " + (nazivStaze == null ? null : "'" + nazivStaze + "'") + ", "
-                + "tipStaze = " + (tipStaze == null ? null : "'" + tipStaze + "'") + ", " + "skiCentar = " + (skiCentar == null ? null : skiCentar.getSifraSkiCentra());
+                + "tipStaze = " + (tipStaze == null ? null : "'" + tipStaze + "'") + ", " + "sifraSkiCentra = " + (skiCentar == null ? null : skiCentar.getSifraSkiCentra());
     }
 
     @Override
