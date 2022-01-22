@@ -32,7 +32,7 @@ public class DbFabrikaKonekcije {
         if (konekcija == null || konekcija.isClosed()) {
             try {
                 //Class.forName("com.mysql.cj.jdbc.Driver");
-                String url = "jdbc:mysql://localhost:3306/projekatPS";
+                String url = "jdbc:mysql://localhost:3306/PSprojekat";
                 String user = "root";
                 String password = "root";
                 konekcija = DriverManager.getConnection(url, user, password);
