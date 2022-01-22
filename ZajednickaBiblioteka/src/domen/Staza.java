@@ -84,14 +84,11 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public String vratiUslovZaNadjiSlog() {
-        //return "brojStaze = " + brojStaze;
-        return "nazivStaze LIKE '"+nazivStaze+"'";
+        return "brojStaze = " + brojStaze;
+        //return "nazivStaze LIKE '"+nazivStaze+"'";
     }
 
-    @Override
-    public String vratiUslovZaPromeniSlog() {
-        return "brojStaze = " + brojStaze;
-    }
+    
     
     
 
