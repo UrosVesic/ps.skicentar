@@ -7,12 +7,7 @@ package klijent.forme.skiCentar;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontroler.Kontroler;
 import klijent.kontrolerKi.KontrolerKIKreirajSkiCentar;
 
 /**

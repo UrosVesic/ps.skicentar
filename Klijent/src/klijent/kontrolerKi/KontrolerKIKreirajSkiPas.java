@@ -5,6 +5,7 @@
  */
 package klijent.kontrolerKi;
 
+import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
 import domen.SkiPas;
 import domen.StavkaSkiPasa;
@@ -19,7 +20,6 @@ import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import klijent.forme.skiPas.KreirajSkiPasForma;
-import klijent.kontroler.Kontroler;
 
 /**
  *
@@ -114,9 +114,11 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
         KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
         try {
-            List<SkiKarta> skiKarte = Kontroler.getInstanca().ucitajListuSkiKarata();
-            for (SkiKarta skiKarta : skiKarte) {
-                kspf.getCmbSkiKarte().addItem(skiKarta);
+            SOUcitajListuSkiKarata();
+            List<OpstiDomenskiObjekat> skiKarte = lista;
+            for (OpstiDomenskiObjekat odoSK : skiKarte) {
+                SkiKarta skiKarta = (SkiKarta) odoSK;
+                kspf.getCmbSkiKarte().addItem(odoSK);
             }
         } catch (Exception ex) {
             Logger.getLogger(KreirajSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);

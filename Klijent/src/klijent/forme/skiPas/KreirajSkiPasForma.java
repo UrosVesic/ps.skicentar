@@ -8,21 +8,10 @@ package klijent.forme.skiPas;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
 import domen.SkiPas;
-import domen.StavkaSkiPasa;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
-import klijent.kontroler.Kontroler;
 import klijent.kontrolerKi.KontrolerKIKreirajSkiPas;
 
 /**

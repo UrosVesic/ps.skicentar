@@ -6,14 +6,8 @@
 package klijent.forme.staza;
 
 import domen.OpstiDomenskiObjekat;
-import domen.SkiCentar;
 import domen.Staza;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontroler.Kontroler;
 import klijent.kontrolerKi.KontrolerKIKreirajStazu;
 
 /**

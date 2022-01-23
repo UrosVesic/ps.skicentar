@@ -8,13 +8,9 @@ package klijent.kontrolerKi;
 import domen.OpstiDomenskiObjekat;
 import domen.Staza;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStaza;
-import klijent.forme.staza.KreirajStazuForma;
 import klijent.forme.staza.PronadjiStazuForma;
-import klijent.kontroler.Kontroler;
 
 /**
  *
@@ -71,12 +67,6 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
         psf.getTblStaze().setModel(model);
         psf.getTblStaze().setRowSelectionAllowed(true);
 
-        /*List<OpstiDomenskiObjekat> skiCentri = new ArrayList<>();
-        try {
-            skiCentri = Kontroler.getInstanca().ucitajListuSkiCentara(skiCentri);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(psf, "Neuspesno ucitavanje liste ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
-        }*/
     }
 
 }

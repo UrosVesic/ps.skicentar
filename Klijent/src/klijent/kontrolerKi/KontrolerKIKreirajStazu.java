@@ -8,12 +8,10 @@ package klijent.kontrolerKi;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.Staza;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.staza.KreirajStazuForma;
-import klijent.kontroler.Kontroler;
 
 /**
  *

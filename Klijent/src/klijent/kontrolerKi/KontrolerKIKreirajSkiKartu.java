@@ -9,13 +9,10 @@ import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.SkiKarta;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
-import klijent.forme.zicara.KreirajZicaruForma;
-import klijent.kontroler.Kontroler;
 
 /**
  *

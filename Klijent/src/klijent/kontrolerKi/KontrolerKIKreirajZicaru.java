@@ -8,13 +8,11 @@ package klijent.kontrolerKi;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.Zicara;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.zicara.KreirajZicaruForma;
-import klijent.kontroler.Kontroler;
 
 /**
  *

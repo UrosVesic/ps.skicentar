@@ -7,14 +7,8 @@ package klijent.forme.skiKarta;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.forme.modeli.ModelTabeleSkiKarte;
-import klijent.kontroler.Kontroler;
 import klijent.kontrolerKi.KontrolerKIPretraziSkiKarte;
 
 /**

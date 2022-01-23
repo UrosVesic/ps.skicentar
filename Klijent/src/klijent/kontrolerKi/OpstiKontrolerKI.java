@@ -45,6 +45,19 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
         }
     }
+    
+    public void SOUcitajListuSkiKarata(){
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_KARATA, lista);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
+        }
+    }
 
     public void SOKreirajStazu() {
         odo = oef.kreirajObjekat();
