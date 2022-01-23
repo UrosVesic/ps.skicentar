@@ -27,7 +27,7 @@ public interface OpstiDomenskiObjekat {
     }
 
     default int vratiBrojSlogovaVezanogObjekta(int i) {
-        return 0;
+        return 1;
     }
 
     //Object vratiVrednostSK();
@@ -53,5 +53,17 @@ public interface OpstiDomenskiObjekat {
 
     default OpstiDomenskiObjekat vratiSlogVezanogObjekta(int i, int j){
         return null;
+    }
+
+    public default String vratiUslovZaNadjiSlogove(){
+        return vratiUslovZaNadjiSlog();
+    }
+
+    public default void kreirajVezaniObjekat(int brojStavki, int i){
+        
+    }
+
+    public default void napuni(ResultSet rs, int brojSloga, int i) throws Exception{
+        
     }
 }

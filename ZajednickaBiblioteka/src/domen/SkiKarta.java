@@ -83,7 +83,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public String vratiUslovZaNadjiSlog() {
-        return "cenaSkiKarte <  " + cenaSkiKarte;
+        return "sifraSkiKarte=  " + sifraSkiKarte;
     }
 
     @Override
@@ -155,7 +155,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public String toString() {
-        return skiCentar+" "+vrstaSkiKarte;
+        return skiCentar + " " + vrstaSkiKarte;
     }
 
     @Override
@@ -175,6 +175,5 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         }
         return true;
     }
-    
-    
+
 }

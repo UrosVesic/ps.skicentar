@@ -11,6 +11,7 @@ import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
+import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.forme.zicara.KreirajZicaruForma;
 
@@ -39,6 +40,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmSkiPas = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jmiIzmeniSkiPas = new javax.swing.JMenuItem();
         jmSkiCentar = new javax.swing.JMenu();
         jmiKreirajNoviSkiCentar = new javax.swing.JMenuItem();
         jmiIzmeniSkiCentar = new javax.swing.JMenuItem();
@@ -62,6 +64,14 @@ public class GlavnaForma extends javax.swing.JFrame {
             }
         });
         jmSkiPas.add(jMenuItem1);
+
+        jmiIzmeniSkiPas.setText("Izmeni ski pas");
+        jmiIzmeniSkiPas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiIzmeniSkiPasActionPerformed(evt);
+            }
+        });
+        jmSkiPas.add(jmiIzmeniSkiPas);
 
         jMenuBar1.add(jmSkiPas);
 
@@ -193,6 +203,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         new KreirajSkiPasForma().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jmiIzmeniSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiPasActionPerformed
+        // TODO add your handling code here:
+        new IzmeniSkiPasForma().setVisible(true);
+    }//GEN-LAST:event_jmiIzmeniSkiPasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,6 +221,7 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JMenu jmStaza;
     private javax.swing.JMenu jmZicara;
     private javax.swing.JMenuItem jmiIzmeniSkiCentar;
+    private javax.swing.JMenuItem jmiIzmeniSkiPas;
     private javax.swing.JMenuItem jmiKreirajNoviSkiCentar;
     private javax.swing.JMenuItem jmiKreirajNovuStazu;
     private javax.swing.JMenuItem jmiKreirajNovuZicaru;

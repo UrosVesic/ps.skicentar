@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -74,19 +76,27 @@ public class BrokerBazePodataka {
         }
     }
 
-    public void pamtiSlozeniSlog(OpstiDomenskiObjekat odo) throws SQLException {
+    public void pamtiSlozeniSlog(OpstiDomenskiObjekat odo) throws Exception {
         String upit;
         promeniSlog(odo);
         konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
         Statement statement = konekcija.createStatement();
-
         for (int i = 0; i < odo.vratiBrojVezanihObjekata(); i++) {
             OpstiDomenskiObjekat vezo;
-            //int z = 
             for (int j = 0; j < odo.vratiBrojSlogovaVezanogObjekta(i); j++) {
                 vezo = odo.vratiSlogVezanogObjekta(i, j);
-                upit = " INSERT INTO " + vezo.vratiImeKlase() + " VALUES (" + vezo.vratiVrednostiAtributa() + ")";
-                statement.executeUpdate(upit);
+                try {
+                    if (daLiPostojiSlog(vezo)) {
+                        promeniSlog(vezo);
+                    } else {
+                        upit = "INSERT INTO " + vezo.vratiImeKlase() + " VALUES (" + vezo.vratiVrednostiAtributa() + ")";
+                        statement.executeUpdate(upit);
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    throw ex;
+                }
 
             }
         }
@@ -100,6 +110,7 @@ public class BrokerBazePodataka {
             Statement statement = konekcija.createStatement();
             statement.executeUpdate(upit);
         } catch (SQLException ex) {
+            ex.printStackTrace();
             throw ex;
         }
     }
@@ -132,11 +143,55 @@ public class BrokerBazePodataka {
                     odo.postaviVrednostVezanogObjekta(vezo, i);
                 }
             } else {
-                throw new Exception("Staza nije pronadjena");
+                throw new Exception();
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw ex;
+        }
+    }
+
+    public boolean daLiPostojiSlog(OpstiDomenskiObjekat odo) throws Exception {
+        try {
+            String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
+            konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
+            Statement statement = konekcija.createStatement();
+            ResultSet rs = statement.executeQuery(upit);
+            return rs.next();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
+
+    public void pronadjiSlozenSlog(OpstiDomenskiObjekat odo) throws Exception {
+        konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
+        Statement st = konekcija.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        String upit = "SELECT * FROM " + odo.vratiImeKlase()
+                + " WHERE " + odo.vratiUslovZaNadjiSlog();
+        ResultSet rs = st.executeQuery(upit);
+        if (rs.next()) {
+            odo.napuni(rs);
+            for (int i = 0; i < odo.vratiBrojVezanihObjekata(); i++) {
+                OpstiDomenskiObjekat vezo = odo.vratiVezaniObjekat(i);
+                upit = "SELECT COUNT(*) as brojStavki FROM " + vezo.vratiImeKlase() + " WHERE " + vezo.vratiUslovZaNadjiSlogove();
+                rs = st.executeQuery(upit);
+                rs.next();
+                int brojStavki = rs.getInt("brojStavki");
+                odo.kreirajVezaniObjekat(brojStavki, i);
+                upit = "SELECT * FROM " + vezo.vratiImeKlase() + " WHERE " + vezo.vratiUslovZaNadjiSlogove();
+                rs = st.executeQuery(upit);
+                int brojSloga = 0;
+                while (rs.next()) {
+                    odo.napuni(rs, brojSloga, i);
+                    brojSloga++;
+                }
+                for (int j = 0; j < brojSloga; j++) {
+                    vezo = odo.vratiSlogVezanogObjekta(i, j);
+                    pronadjiSlog(vezo);
+                }
+
+            }
         }
     }
 

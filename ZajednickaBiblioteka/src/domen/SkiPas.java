@@ -29,11 +29,11 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
     public SkiPas() {
         imePrezimeKupca = "";
         ukupnaCena = new BigDecimal(0);
-        
+
         SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
         Date dDatum = new Date();
         datumIzdavanja = java.sql.Date.valueOf(sm.format(dDatum));
-        
+
         stavkeSkiPasa = new ArrayList<>();
     }
 
@@ -91,12 +91,12 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
     @Override
     public String vratiVrednostiAtributa() {
 
-        return sifraSkiPasa + ", " + ukupnaCena + ", " + (imePrezimeKupca == null ? null : "'" + imePrezimeKupca + "'") + ", " + "'"+datumIzdavanja+"'";
+        return sifraSkiPasa + ", " + ukupnaCena + ", " + (imePrezimeKupca == null ? null : "'" + imePrezimeKupca + "'") + ", " + "'" + datumIzdavanja + "'";
     }
 
     @Override
     public String postaviVrednostiAtributa() {
-        return "sifraSkiPasa = " + sifraSkiPasa + ", " + "ukupnaCena = " + ukupnaCena + ", " + "imePrezimeKupca = " + (imePrezimeKupca == null ? null : "'" + imePrezimeKupca + "'") + ", " + "datumIzdavanja = '" +datumIzdavanja+"'";
+        return "sifraSkiPasa = " + sifraSkiPasa + ", " + "ukupnaCena = " + ukupnaCena + ", " + "imePrezimeKupca = " + (imePrezimeKupca == null ? null : "'" + imePrezimeKupca + "'") + ", " + "datumIzdavanja = '" + datumIzdavanja + "'";
     }
 
     @Override
@@ -114,14 +114,13 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
         sifraSkiPasa = (long) pk;
     }
 
-    
     @Override
     public void napuni(ResultSet rs) throws SQLException {
         sifraSkiPasa = rs.getLong("sifraSkiPasa");
         ukupnaCena = rs.getBigDecimal("ukupnaCena");
         imePrezimeKupca = rs.getString("imePrezimeKupca");
         datumIzdavanja = new Date(rs.getDate("datumIzdavanja").getTime());
-
+        stavkeSkiPasa = new ArrayList<>();
     }
 
     @Override
@@ -151,16 +150,18 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public OpstiDomenskiObjekat vratiVezaniObjekat(int i) {
-        if (i < stavkeSkiPasa.size()) {
-            return new StavkaSkiPasa();
+        if (i == 0) {
+            StavkaSkiPasa stavkaSkiPasa = new StavkaSkiPasa();
+            stavkaSkiPasa.setSkiPas(this);
+            return stavkaSkiPasa;
         }
         return null;
     }
 
     @Override
-    public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
-        if (i < stavkeSkiPasa.size()) {
-            stavkeSkiPasa.set(i, (StavkaSkiPasa) vezo);
+    public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int j) {
+        if (j < stavkeSkiPasa.size()) {
+            stavkeSkiPasa.set(j, (StavkaSkiPasa) vezo);
         }
     }
 
@@ -183,6 +184,32 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
             return stavkeSkiPasa.get(j);
         }
         return null;
+    }
+
+    @Override
+    public void kreirajVezaniObjekat(int brojStavki, int i) {
+        if (i == 0) {
+            stavkeSkiPasa = new ArrayList<>();
+            for (int j = 0; j < brojStavki; j++) {
+                StavkaSkiPasa stavkaSkiPasa = new StavkaSkiPasa();
+                stavkaSkiPasa.setSkiPas(this);
+                stavkeSkiPasa.add(stavkaSkiPasa);
+            }
+        }
+    }
+
+    @Override
+    public void napuni(ResultSet rs, int brojSloga, int i) throws Exception {
+        stavkeSkiPasa.get(brojSloga).setSkiPas(this);
+        stavkeSkiPasa.get(brojSloga).setRedniBroj(brojSloga + 1);
+        stavkeSkiPasa.get(brojSloga).setPocetakVazenja(rs.getDate("PocetakVazenja"));
+        stavkeSkiPasa.get(brojSloga).setZavrsetakVazenja(rs.getDate("ZavrsetakVazenja"));
+
+        SkiKarta skiKarta = new SkiKarta();
+        skiKarta.setSifraSkiKarte(rs.getLong("sifraSkiKarte"));
+        stavkeSkiPasa.get(brojSloga).setSkiKarta(skiKarta);
+
+        stavkeSkiPasa.get(brojSloga).setVrednostStavke(ukupnaCena);
     }
 
 }

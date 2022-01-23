@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
+import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.komunikacija.Komunikacija;
 import komunikacija.Odgovor;
 import komunikacija.Operacije;
@@ -45,8 +46,8 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
         }
     }
-    
-    public void SOUcitajListuSkiKarata(){
+
+    public void SOUcitajListuSkiKarata() {
         Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_KARATA, lista);
         Odgovor odgovor;
         try {
@@ -265,7 +266,8 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu");
         }
     }
-    public void SOKreirajSkiPas(){
+
+    public void SOKreirajSkiPas() {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.KREIRAJ_SKI_PAS, odo);
@@ -276,14 +278,15 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiPas) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao ski pas");
+                omoguciPamcenjeSkiPasa();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira pas");
         }
     }
-    
-    public void SOZapamitSkiPas(){
-         odo = oef.kreirajObjekat();
+
+    public void SOZapamitSkiPas() {
+        odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_PAS, odo);
         Odgovor odgovor;
@@ -293,9 +296,32 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiPas) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
+                isprazniGrafickiObjekat();
+                onemoguciPamcenjeSkiPasa();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas");
+        }
+    }
+    
+     public void SOPretraziSkiPas() {
+        odo = oef.kreirajObjekat();
+        KonvertujGrafickiObjekatUDomenskiObjekat();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_PAS, odo);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                odo = (SkiPas) odgovor.getRezultat();
+                KonvertujObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pas po zadatom kriterijumu");
+                omoguciPamcenjeSkiPasa();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu");
         }
     }
 
@@ -322,4 +348,13 @@ public abstract class OpstiKontrolerKI {
         pscf.getTxtSifraSkiCentra().setEditable(true);
         pscf.getBtnPromeni().setEnabled(false);
     }
+
+
+    public void omoguciPamcenjeSkiPasa() {}
+
+    public void promeniCenu() {}
+
+    public void onemoguciPamcenjeSkiPasa() {}
+
+    
 }

@@ -105,6 +105,9 @@ public class KlijentskaNit extends Thread {
             case Operacije.PRETRAZI_SKI_CENTAR:
                 odgovor = pretraziSkiCentar(zahtev);
                 break;
+            case Operacije.PRETRAZI_SKI_PAS:
+                odgovor = pretraziSkiPas(zahtev);
+                break;
             default:
                 break;
         }
@@ -349,6 +352,22 @@ public class KlijentskaNit extends Thread {
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor pretraziSkiPas(Zahtev zahtev) {
+        SkiPas skiPas = (SkiPas) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().pronadjiSkiPas(skiPas);
+            odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_PAS);
+            odgovor.setRezultat(skiPas);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            ex.printStackTrace();
             odgovor.setException(ex);
         }
         return odgovor;

@@ -23,24 +23,28 @@ import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
+import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
 
 /**
  *
  * @author draskovesic
  */
-public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
+public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
 
-    public KontrolerKIKreirajSkiPas(OpstaEkranskaForma oef) {
+    private List<StavkaSkiPasa> dodateStavke;
+
+    public KontrolerKIIzmeniSkiPas(OpstaEkranskaForma oef) {
         this.oef = oef;
+        dodateStavke = new ArrayList<>();
     }
 
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
-        if (!"".equals(kspf.getTxtSifraSkiPasa().getText())) {
-            skiPas.setSifraSkiPasa(Long.parseLong(kspf.getTxtSifraSkiPasa().getText()));
+        if (!"".equals(kspf.getTxtSifraSkiPasaZaPretragu().getText())) {
+            skiPas.setSifraSkiPasa(Long.parseLong(kspf.getTxtSifraSkiPasaZaPretragu().getText()));
         }
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         try {
@@ -60,7 +64,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
 
     @Override
     public void KonvertujObjekatUGrafickeKomponente() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
         kspf.getTxtSifraSkiPasa().setText(skiPas.getSifraSkiPasa() + "");
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -73,7 +77,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     @Override
     public void isprazniGrafickiObjekat() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         kspf.getTxtSifraSkiPasa().setText("");
         kspf.getTxtDatumIzdavanja().setText(sdf.format(new Date()));
         kspf.getTxtImePrezimeKupca().setText("");
@@ -82,7 +86,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     }
 
     private void konvertujRedoveTabeleUNizStavki() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
         skiPas.setStavkeSkiPasa(model.getSkiPas().getStavkeSkiPasa());
@@ -90,7 +94,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     }
 
     public void dodajStavkuUTabelu() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -99,6 +103,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
             Date zavrsetakVazenja = sdf.parse(kspf.getTxtZavrsetakVazenja().getText());
             StavkaSkiPasa stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(kspf.getTxtVrednostStavke().getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
             model.dodaj(stavka);
+            dodateStavke.add(stavka);
             kspf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(kspf, "Datum mora biti unesen u formatu dd.MM.gggg");
@@ -114,14 +119,15 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
         return cena + "";
     }
 
+    @Override
     public void promeniCenu() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
         kspf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
     }
 
     public void pripremiTabelu() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         ModelTabeleStavkeSkiPasa model = new ModelTabeleStavkeSkiPasa(new SkiPas(), this);
         kspf.getTblStavkeSkiPasa().setModel(model);
 
@@ -147,7 +153,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     }
 
     public void pripremiKomboBoks() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
         try {
             SOUcitajListuSkiKarata();
@@ -162,20 +168,20 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     }
 
     public void ObrisiStavku() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
         model.obrisi(kspf.getTblStavkeSkiPasa().getSelectedRow());
     }
 
     @Override
     public void omoguciPamcenjeSkiPasa() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         kspf.getBtnZapamtiSkiPas().setEnabled(true);
     }
 
     @Override
     public void onemoguciPamcenjeSkiPasa() {
-        KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
+        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         kspf.getBtnZapamtiSkiPas().setEnabled(false);
     }
 

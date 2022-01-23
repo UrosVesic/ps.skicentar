@@ -118,9 +118,9 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
         this.pocetakVazenja = java.sql.Date.valueOf(sm.format(dDatumP));
         System.out.println(pocetakVazenja);
         System.out.println(zavrsetakVazenja);
-        return "sifraSkiPasa= " + (skiPas == null ? null : skiPas.getSifraSkiPasa()) + ", " + "redniBroj = " + redniBroj + ", " + "vrednostStavke = "
+        return "sifraSkiPasa= " + (skiPas == null ? null : skiPas.getSifraSkiPasa()) + ", " + "RB = " + redniBroj + ", " + "vrednostStavke = "
                 + vrednostStavke + ", " + "pocetakVazenja = " + "'" + pocetakVazenja + "'" + ", " + "zavrsetakVazenja = "
-                + "'" + zavrsetakVazenja + "'" + ", " + "sifraSkiKarte" + (skiKarta == null ? null : skiKarta.getSifraSkiKarte());
+                + "'" + zavrsetakVazenja + "'" + ", " + "sifraSkiKarte = " + (skiKarta == null ? null : skiKarta.getSifraSkiKarte());
     }
 
     @Override
@@ -130,7 +130,7 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public String vratiUslovZaNadjiSlog() {
-        return "sifraSkiPasa = " + skiPas.getSifraSkiPasa() + " AND " + "redniBroj = " + redniBroj;
+        return "sifraSkiPasa = " + skiPas.getSifraSkiPasa() + " AND " + "RB = " + redniBroj;
     }
 
     @Override
@@ -138,14 +138,17 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
         redniBroj = (long) pk;
     }
 
-    
     @Override
     public void napuni(ResultSet rs) throws SQLException {
         skiPas.setSifraSkiPasa(rs.getLong("sifraSkiPasa"));
-        redniBroj = rs.getLong("redniBroj");
+        redniBroj = rs.getLong("RB");
         vrednostStavke = rs.getBigDecimal("vrednostStavke");
         pocetakVazenja = new Date(rs.getDate("pocetakVazenja").getTime());
         zavrsetakVazenja = new Date(rs.getDate("zavrsetakVazenja").getTime());
+
+        SkiKarta sk = new SkiKarta();
+        sk.setSifraSkiKarte(rs.getLong("sifraSkiKarte"));
+        skiKarta = sk;
     }
 
     @Override
@@ -170,28 +173,24 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public int vratiBrojVezanihObjekata() {
-        return 2;
+        return 1;
     }
 
     @Override
     public OpstiDomenskiObjekat vratiVezaniObjekat(int i) {
         if (i == 0) {
-            return new SkiPas();
+            return skiKarta;
         }
-        if (i == 1) {
-            return new SkiKarta();
-        }
+
         return null;
     }
 
     @Override
     public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
         if (i == 0) {
-            skiPas = (SkiPas) vezo;
-        }
-        if (i == 1) {
             skiKarta = (SkiKarta) vezo;
         }
+
     }
 
     @Override
@@ -203,6 +202,11 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
             return skiKarta.getSifraSkiKarte();
         }
         return null;
+    }
+
+    @Override
+    public String vratiUslovZaNadjiSlogove() {
+        return "sifraSkiPasa = " + skiPas.getSifraSkiPasa();
     }
 
     @Override

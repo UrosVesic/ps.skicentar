@@ -19,6 +19,7 @@ import server.so.OpstaSo;
 import server.so.OpstaSo1;
 import server.so.impl.KreirajSo;
 import server.so.impl.PretraziSkiKarteSo;
+import server.so.impl.PretraziSkiPasSo;
 import server.so.impl.ZapamtiSo;
 import server.so.impl.PretraziSo;
 import server.so.impl.UcitajListuSo;
@@ -126,6 +127,11 @@ public class Kontroler {
 
     public void zapamtiSkiPas(SkiPas skiPas) throws Exception {
         OpstaSo so = new ZapamtiSkiPasSo(b);
+        so.opsteIzvrsenjeSo(skiPas);
+    }
+
+    public void pronadjiSkiPas(SkiPas skiPas) throws Exception {
+        OpstaSo so = new PretraziSkiPasSo(b);
         so.opsteIzvrsenjeSo(skiPas);
     }
 }

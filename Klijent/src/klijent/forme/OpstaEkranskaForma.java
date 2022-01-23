@@ -15,4 +15,7 @@ public abstract class OpstaEkranskaForma extends javax.swing.JFrame {
 
     public abstract OpstiDomenskiObjekat kreirajObjekat();
 
+    public void promeniCenu() {
+    }
+
 }
