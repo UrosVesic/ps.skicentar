@@ -9,13 +9,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -117,11 +114,7 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
         sifraSkiPasa = (long) pk;
     }
 
-    /*private long sifraSkiPasa;
-    private long ukupnaCena;
-    private String imePrezimeKupca;
-    private Date datumIzdavanja;
-    private List<StavkaSkiPasa> stavkeSkiPasa;*/
+    
     @Override
     public void napuni(ResultSet rs) throws SQLException {
         sifraSkiPasa = rs.getLong("sifraSkiPasa");

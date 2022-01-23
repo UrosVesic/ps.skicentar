@@ -6,6 +6,7 @@
 package domen;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,7 +18,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
 
     private long sifraSkiKarte;
     private String vrstaSkiKarte;
-    private int cenaSkiKarte;
+    private BigDecimal cenaSkiKarte;
     private SkiCentar skiCentar;
 
     public SkiKarta() {
@@ -25,7 +26,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
 
     }
 
-    public SkiKarta(long sifraSkiKarte, String vrstaSkiKarte, int cenaSkiKarte, SkiCentar skiCentar) {
+    public SkiKarta(long sifraSkiKarte, String vrstaSkiKarte, BigDecimal cenaSkiKarte, SkiCentar skiCentar) {
         this.sifraSkiKarte = sifraSkiKarte;
         this.vrstaSkiKarte = vrstaSkiKarte;
         this.cenaSkiKarte = cenaSkiKarte;
@@ -48,11 +49,11 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         this.vrstaSkiKarte = vrstaSkiKarte;
     }
 
-    public int getCenaSkiKarte() {
+    public BigDecimal getCenaSkiKarte() {
         return cenaSkiKarte;
     }
 
-    public void setCenaSkiKarte(int cenaSkiKarte) {
+    public void setCenaSkiKarte(BigDecimal cenaSkiKarte) {
         this.cenaSkiKarte = cenaSkiKarte;
     }
 
@@ -94,7 +95,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
     public void napuni(ResultSet rs) throws SQLException {
         sifraSkiKarte = rs.getLong("sifraSkiKarte");
         vrstaSkiKarte = rs.getString("vrstaSkiKarte");
-        cenaSkiKarte = rs.getInt("cenaSkiKarte");
+        cenaSkiKarte = rs.getBigDecimal("cenaSkiKarte");
         skiCentar = new SkiCentar();
         skiCentar.setSifraSkiCentra(rs.getLong("sifraSkiCentra"));
     }

@@ -96,12 +96,6 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
         this.zavrsetakVazenja = java.sql.Date.valueOf(sm.format(dDatum));
     }
 
-    /*private SkiPas skiPas;
-    private long redniBroj;
-    private BigDecimal vrednostStavke;
-    private Date pocetakVazenja;
-    private Date zavrsetakVazenja;
-    private SkiKarta skiKarta;*/
     @Override
     public String vratiVrednostiAtributa() {
         SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
@@ -144,12 +138,7 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
         redniBroj = (long) pk;
     }
 
-    /*private SkiPas skiPas;
-    private long redniBroj;
-    private BigDecimal vrednostStavke;
-    private Date pocetakVazenja;
-    private Date zavrsetakVazenja;
-    private SkiKarta skiKarta;*/
+    
     @Override
     public void napuni(ResultSet rs) throws SQLException {
         skiPas.setSifraSkiPasa(rs.getLong("sifraSkiPasa"));

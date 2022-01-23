@@ -101,14 +101,7 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
         s.setTipStaze(rs.getString("tipStaze"));
         SkiCentar sc = new SkiCentar();
         sc.setSifraSkiCentra(rs.getLong("sifraSkiCentra"));
-        /*try {
-            new BrokerBazePodataka().pronadjiSlog(sc);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-        //kontroler.Kontroler.getInstanca().pronadjiSkiCentar(skiCentar);
         s.setSkiCentar(sc);
-        //return new Staza(rs.getLong("brojStaze"), rs.getString("nazivStaze"), rs.getString("tipStaze"), null);
 
     }
 
