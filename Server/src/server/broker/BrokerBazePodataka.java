@@ -135,11 +135,11 @@ public class BrokerBazePodataka {
                 throw new Exception("Staza nije pronadjena");
             }
         } catch (SQLException ex) {
+            ex.printStackTrace();
             throw ex;
         }
     }
 
-    //void prondajiPoKljucu(long kljuc, OpstiDomenskiObjekat odo) throws SQLException;
     public void vratiMaxID(OpstiDomenskiObjekat odo) throws SQLException {
         String upit;
         upit = "SELECT Max(" + odo.vratiNazivPK() + ") AS " + odo.vratiNazivPK() + " FROM " + odo.vratiImeKlase();

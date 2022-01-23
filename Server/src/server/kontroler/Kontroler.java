@@ -85,7 +85,6 @@ public class Kontroler {
     public void kreirajSkiCentar(SkiCentar skiCentar) throws SQLException, Exception {
         OpstaSo so = new KreirajSo(b);
         so.opsteIzvrsenjeSo(skiCentar);
-        //return skiCentar;
     }
 
     public void kreirajZicaru(Zicara zicara) throws Exception {

@@ -13,7 +13,6 @@ import domen.Staza;
 import domen.Zicara;
 import java.io.IOException;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -102,6 +101,9 @@ public class KlijentskaNit extends Thread {
                 break;
             case Operacije.ZAPAMTI_SKI_PAS:
                 odgovor = zapamtiSkiPas(zahtev);
+                break;
+            case Operacije.PRETRAZI_SKI_CENTAR:
+                odgovor = pretraziSkiCentar(zahtev);
                 break;
             default:
                 break;
@@ -275,12 +277,8 @@ public class KlijentskaNit extends Thread {
         Odgovor odgovor = new Odgovor();
         try {
             List<OpstiDomenskiObjekat> lista = Kontroler.getInstanca().pretraziSkiKarte(skiKarta);
-            List<SkiKarta> skiKarte = new ArrayList<>();
-            for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-                skiKarte.add((SkiKarta) opstiDomenskiObjekat);
-            }
             odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_KARTE);
-            odgovor.setRezultat(skiKarte);
+            odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
@@ -333,6 +331,21 @@ public class KlijentskaNit extends Thread {
             Kontroler.getInstanca().zapamtiSkiPas(skiPas);
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_SKI_PAS);
             odgovor.setRezultat(skiPas);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor pretraziSkiCentar(Zahtev zahtev) {
+        SkiCentar skiCentar = (SkiCentar) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().pronadjiSkiCentar(skiCentar);
+            odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_CENTAR);
+            odgovor.setRezultat(skiCentar);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
