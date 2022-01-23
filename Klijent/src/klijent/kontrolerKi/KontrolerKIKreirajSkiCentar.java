@@ -1,0 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package klijent.kontrolerKi;
+
+import domen.SkiCentar;
+import klijent.forme.OpstaEkranskaForma;
+import klijent.forme.skiCentar.KreirajSkiCentarForma;
+
+/**
+ *
+ * @author draskovesic
+ */
+public class KontrolerKIKreirajSkiCentar extends OpstiKontrolerKI {
+
+    public KontrolerKIKreirajSkiCentar(OpstaEkranskaForma oef) {
+        this.oef = oef;
+    }
+
+    @Override
+    public void KonvertujGrafickiObjekatUDomenskiObjekat() {
+        KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
+        SkiCentar skiCentar = (SkiCentar) odo;
+        if (!"".equals(kscf.getTxtSifraSkiCentra().getText())) {
+            skiCentar.setSifraSkiCentra(Long.parseLong(kscf.getTxtSifraSkiCentra().getText()));
+        }
+        skiCentar.setNazivPlanine(kscf.getTxtNazivPlanine().getText());
+        skiCentar.setRadnoVreme(kscf.getTxtRadnoVreme().getText());
+        skiCentar.setNazivSkiCentra(kscf.getTxtNazivSkiCentra().getText());
+    }
+
+    @Override
+    public void KonvertujObjekatUGrafickeKomponente() {
+        KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
+        SkiCentar skiCentar = (SkiCentar) odo;
+        kscf.getTxtSifraSkiCentra().setText(skiCentar.getSifraSkiCentra()+"");
+        kscf.getTxtNazivPlanine().setText(skiCentar.getNazivPlanine());
+        kscf.getTxtNazivSkiCentra().setText(skiCentar.getNazivSkiCentra());
+        kscf.getTxtRadnoVreme().setText(skiCentar.getRadnoVreme());
+    }
+
+    @Override
+    public void isprazniGrafickiObjekat() {
+        KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
+        kscf.getTxtSifraSkiCentra().setText("0");
+        kscf.getTxtNazivPlanine().setText("");
+        kscf.getTxtNazivSkiCentra().setText("");
+        kscf.getTxtRadnoVreme().setText("00-00");
+    }
+
+}

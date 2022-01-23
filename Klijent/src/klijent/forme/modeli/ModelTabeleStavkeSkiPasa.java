@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
 
-    private final SkiPas skiPas;
+    private  SkiPas skiPas;
     String[] kolone = {"Redni broj", "Vrednost stavke", "Pocetak vazenja", "Zavrsetak vazenja", "Ski karta"};
 
     public ModelTabeleStavkeSkiPasa(SkiPas skiPas) {
@@ -29,11 +29,18 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
     public SkiPas getSkiPas() {
         return skiPas;
     }
+
+    public void setSkiPas(SkiPas skiPas) {
+        this.skiPas = skiPas;
+    }
     
     
 
     @Override
     public int getRowCount() {
+        if (skiPas == null) {
+            return 0;
+        }
         return skiPas.getStavkeSkiPasa().size();
     }
 
@@ -70,7 +77,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
     }
 
     public void dodaj(StavkaSkiPasa stavka) {
-        if(skiPas.getStavkeSkiPasa().contains(stavka)){
+        if (skiPas.getStavkeSkiPasa().contains(stavka)) {
             return;
         }
         stavka.setRedniBroj(skiPas.getStavkeSkiPasa().size() + 1);

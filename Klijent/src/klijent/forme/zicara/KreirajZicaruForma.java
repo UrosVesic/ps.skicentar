@@ -6,28 +6,24 @@
 package klijent.forme.zicara;
 
 import domen.OpstiDomenskiObjekat;
-import domen.SkiCentar;
 import domen.Zicara;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import klijent.kontroler.Kontroler;
+import klijent.forme.OpstaEkranskaForma;
+import klijent.kontrolerKi.KontrolerKIKreirajZicaru;
 
 /**
  *
  * @author UrosVesic
  */
-public class KreirajZicaruForma extends javax.swing.JFrame {
+public class KreirajZicaruForma extends OpstaEkranskaForma {
 
     /**
      * Creates new form KreirajZicaruForma
      */
-    Zicara zicara;
+    KontrolerKIKreirajZicaru kkiKreirajZicaru;
 
     public KreirajZicaruForma() {
         initComponents();
+        kkiKreirajZicaru = new KontrolerKIKreirajZicaru(this);
         prepare();
     }
 
@@ -56,7 +52,7 @@ public class KreirajZicaruForma extends javax.swing.JFrame {
         btnKreiraj = new javax.swing.JButton();
         btnZapamti = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Sifra zicare: ");
 
@@ -168,30 +164,13 @@ public class KreirajZicaruForma extends javax.swing.JFrame {
 
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
         // TODO add your handling code here:
-        zicara = new Zicara();
-
-        try {
-            Kontroler.getInstanca().kreirajZicaru(zicara);
-            napuniGrafickiObjekat();
-            JOptionPane.showMessageDialog(this, "Sistem je kreirao zicaru");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da kreira zicaru");
-            ex.printStackTrace();
-        }
+        kkiKreirajZicaru.SOKreirajZicaru();
 
     }//GEN-LAST:event_btnKreirajActionPerformed
 
     private void btnZapamtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiActionPerformed
         // TODO add your handling code here:
-        napuniDomenskiObjekat();
-        
-        try {
-            Kontroler.getInstanca().zapamtiZicaru(zicara);
-            JOptionPane.showMessageDialog(this, "Sistem je zapamtio zicaru");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti zicaru");
-            ex.printStackTrace();
-        }
+        kkiKreirajZicaru.SOZapamtiZicaru();
     }//GEN-LAST:event_btnZapamtiActionPerformed
 
 
@@ -212,35 +191,37 @@ public class KreirajZicaruForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtRadnoVreme;
     private javax.swing.JTextField txtSifraZicare;
     // End of variables declaration//GEN-END:variables
-
+    
     private void prepare() {
-        List<OpstiDomenskiObjekat> skiCentri = new ArrayList<>();
-        try {
-            skiCentri = Kontroler.getInstanca().ucitajListuSkiCentara(skiCentri);
-            for (OpstiDomenskiObjekat skiCentar : skiCentri) {
-                cmbSkiCentri.addItem((SkiCentar) skiCentar);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(KreirajZicaruForma.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        kkiKreirajZicaru.pripremiKomboBoks();
     }
 
-    private void napuniGrafickiObjekat() {
-        txtSifraZicare.setText(String.valueOf(zicara.getSifraZicare()));
-        txtNazivZicare.setText(zicara.getNazivZicare());
-        txtRadnoVreme.setText(zicara.getRadnoVreme());
-        txtKapacitet.setText(String.valueOf(zicara.getKapacitet()));
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new Zicara();
     }
 
-    private void napuniDomenskiObjekat() {
-        zicara.setNazivZicare(txtNazivZicare.getText());
-        zicara.setRadnoVreme(txtRadnoVreme.getText());
-        zicara.setKapacitet(Integer.parseInt(txtKapacitet.getText()));
-        if (cmbUfunkciji.getSelectedItem().equals("DA")) {
-            zicara.setUFunkciji(true);
-        } else {
-            zicara.setUFunkciji(false);
-        }
-        zicara.setSkiCentar((SkiCentar) cmbSkiCentri.getSelectedItem());
+    public javax.swing.JComboBox getCmbSkiCentri() {
+        return cmbSkiCentri;
+    }
+
+    public javax.swing.JComboBox<String> getCmbUfunkciji() {
+        return cmbUfunkciji;
+    }
+
+    public javax.swing.JTextField getTxtKapacitet() {
+        return txtKapacitet;
+    }
+
+    public javax.swing.JTextField getTxtNazivZicare() {
+        return txtNazivZicare;
+    }
+
+    public javax.swing.JTextField getTxtRadnoVreme() {
+        return txtRadnoVreme;
+    }
+
+    public javax.swing.JTextField getTxtSifraZicare() {
+        return txtSifraZicare;
     }
 }

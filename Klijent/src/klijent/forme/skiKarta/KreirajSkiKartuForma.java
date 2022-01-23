@@ -13,21 +13,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import klijent.forme.OpstaEkranskaForma;
 import klijent.kontroler.Kontroler;
+import klijent.kontrolerKi.KontrolerKIKreirajSkiKartu;
 
 /**
  *
  * @author UrosVesic
  */
-public class KreirajSkiKartuForma extends javax.swing.JFrame {
+public class KreirajSkiKartuForma extends OpstaEkranskaForma{
 
     /**
      * Creates new form KreirajSkiKartuForma
      */
-    SkiKarta skiKarta;
+    KontrolerKIKreirajSkiKartu kkiKreirajSkiKartu;
 
     public KreirajSkiKartuForma() {
         initComponents();
+        kkiKreirajSkiKartu = new KontrolerKIKreirajSkiKartu(this);
         prepare();
     }
 
@@ -141,34 +144,12 @@ public class KreirajSkiKartuForma extends javax.swing.JFrame {
 
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
 
-        skiKarta = new SkiKarta();
-        try {
-            Kontroler.getInstanca().kreirajSkiKartu(skiKarta);
-            napuniGrafickiObjekat();
-            JOptionPane.showMessageDialog(this, "Sistem je kreirao ski kartu");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da kreira ski kartu");
-            ex.printStackTrace();
-        }
+        kkiKreirajSkiKartu.SOKreirajSkiKartu();
 
     }//GEN-LAST:event_btnKreirajActionPerformed
 
     private void btnZapamtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiActionPerformed
-        if (skiKarta == null) {
-            JOptionPane.showMessageDialog(this, "Morate prvo kreirati kartu");
-            return;
-        }
-        napuniDomenskiObjekat();
-
-        try {
-            Kontroler.getInstanca().zapamtiSkiKartu(skiKarta);
-            JOptionPane.showMessageDialog(this, "Sistem je zapamtio ski kartu");
-            israzniGrafickiObjekat();
-            skiKarta = null;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti ski kartu");
-            ex.printStackTrace();
-        }
+        kkiKreirajSkiKartu.SOZapamtiSkiKartu();
 
     }//GEN-LAST:event_btnZapamtiActionPerformed
 
@@ -186,33 +167,34 @@ public class KreirajSkiKartuForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtSifraSkiKarte;
     // End of variables declaration//GEN-END:variables
 
-    private void napuniGrafickiObjekat() {
-        txtSifraSkiKarte.setText(String.valueOf(skiKarta.getSifraSkiKarte()));
-        txtCenaSkiKarte.setText(String.valueOf(skiKarta.getCenaSkiKarte()));
-    }
-
-    private void napuniDomenskiObjekat() {
-        skiKarta.setCenaSkiKarte(Integer.parseInt(txtCenaSkiKarte.getText()));
-        skiKarta.setSkiCentar((SkiCentar) cmbSkiCentar.getSelectedItem());
-        skiKarta.setVrstaSkiKarte((String) cmbVrstaSkiKarte.getSelectedItem());
-    }
-
-    private void israzniGrafickiObjekat() {
-        txtSifraSkiKarte.setText("");
-        txtCenaSkiKarte.setText("");
-        txtSifraSkiKarte.setText("");
-    }
+    
 
     private void prepare() {
-        List<OpstiDomenskiObjekat> skiCentri = new ArrayList<>();
-        cmbSkiCentar.removeAllItems();
-        try {
-            skiCentri = Kontroler.getInstanca().ucitajListuSkiCentara(skiCentri);
-            for (OpstiDomenskiObjekat skiCentar : skiCentri) {
-                cmbSkiCentar.addItem((SkiCentar) skiCentar);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da vrati listu ski centara");
-        }
+        
+        kkiKreirajSkiKartu.pripremiKombobox();
+        
     }
+
+    public javax.swing.JComboBox getCmbSkiCentar() {
+        return cmbSkiCentar;
+    }
+
+    public javax.swing.JComboBox<String> getCmbVrstaSkiKarte() {
+        return cmbVrstaSkiKarte;
+    }
+
+    public javax.swing.JTextField getTxtCenaSkiKarte() {
+        return txtCenaSkiKarte;
+    }
+
+    public javax.swing.JTextField getTxtSifraSkiKarte() {
+        return txtSifraSkiKarte;
+    }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new SkiKarta();
+    }
+    
+    
 }

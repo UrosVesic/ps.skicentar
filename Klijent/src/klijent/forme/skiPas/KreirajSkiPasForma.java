@@ -5,6 +5,7 @@
  */
 package klijent.forme.skiPas;
 
+import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
 import domen.SkiPas;
 import domen.StavkaSkiPasa;
@@ -15,26 +16,31 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import klijent.kontroler.Kontroler;
+import klijent.kontrolerKi.KontrolerKIKreirajSkiPas;
 
 /**
  *
  * @author UrosVesic
  */
-public class KreirajNoviSkiPasForma extends javax.swing.JFrame {
+public class KreirajSkiPasForma extends OpstaEkranskaForma {
 
     /**
-     * Creates new form KreirajNoviSkiPasForma
+     * Creates new form KreirajSkiPasForma
      */
-    SkiPas skiPas;
+    private final KontrolerKIKreirajSkiPas kkiksp;
 
-    public KreirajNoviSkiPasForma() {
+    public KreirajSkiPasForma() {
         initComponents();
-        skiPas = new SkiPas();
-        prepareTbl();
-        prepareCmb();
+        kkiksp = new KontrolerKIKreirajSkiPas(this);
+        pripremiTabelu();
+        pripremiKomboBoks();
     }
 
     /**
@@ -81,6 +87,8 @@ public class KreirajNoviSkiPasForma extends javax.swing.JFrame {
 
         jLabel3.setText("Ime i prezime kupca:");
 
+        txtImePrezimeKupca.setText("Pera Peric");
+
         jLabel4.setText("Datum izdavanja: ");
 
         tblStavkeSkiPasa.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,7 +112,11 @@ public class KreirajNoviSkiPasForma extends javax.swing.JFrame {
 
         jLabel6.setText("Pocetak vazenja: ");
 
+        txtPocetakVazenja.setText("1.2.2022");
+
         jLabel7.setText("Zavrsetak vazenja: ");
+
+        txtZavrsetakVazenja.setText("5.2.2022");
 
         jLabel8.setText("Ski karta: ");
 
@@ -260,14 +272,8 @@ public class KreirajNoviSkiPasForma extends javax.swing.JFrame {
 
     private void btnKreirajSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajSkiPasActionPerformed
         // TODO add your handling code here:
-        skiPas = new SkiPas();
+        kkiksp.SOKreirajSkiPas();
 
-        try {
-            Kontroler.getInstanca().kreirajSkiPas(skiPas);
-            napuniGrafickiObjekat();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }//GEN-LAST:event_btnKreirajSkiPasActionPerformed
 
     private void cmbSkiKarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSkiKarteActionPerformed
@@ -278,39 +284,12 @@ public class KreirajNoviSkiPasForma extends javax.swing.JFrame {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         // TODO add your handling code here:
-        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) tblStavkeSkiPasa.getModel();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        try {
-            Date pocetakVazenja = sdf.parse(txtPocetakVazenja.getText());
-            Date zavrsetakVazenja = sdf.parse(txtZavrsetakVazenja.getText());
-            StavkaSkiPasa stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(txtVrednostStavke.getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) cmbSkiKarte.getSelectedItem());
-            model.dodaj(stavka);
-            txtUkupnaCena.setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Datum mora biti unesen u formatu dd.MM.gggg");
-            Logger.getLogger(KreirajNoviSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        kkiksp.dodajStavkuUTabelu();
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnZapamtiSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiSkiPasActionPerformed
         // TODO add your handling code here:
-        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) tblStavkeSkiPasa.getModel();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        skiPas.setUkupnaCena(new BigDecimal(txtUkupnaCena.getText()));
-        skiPas.setImePrezimeKupca(txtImePrezimeKupca.getText());
-        skiPas.setStavkeSkiPasa(model.getSkiPas().getStavkeSkiPasa());
-        try {
-            Date datumIzdavanja = sdf.parse(txtDatumIzdavanja.getText());
-            skiPas.setDatumIzdavanja(datumIzdavanja);
-            Kontroler.getInstanca().zapamtiSkiPas(skiPas);
-            JOptionPane.showMessageDialog(this, "Sistem je zapamtio ski pas");
-        } catch (ParseException ex) {
-            Logger.getLogger(KreirajNoviSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti ski pas");
-            ex.printStackTrace();
-        }
-
+        kkiksp.SOZapamitSkiPas();
     }//GEN-LAST:event_btnZapamtiSkiPasActionPerformed
 
 
@@ -339,34 +318,54 @@ public class KreirajNoviSkiPasForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtZavrsetakVazenja;
     // End of variables declaration//GEN-END:variables
 
-    private void prepareTbl() {
-        ModelTabeleStavkeSkiPasa model = new ModelTabeleStavkeSkiPasa(skiPas);
-        tblStavkeSkiPasa.setModel(model);
-    }
-
-    private void napuniGrafickiObjekat() {
-        txtSifraSkiPasa.setText(String.valueOf(skiPas.getSifraSkiPasa()));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        txtDatumIzdavanja.setText(sdf.format(skiPas.getDatumIzdavanja()));
+    private void pripremiTabelu() {
+        kkiksp.pripremiTabelu();
 
     }
 
-    private void prepareCmb() {
-        try {
-            List<SkiKarta> skiKarte = Kontroler.getInstanca().ucitajListuSkiKarata();
-            for (SkiKarta skiKarta : skiKarte) {
-                cmbSkiKarte.addItem(skiKarta);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(KreirajNoviSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void pripremiKomboBoks() {
+        kkiksp.pripremiKomboBoks();
     }
 
-    private String postaviCenu(List<StavkaSkiPasa> stavkeSkiPasa) {
-        BigDecimal cena = new BigDecimal(0);
-        for (StavkaSkiPasa stavkaSkiPasa : stavkeSkiPasa) {
-            cena = cena.add(stavkaSkiPasa.getVrednostStavke());
-        }
-        return cena + "";
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new SkiPas();
     }
+
+    public JComboBox getCmbSkiKarte() {
+        return cmbSkiKarte;
+    }
+
+    public JTable getTblStavkeSkiPasa() {
+        return tblStavkeSkiPasa;
+    }
+
+    public JTextField getTxtDatumIzdavanja() {
+        return txtDatumIzdavanja;
+    }
+
+    public JTextField getTxtImePrezimeKupca() {
+        return txtImePrezimeKupca;
+    }
+
+    public JTextField getTxtPocetakVazenja() {
+        return txtPocetakVazenja;
+    }
+
+    public JTextField getTxtSifraSkiPasa() {
+        return txtSifraSkiPasa;
+    }
+
+    public JTextField getTxtUkupnaCena() {
+        return txtUkupnaCena;
+    }
+
+    public JTextField getTxtVrednostStavke() {
+        return txtVrednostStavke;
+    }
+
+    public JTextField getTxtZavrsetakVazenja() {
+        return txtZavrsetakVazenja;
+    }
+
 }

@@ -5,26 +5,31 @@
  */
 package klijent.forme.skiCentar;
 
+import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import klijent.forme.OpstaEkranskaForma;
 import klijent.kontroler.Kontroler;
+import klijent.kontrolerKi.KontrolerKIKreirajSkiCentar;
 
 /**
  *
  * @author UrosVesic
  */
-public class KreirajSkiCentarForma extends javax.swing.JFrame {
+public class KreirajSkiCentarForma extends OpstaEkranskaForma {
 
     private SkiCentar skiCentar;
+    private final KontrolerKIKreirajSkiCentar kkiKreirajSkiCentar;
 
     /**
      * Creates new form kreirajSkiCentarForma
      */
     public KreirajSkiCentarForma() {
         initComponents();
+        kkiKreirajSkiCentar = new KontrolerKIKreirajSkiCentar(this);
     }
 
     /**
@@ -137,33 +142,14 @@ public class KreirajSkiCentarForma extends javax.swing.JFrame {
 
     private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
         // TODO add your handling code here:
-        skiCentar = new SkiCentar();
-        try {
-            /*skiCentar = */Kontroler.getInstanca().kreirajSkiCentar(skiCentar);
-            napuniGrafickiObjekat();
-            napuniDomenskiObjekat();
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            //System.out.println("Neuspesno vracanje maxId");
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da kreira ski centar"+ex.getMessage());
-            return;
-        }
-        JOptionPane.showMessageDialog(this, "Sistem je kreirao ski centar");
+        kkiKreirajSkiCentar.SOKreirajSkiCentar();
+
+
     }//GEN-LAST:event_btnKreirajActionPerformed
 
     private void BtnZapamtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnZapamtiActionPerformed
-        try {
-            // TODO add your handling code here:
-            //validacija za kreiranje staze i popunjensot polja
-            napuniDomenskiObjekat();
-            skiCentar = Kontroler.getInstanca().zapamtiSkiCentar(skiCentar);
-            JOptionPane.showMessageDialog(this, "Sistem je zapamtio ski centar");
-            isprazniGrafickiObjekat();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti ski centar "+ex.getMessage());
-            ex.printStackTrace();
-        }
+        // TODO add your handling code here:
+        kkiKreirajSkiCentar.SOZapamtiSkiCentar();
     }//GEN-LAST:event_BtnZapamtiActionPerformed
 
     /**
@@ -183,25 +169,24 @@ public class KreirajSkiCentarForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtSifraSkiCentra;
     // End of variables declaration//GEN-END:variables
 
-    private void napuniGrafickiObjekat() throws SQLException {
-        txtNazivSkiCentra.setText(skiCentar.getNazivSkiCentra());
-        txtNazivPlanine.setText(skiCentar.getNazivPlanine());
-        txtRadnoVreme.setText(skiCentar.getRadnoVreme());
-        txtSifraSkiCentra.setText(String.valueOf(skiCentar.getSifraSkiCentra()));
-
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new SkiCentar();
     }
 
-    private void isprazniGrafickiObjekat() {
-        txtNazivPlanine.setText("");
-        txtNazivSkiCentra.setText("");
-        txtRadnoVreme.setText("");
-        txtSifraSkiCentra.setText("");
+    public javax.swing.JTextField getTxtNazivPlanine() {
+        return txtNazivPlanine;
     }
 
-    private void napuniDomenskiObjekat() {
-        skiCentar.setSifraSkiCentra(Long.parseLong(txtSifraSkiCentra.getText()));
-        skiCentar.setNazivSkiCentra(txtNazivSkiCentra.getText());
-        skiCentar.setNazivPlanine(txtNazivPlanine.getText());
-        skiCentar.setRadnoVreme(txtRadnoVreme.getText());
+    public javax.swing.JTextField getTxtNazivSkiCentra() {
+        return txtNazivSkiCentra;
+    }
+
+    public javax.swing.JTextField getTxtRadnoVreme() {
+        return txtRadnoVreme;
+    }
+
+    public javax.swing.JTextField getTxtSifraSkiCentra() {
+        return txtSifraSkiCentra;
     }
 }

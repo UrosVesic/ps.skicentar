@@ -5,17 +5,23 @@
  */
 package klijent.forme.skiCentar;
 
+import domen.OpstiDomenskiObjekat;
+import domen.SkiCentar;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import klijent.forme.OpstaEkranskaForma;
+import klijent.kontrolerKi.KontrolerKIPromeniSkiCentar;
+
 /**
  *
  * @author UrosVesic
  */
-public class PromeniSkiCentarForma extends javax.swing.JFrame {
+public class PromeniSkiCentarForma extends OpstaEkranskaForma {
 
-    /**
-     * Creates new form PromeniSkiCentarForma
-     */
+    private final KontrolerKIPromeniSkiCentar kkipsc;
     public PromeniSkiCentarForma() {
         initComponents();
+        kkipsc = new KontrolerKIPromeniSkiCentar(this);
     }
 
     /**
@@ -27,24 +33,158 @@ public class PromeniSkiCentarForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        txtRadnoVreme = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtSifraSkiCentra = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtNazivSkiCentra = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtNazivPlanine = new javax.swing.JTextField();
+        btnNadji = new javax.swing.JButton();
+        btnPromeni = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        txtRadnoVreme.setEditable(false);
+
+        jLabel3.setText("Radno vreme:");
+
+        jLabel4.setText("Sifra ski centra: ");
+
+        jLabel1.setText("Naziv ski centra: ");
+
+        txtNazivSkiCentra.setEditable(false);
+
+        jLabel2.setText("Naziv planine : ");
+
+        txtNazivPlanine.setEditable(false);
+
+        btnNadji.setText("Nadji");
+        btnNadji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNadjiActionPerformed(evt);
+            }
+        });
+
+        btnPromeni.setText("Promeni");
+        btnPromeni.setEnabled(false);
+        btnPromeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromeniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 806, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNazivPlanine, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtNazivSkiCentra, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtRadnoVreme, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(btnPromeni)
+                                    .addGap(91, 91, 91)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSifraSkiCentra, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnNadji)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSifraSkiCentra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNadji))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNazivSkiCentra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNazivPlanine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRadnoVreme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(btnPromeni)
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNadjiActionPerformed
+        // TODO add your handling code here:
+        kkipsc.SOPretraziSkiCentar();
+    }//GEN-LAST:event_btnNadjiActionPerformed
+
+    private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
+        // TODO add your handling code here:
+        kkipsc.SOZapamtiSkiCentar();
+    }//GEN-LAST:event_btnPromeniActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNadji;
+    private javax.swing.JButton btnPromeni;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtNazivPlanine;
+    private javax.swing.JTextField txtNazivSkiCentra;
+    private javax.swing.JTextField txtRadnoVreme;
+    private javax.swing.JTextField txtSifraSkiCentra;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new SkiCentar();
+    }
+
+    public JTextField getTxtNazivPlanine() {
+        return txtNazivPlanine;
+    }
+
+    public JTextField getTxtNazivSkiCentra() {
+        return txtNazivSkiCentra;
+    }
+
+    public JTextField getTxtRadnoVreme() {
+        return txtRadnoVreme;
+    }
+
+    public JTextField getTxtSifraSkiCentra() {
+        return txtSifraSkiCentra;
+    }
+
+    public JButton getBtnPromeni() {
+        return btnPromeni;
+    }
+    
+    
 }

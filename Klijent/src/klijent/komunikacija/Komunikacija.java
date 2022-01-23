@@ -106,4 +106,9 @@ public class Komunikacija {
         return (Odgovor) new Primalac(socket).primi();
     }
 
+    public Odgovor pozivSo(Zahtev zahtev) throws Exception {
+        new Posiljalac(socket).posalji(zahtev);
+        return (Odgovor) new Primalac(socket).primi();
+    }
+
 }

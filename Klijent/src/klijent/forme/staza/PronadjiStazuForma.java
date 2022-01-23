@@ -8,36 +8,26 @@ package klijent.forme.staza;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.Staza;
-import klijent.forme.modeli.ModelTabeleStaza;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.table.TableColumn;
-import klijent.kontroler.Kontroler;
+import klijent.forme.OpstaEkranskaForma;
+import klijent.kontrolerKi.KontrolerKIPronadjiStazu;
 
 /**
  *
  * @author UrosVesic
  */
-public class PronadjiStazuForma extends javax.swing.JFrame {
+public class PronadjiStazuForma extends OpstaEkranskaForma {
 
     /**
      * Creates new form PronadjiStazuForma1
      */
     Staza staza;
+    private final KontrolerKIPronadjiStazu kkiPronadjiStazu;
 
     public PronadjiStazuForma() {
         initComponents();
-        try {
-            prepare();
-        } catch (SQLException ex) {
-            System.out.println("Neuspesno ucitavanje ski centara");
-        }
+        kkiPronadjiStazu = new KontrolerKIPronadjiStazu(this);
+        prepare();
+
     }
 
     /**
@@ -54,7 +44,7 @@ public class PronadjiStazuForma extends javax.swing.JFrame {
         btnPronadji = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtBrojStaze = new javax.swing.JTextField();
-        btnZapamtiPromene = new javax.swing.JButton();
+        btnPromeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,12 +68,12 @@ public class PronadjiStazuForma extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Pretrazi stazu po nazivu: ");
+        jLabel1.setText("Pretrazi stazu po broju: ");
 
-        btnZapamtiPromene.setText("Zapamti promene");
-        btnZapamtiPromene.addActionListener(new java.awt.event.ActionListener() {
+        btnPromeni.setText("Promeni");
+        btnPromeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnZapamtiPromeneActionPerformed(evt);
+                btnPromeniActionPerformed(evt);
             }
         });
 
@@ -104,7 +94,7 @@ public class PronadjiStazuForma extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnZapamtiPromene, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPromeni, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,7 +112,7 @@ public class PronadjiStazuForma extends javax.swing.JFrame {
                         .addGap(54, 54, 54))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
-                        .addComponent(btnZapamtiPromene)
+                        .addComponent(btnPromeni)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -131,25 +121,14 @@ public class PronadjiStazuForma extends javax.swing.JFrame {
 
     private void btnPronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiActionPerformed
         // TODO add your handling code here:
-        isprazniTabelu();
-        staza = new Staza();
-        ModelTabeleStaza model = (ModelTabeleStaza) tblStaze.getModel();
-        try {
-            //staza.setBrojStaze(Long.parseLong(txtBrojStaze.getText()));
-            staza.setNazivStaze(txtBrojStaze.getText());
-            staza = Kontroler.getInstanca().pronadjiStaze(staza);
-
-            model.dodaj(staza);
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da pronadje stazu po zadatom krterijumu " + ex.getMessage());
-            ex.printStackTrace();
-        }
+        kkiPronadjiStazu.SOPretraziStaze();
     }//GEN-LAST:event_btnPronadjiActionPerformed
 
-    private void btnZapamtiPromeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiPromeneActionPerformed
+    private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
         // TODO add your handling code here:
-        ModelTabeleStaza model = (ModelTabeleStaza) tblStaze.getModel();
+
+        new PromeniStazuForma((Staza) kkiPronadjiStazu.getOdo()).setVisible(true);
+        /*ModelTabeleStaza model = (ModelTabeleStaza) tblStaze.getModel();
         List<Staza> staze = model.getStaze();
         for (Staza staza1 : staze) {
             try {
@@ -158,51 +137,39 @@ public class PronadjiStazuForma extends javax.swing.JFrame {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti stazu: " + staza1.getNazivStaze());
             }
-        }
+        }*/
 
-    }//GEN-LAST:event_btnZapamtiPromeneActionPerformed
+    }//GEN-LAST:event_btnPromeniActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPromeni;
     private javax.swing.JButton btnPronadji;
-    private javax.swing.JButton btnZapamtiPromene;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblStaze;
     private javax.swing.JTextField txtBrojStaze;
     // End of variables declaration//GEN-END:variables
 
-    private void prepare() throws SQLException {
-        ModelTabeleStaza model = new ModelTabeleStaza();
-        tblStaze.setModel(model);
-
-        List<OpstiDomenskiObjekat> skiCentri = new ArrayList<>();
-        try {
-            skiCentri = Kontroler.getInstanca().ucitajListuSkiCentara(skiCentri);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Neuspesno ucitavanje liste ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        SkiCentar[] arr = new SkiCentar[skiCentri.size()];
-        arr = skiCentri.toArray(arr);
-        JComboBox cmbSkiCentri = new JComboBox(arr);
-
-        TableColumn tcSkiCentar = tblStaze.getColumnModel().getColumn(3);
-        tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
-
-        String[] tipovi = new String[]{"Laka", "Srednja", "Teska"};
-        JComboBox cmbTipStaze = new JComboBox(tipovi);
-
-        TableColumn tcTipovi = tblStaze.getColumnModel().getColumn(2);
-        tcTipovi.setCellEditor(new DefaultCellEditor(cmbTipStaze));
+    private void prepare()  {
+        kkiPronadjiStazu.pripremiTabelu();
 
     }
 
-    private void isprazniTabelu() {
-        ModelTabeleStaza model = (ModelTabeleStaza) tblStaze.getModel();
-        model.removeAll();
+    public javax.swing.JTable getTblStaze() {
+        return tblStaze;
     }
+
+    public javax.swing.JTextField getTxtBrojStaze() {
+        return txtBrojStaze;
+    }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new Staza();
+    }
+
 }

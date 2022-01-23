@@ -11,7 +11,7 @@ import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
-import klijent.forme.skiPas.KreirajNoviSkiPasForma;
+import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.forme.zicara.KreirajZicaruForma;
 
 /**
@@ -190,7 +190,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        new KreirajNoviSkiPasForma().setVisible(true);
+        new KreirajSkiPasForma().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

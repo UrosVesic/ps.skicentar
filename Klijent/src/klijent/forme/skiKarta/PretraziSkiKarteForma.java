@@ -5,27 +5,33 @@
  */
 package klijent.forme.skiKarta;
 
+import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleSkiKarte;
 import klijent.kontroler.Kontroler;
+import klijent.kontrolerKi.KontrolerKIPretraziSkiKarte;
 
 /**
  *
  * @author UrosVesic
  */
-public class PretraziSkiKarteForma extends javax.swing.JFrame {
+public class PretraziSkiKarteForma extends OpstaEkranskaForma {
 
     /**
      * Creates new form PretraziSkiKarteForma
      */
     List<SkiKarta> skiKarte;
+    private final KontrolerKIPretraziSkiKarte kkiPretraziSkiKarte;
 
     public PretraziSkiKarteForma() {
         initComponents();
+        kkiPretraziSkiKarte = new KontrolerKIPretraziSkiKarte(this);
         prepare();
     }
 
@@ -104,18 +110,9 @@ public class PretraziSkiKarteForma extends javax.swing.JFrame {
 
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
-        SkiKarta skiKarta = new SkiKarta();
-        skiKarta.setCenaSkiKarte(Integer.parseInt(txtCena.getText()));
+        kkiPretraziSkiKarte.SOPretraziKarte();
 
-        try {
-            skiKarte = Kontroler.getInstanca().pretraziSkiKarte(skiKarta);
-            ModelTabeleSkiKarte model = (ModelTabeleSkiKarte) tblSkiKarte.getModel();
-            model.setSkiKarte(skiKarte);
-            JOptionPane.showMessageDialog(this, "Sistem je nasao ski karte po zadatom kriterijumu");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje ski karte po zadatom kriterijumu");
-            ex.printStackTrace();
-        }
+
     }//GEN-LAST:event_btnPretraziActionPerformed
 
 
@@ -128,7 +125,21 @@ public class PretraziSkiKarteForma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void prepare() {
-        ModelTabeleSkiKarte model = new ModelTabeleSkiKarte();
-        tblSkiKarte.setModel(model);
+        kkiPretraziSkiKarte.pripremiTabelu();
+
     }
+
+    @Override
+    public OpstiDomenskiObjekat kreirajObjekat() {
+        return new SkiKarta();
+    }
+
+    public javax.swing.JTable getTblSkiKarte() {
+        return tblSkiKarte;
+    }
+
+    public javax.swing.JTextField getTxtCena() {
+        return txtCena;
+    }
+
 }

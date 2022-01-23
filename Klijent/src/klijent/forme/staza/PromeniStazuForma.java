@@ -6,32 +6,25 @@
 package klijent.forme.staza;
 
 import domen.OpstiDomenskiObjekat;
-import domen.SkiCentar;
 import domen.Staza;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontroler.Kontroler;
-import klijent.kontrolerKi.KontrolerKIKreirajStazu;
+import klijent.kontrolerKi.KontrolerKIPromeniStazu;
 
 /**
  *
- * @author UrosVesic
+ * @author draskovesic
  */
-public class KreirajStazuForma extends OpstaEkranskaForma {
+public class PromeniStazuForma extends OpstaEkranskaForma{
 
-    private Staza staza;
-    private final KontrolerKIKreirajStazu kkiKreirajStazu;
-
-    /**
-     * Creates new form KreirajStazuForma
-     */
-    public KreirajStazuForma() {
+    private final KontrolerKIPromeniStazu kkiPromeniStazu;
+    
+    public PromeniStazuForma(Staza staza) {
         initComponents();
-        kkiKreirajStazu = new KontrolerKIKreirajStazu(this);
-        prepare();
+        kkiPromeniStazu = new KontrolerKIPromeniStazu(this,staza);
+        pripremiKomboBox();
+        
     }
 
     /**
@@ -43,22 +36,22 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtNazivStaze = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cmbTipStaze = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cmbSkiCentar = new javax.swing.JComboBox();
         txtBrojStaze = new javax.swing.JTextField();
-        btnKreiraj = new javax.swing.JButton();
-        btnZapamti = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnZapamtiPromene = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Broj staze: ");
-
-        jLabel2.setText("Naziv staze: ");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel3.setText("Tip staze: ");
 
@@ -70,17 +63,14 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
 
         txtBrojStaze.setEditable(false);
 
-        btnKreiraj.setText("kreiraj");
-        btnKreiraj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKreirajActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Broj staze: ");
 
-        btnZapamti.setText("zapamti");
-        btnZapamti.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Naziv staze: ");
+
+        btnZapamtiPromene.setText("Zapamti promene");
+        btnZapamtiPromene.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnZapamtiActionPerformed(evt);
+                btnZapamtiPromeneActionPerformed(evt);
             }
         });
 
@@ -91,36 +81,33 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBrojStaze, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnZapamtiPromene)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNazivStaze)
-                                .addComponent(cmbTipStaze, 0, 152, Short.MAX_VALUE)
-                                .addComponent(cmbSkiCentar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cmbTipStaze, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbSkiCentar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(btnKreiraj)
-                        .addGap(65, 65, 65)
-                        .addComponent(btnZapamti)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                        .addGap(107, 107, 107)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBrojStaze, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtBrojStaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNazivStaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,33 +119,31 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cmbSkiCentar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKreiraj)
-                    .addComponent(btnZapamti))
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnZapamtiPromene)
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajActionPerformed
+    private void btnZapamtiPromeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiPromeneActionPerformed
         // TODO add your handling code here:
-        kkiKreirajStazu.SOKreirajStazu();
-    }//GEN-LAST:event_btnKreirajActionPerformed
+        kkiPromeniStazu.SOZapamtiStazu();
+    }//GEN-LAST:event_btnZapamtiPromeneActionPerformed
 
-    private void btnZapamtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiActionPerformed
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        kkiKreirajStazu.SOZapamtiStazu();
-    }//GEN-LAST:event_btnZapamtiActionPerformed
+        kkiPromeniStazu.KonvertujObjekatUGrafickeKomponente();
+    }//GEN-LAST:event_formWindowOpened
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKreiraj;
-    private javax.swing.JButton btnZapamti;
+    private javax.swing.JButton btnKreiraj1;
+    private javax.swing.JButton btnKreiraj2;
+    private javax.swing.JButton btnKreiraj3;
+    private javax.swing.JButton btnZapamtiPromene;
     private javax.swing.JComboBox cmbSkiCentar;
     private javax.swing.JComboBox<String> cmbTipStaze;
     private javax.swing.JLabel jLabel1;
@@ -169,48 +154,30 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
     private javax.swing.JTextField txtNazivStaze;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-    private void prepare() {
-        kkiKreirajStazu.pripremiKomboBox();
-    }
-
-
     @Override
     public OpstiDomenskiObjekat kreirajObjekat() {
         return new Staza();
     }
 
-    public javax.swing.JComboBox getCmbSkiCentar() {
+    public JComboBox getCmbSkiCentar() {
         return cmbSkiCentar;
     }
 
-    public javax.swing.JComboBox<String> getCmbTipStaze() {
+    public JComboBox<String> getCmbTipStaze() {
         return cmbTipStaze;
     }
 
-    public javax.swing.JTextField getTxtBrojStaze() {
+    public JTextField getTxtBrojStaze() {
         return txtBrojStaze;
     }
 
-    public javax.swing.JTextField getTxtNazivStaze() {
+    public JTextField getTxtNazivStaze() {
         return txtNazivStaze;
     }
 
-    public void setCmbSkiCentar(javax.swing.JComboBox cmbSkiCentar) {
-        this.cmbSkiCentar = cmbSkiCentar;
+    private void pripremiKomboBox() {
+        kkiPromeniStazu.pripremiKomboBox();
     }
-
-    public void setCmbTipStaze(javax.swing.JComboBox<String> cmbTipStaze) {
-        this.cmbTipStaze = cmbTipStaze;
-    }
-
-    public void setTxtBrojStaze(javax.swing.JTextField txtBrojStaze) {
-        this.txtBrojStaze = txtBrojStaze;
-    }
-
-    public void setTxtNazivStaze(javax.swing.JTextField txtNazivStaze) {
-        this.txtNazivStaze = txtNazivStaze;
-    }
-
+    
+    
 }

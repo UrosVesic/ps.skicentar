@@ -27,6 +27,10 @@ public class ModelTabeleStaza extends AbstractTableModel {
     public List<Staza> getStaze() {
         return staze;
     }
+
+    public void setStaze(List<Staza> staze) {
+        this.staze = staze;
+    }
     
     
 
