@@ -68,7 +68,7 @@ public class PronadjiStazuForma extends OpstaEkranskaForma {
             }
         });
 
-        jLabel1.setText("Pretrazi stazu po broju: ");
+        jLabel1.setText("Pretrazi stazu po broju:");
 
         btnPromeni.setText("Promeni");
         btnPromeni.addActionListener(new java.awt.event.ActionListener() {
@@ -126,19 +126,7 @@ public class PronadjiStazuForma extends OpstaEkranskaForma {
 
     private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
         // TODO add your handling code here:
-
         new PromeniStazuForma((Staza) kkiPronadjiStazu.getOdo()).setVisible(true);
-        /*ModelTabeleStaza model = (ModelTabeleStaza) tblStaze.getModel();
-        List<Staza> staze = model.getStaze();
-        for (Staza staza1 : staze) {
-            try {
-                Kontroler.getInstanca().zapamtiStazu(staza1);
-                JOptionPane.showMessageDialog(this, "Sistem je zapamtio stazu: " + staza1.getNazivStaze());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti stazu: " + staza1.getNazivStaze());
-            }
-        }*/
-
     }//GEN-LAST:event_btnPromeniActionPerformed
 
     /**

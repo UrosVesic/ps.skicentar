@@ -108,11 +108,9 @@ public class Kontroler {
         so.opsteIzvrsenjeSo(skiKarta);
     }
 
-    public List<OpstiDomenskiObjekat> pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
-        List<OpstiDomenskiObjekat> skiKarte = new ArrayList<>();
-        OpstaSo1 so = new PretraziSkiKarteSo(b);
-        so.opsteIzvrsenjeSo(skiKarte, skiKarta);
-        return skiKarte;
+    public void pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
+        OpstaSo so = new PretraziSkiKarteSo(b);
+        so.opsteIzvrsenjeSo(skiKarta);
     }
 
     public void kreirajSkiPas(SkiPas skiPas) throws Exception {

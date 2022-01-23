@@ -88,7 +88,6 @@ public abstract class OpstiKontrolerKI {
                 odo = (Staza) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
-                isprazniGrafickiObjekat();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -97,7 +96,7 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void SOPretraziStaze() {
-
+        isprazniGrafickiObjekat();
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZU, odo);
@@ -189,7 +188,6 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void SOPretraziKarte() {
-        isprazniGrafickiObjekat();
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_KARTE, odo);
@@ -197,14 +195,15 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
+                odo = (SkiKarta) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
-                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski karte po zadatom kriterijumu");
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski kartu po zadatom kriterijumu");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski karte po zadataom kriterijumu");
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski kartu po zadataom kriterijumu");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski karte po zadataom kriterijumu");
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski kartu po zadataom kriterijumu");
         }
     }
 
@@ -303,8 +302,8 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas");
         }
     }
-    
-     public void SOPretraziSkiPas() {
+
+    public void SOPretraziSkiPas() {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_PAS, odo);
@@ -336,7 +335,7 @@ public abstract class OpstiKontrolerKI {
         pscf.getTxtNazivPlanine().setEditable(true);
         pscf.getTxtNazivSkiCentra().setEditable(true);
         pscf.getTxtRadnoVreme().setEditable(true);
-        pscf.getTxtSifraSkiCentra().setEditable(false);
+        //pscf.getTxtSifraSkiCentra().setEditable(false);
         pscf.getBtnPromeni().setEnabled(true);
     }
 
@@ -349,12 +348,13 @@ public abstract class OpstiKontrolerKI {
         pscf.getBtnPromeni().setEnabled(false);
     }
 
+    public void omoguciPamcenjeSkiPasa() {
+    }
 
-    public void omoguciPamcenjeSkiPasa() {}
+    public void promeniCenu() {
+    }
 
-    public void promeniCenu() {}
+    public void onemoguciPamcenjeSkiPasa() {
+    }
 
-    public void onemoguciPamcenjeSkiPasa() {}
-
-    
 }

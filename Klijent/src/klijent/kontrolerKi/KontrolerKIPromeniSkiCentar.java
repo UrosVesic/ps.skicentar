@@ -7,7 +7,6 @@ package klijent.kontrolerKi;
 
 import domen.SkiCentar;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
 
 /**

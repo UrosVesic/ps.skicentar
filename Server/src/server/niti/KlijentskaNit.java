@@ -279,9 +279,9 @@ public class KlijentskaNit extends Thread {
         SkiKarta skiKarta = (SkiKarta) zahtev.getParametar();
         Odgovor odgovor = new Odgovor();
         try {
-            List<OpstiDomenskiObjekat> lista = Kontroler.getInstanca().pretraziSkiKarte(skiKarta);
+            Kontroler.getInstanca().pretraziSkiKarte(skiKarta);
             odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_KARTE);
-            odgovor.setRezultat(lista);
+            odgovor.setRezultat(skiKarta);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);

@@ -137,8 +137,6 @@ public class BrokerBazePodataka {
                 odo.napuni(rs);
                 for (int i = 0; i < odo.vratiBrojVezanihObjekata(); i++) {
                     OpstiDomenskiObjekat vezo = odo.vratiVezaniObjekat(i);
-                    //postavi pk za vezo
-                    //vezo.postaviVrednostPK(odo.vratiVrednostSK(i));
                     pronadjiSlog(vezo);
                     odo.postaviVrednostVezanogObjekta(vezo, i);
                 }

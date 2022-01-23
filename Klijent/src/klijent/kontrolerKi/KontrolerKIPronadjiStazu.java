@@ -8,6 +8,7 @@ package klijent.kontrolerKi;
 import domen.OpstiDomenskiObjekat;
 import domen.Staza;
 import java.util.ArrayList;
+import java.util.List;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStaza;
 import klijent.forme.staza.PronadjiStazuForma;
@@ -25,8 +26,6 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
     public OpstiDomenskiObjekat getOdo() {
         return odo;
     }
-    
-    
 
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
@@ -56,7 +55,7 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
     }
 
     private void napuniGrafickiObjekatIzDOmenskog(Staza staza, PronadjiStazuForma psf) {
-        psf.getTxtBrojStaze().setText(staza.getBrojStaze()+"");
+        psf.getTxtBrojStaze().setText(staza.getBrojStaze() + "");
         ModelTabeleStaza model = (ModelTabeleStaza) psf.getTblStaze().getModel();
         model.dodaj(staza);
     }

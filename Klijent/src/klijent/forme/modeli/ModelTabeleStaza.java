@@ -30,6 +30,7 @@ public class ModelTabeleStaza extends AbstractTableModel {
 
     public void setStaze(List<Staza> staze) {
         this.staze = staze;
+        fireTableDataChanged();
     }
     
     

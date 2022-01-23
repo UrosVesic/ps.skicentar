@@ -8,6 +8,8 @@ package klijent.forme.skiKarta;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
 import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.kontrolerKi.KontrolerKIPretraziSkiKarte;
 
@@ -26,7 +28,7 @@ public class PretraziSkiKarteForma extends OpstaEkranskaForma {
     public PretraziSkiKarteForma() {
         initComponents();
         kkiPretraziSkiKarte = new KontrolerKIPretraziSkiKarte(this);
-        prepare();
+        pripremiKomboBox();
     }
 
     /**
@@ -39,27 +41,18 @@ public class PretraziSkiKarteForma extends OpstaEkranskaForma {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtCena = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblSkiKarte = new javax.swing.JTable();
+        txtSifraSkiKarte = new javax.swing.JTextField();
         btnPretrazi = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cmbVrstaSkiKarte = new javax.swing.JComboBox<>();
+        txtCenaSkiKArte = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cmbSkiCentar = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Unesite gornju granicu cene: ");
-
-        tblSkiKarte.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblSkiKarte);
+        jLabel1.setText("Unesite broj ski karte:");
 
         btnPretrazi.setText("Pretrazi");
         btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -68,35 +61,57 @@ public class PretraziSkiKarteForma extends OpstaEkranskaForma {
             }
         });
 
+        jLabel2.setText("Vrsta ski karte: ");
+
+        cmbVrstaSkiKarte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jednodnevna", "Dvodnevna", "Trodnevna", "Sedmodnevna", "Nocna" }));
+
+        jLabel3.setText("Cena ski karte: ");
+
+        jLabel4.setText("Ski centar: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCena, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(btnPretrazi))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(txtSifraSkiKarte, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbVrstaSkiKarte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCenaSkiKArte)
+                    .addComponent(cmbSkiCentar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSifraSkiKarte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPretrazi))
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbVrstaSkiKarte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCenaSkiKArte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbSkiCentar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,35 +120,44 @@ public class PretraziSkiKarteForma extends OpstaEkranskaForma {
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         // TODO add your handling code here:
         kkiPretraziSkiKarte.SOPretraziKarte();
-
-
     }//GEN-LAST:event_btnPretraziActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPretrazi;
+    private javax.swing.JComboBox cmbSkiCentar;
+    private javax.swing.JComboBox<String> cmbVrstaSkiKarte;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblSkiKarte;
-    private javax.swing.JTextField txtCena;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtCenaSkiKArte;
+    private javax.swing.JTextField txtSifraSkiKarte;
     // End of variables declaration//GEN-END:variables
-
-    private void prepare() {
-        kkiPretraziSkiKarte.pripremiTabelu();
-
-    }
 
     @Override
     public OpstiDomenskiObjekat kreirajObjekat() {
         return new SkiKarta();
     }
 
-    public javax.swing.JTable getTblSkiKarte() {
-        return tblSkiKarte;
+    public JComboBox getCmbSkiCentar() {
+        return cmbSkiCentar;
     }
 
-    public javax.swing.JTextField getTxtCena() {
-        return txtCena;
+    public JComboBox<String> getCmbVrstaSkiKarte() {
+        return cmbVrstaSkiKarte;
+    }
+
+    public JTextField getTxtCenaSkiKArte() {
+        return txtCenaSkiKArte;
+    }
+
+    public javax.swing.JTextField getTxtSifraSkiKarte() {
+        return txtSifraSkiKarte;
+    }
+
+    private void pripremiKomboBox() {
+        kkiPretraziSkiKarte.pripremiKomboBox();
     }
 
 }
