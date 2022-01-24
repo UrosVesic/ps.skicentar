@@ -11,7 +11,6 @@ import domen.Staza;
 import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.forme.staza.KreirajStazuForma;
 import klijent.forme.staza.PromeniStazuForma;
 
 /**
@@ -62,6 +61,7 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
 
     public void pripremiKomboBox() {
         List<OpstiDomenskiObjekat> skiCentri;
+        Staza staza = (Staza) odo;
         PromeniStazuForma psf = (PromeniStazuForma) oef;
         psf.getCmbSkiCentar().removeAllItems();
         try {
@@ -73,6 +73,8 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(psf, "Sistem ne moze da vrati listu ski centara");
         }
+        psf.getCmbSkiCentar().setSelectedItem(staza.getSkiCentar());
+
     }
 
 }

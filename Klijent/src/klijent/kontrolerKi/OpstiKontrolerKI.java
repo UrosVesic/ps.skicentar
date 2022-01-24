@@ -257,6 +257,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski centar po zadatom kriterijumu");
                 omoguciPromenu();
+
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu");
             }
@@ -335,7 +336,7 @@ public abstract class OpstiKontrolerKI {
         pscf.getTxtNazivPlanine().setEditable(true);
         pscf.getTxtNazivSkiCentra().setEditable(true);
         pscf.getTxtRadnoVreme().setEditable(true);
-        //pscf.getTxtSifraSkiCentra().setEditable(false);
+        pscf.getTxtSifraSkiCentra().setEditable(false);
         pscf.getBtnPromeni().setEnabled(true);
     }
 

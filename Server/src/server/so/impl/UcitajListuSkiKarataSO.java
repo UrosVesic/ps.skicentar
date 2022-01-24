@@ -6,25 +6,23 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
-import java.sql.SQLException;
 import java.util.List;
 import server.broker.BrokerBazePodataka;
 import server.so.OpstaSo1;
 
 /**
  *
- * @author UrosVesic
+ * @author draskovesic
  */
-public class UcitajListuSo extends OpstaSo1{
-    
+public class UcitajListuSkiKarataSO extends OpstaSo1 {
 
-    public UcitajListuSo(BrokerBazePodataka b) {
+    public UcitajListuSkiKarataSO(BrokerBazePodataka b) {
         super(b);
     }
-    
 
     @Override
     public void izvrsenjeSo(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws Exception {
         b.vratiSve(lista, odo);
     }
+
 }

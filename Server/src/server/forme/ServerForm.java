@@ -7,9 +7,8 @@ package server.forme;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import server.kontroler.Kontroler;
 import server.niti.ServerskaNit;
 
 /**
@@ -91,7 +90,7 @@ public class ServerForm extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Konfiguracija");
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -119,34 +118,25 @@ public class ServerForm extends javax.swing.JFrame {
                     .addComponent(lblStatusServera, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokreniActionPerformed
+        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
-            serverskaNit = new ServerskaNit();
-            serverskaNit.start();
-            btnPokreni.setEnabled(false);
-            btnZaustavi.setEnabled(true);
-            lblStatusServera.setText("Server je pokrenut");
-            lblStatusServera.setForeground(Color.GREEN);
+            Kontroler.getInstanca().pokreniServer(this);
         } catch (IOException ex) {
             JOptionPane.showConfirmDialog(this, "Neuspesno pokretanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokreniActionPerformed
 
     private void btnZaustaviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaustaviActionPerformed
+        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
-            serverskaNit.zaustavi();
-            btnPokreni.setEnabled(true);
-            btnZaustavi.setEnabled(false);
-            lblStatusServera.setText("Server je zaustavljen");
-            lblStatusServera.setForeground(Color.RED);
+            Kontroler.getInstanca().zaustaviServer(this);
         } catch (IOException ex) {
             JOptionPane.showConfirmDialog(this, "Neuspesno zaustavljanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
         }
@@ -162,4 +152,16 @@ public class ServerForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblStatusServera;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnPokreni() {
+        return btnPokreni;
+    }
+
+    public javax.swing.JButton getBtnZaustavi() {
+        return btnZaustavi;
+    }
+
+    public javax.swing.JLabel getLblStatusServera() {
+        return lblStatusServera;
+    }
 }

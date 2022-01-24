@@ -68,4 +68,10 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
 
     }
 
+    public void azurirajTabelu() {
+        PronadjiStazuForma psf = (PronadjiStazuForma) oef;
+        ModelTabeleStaza model = (ModelTabeleStaza) psf.getTblStaze().getModel();
+        model.fireTableDataChanged();
+    }
+
 }

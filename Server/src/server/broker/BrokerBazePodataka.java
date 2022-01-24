@@ -76,7 +76,7 @@ public class BrokerBazePodataka {
         }
     }
 
-    public void pamtiSlozeniSlog(OpstiDomenskiObjekat odo) throws Exception {
+    public void pamtiSlozeniSlog(OpstiDomenskiObjekat odo) throws SQLException, Exception {
         String upit;
         promeniSlog(odo);
         konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
@@ -149,7 +149,7 @@ public class BrokerBazePodataka {
         }
     }
 
-    public boolean daLiPostojiSlog(OpstiDomenskiObjekat odo) throws Exception {
+    public boolean daLiPostojiSlog(OpstiDomenskiObjekat odo) throws SQLException, Exception {
         try {
             String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
             konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
@@ -162,7 +162,7 @@ public class BrokerBazePodataka {
         }
     }
 
-    public void pronadjiSlozenSlog(OpstiDomenskiObjekat odo) throws Exception {
+    public void pronadjiSlozenSlog(OpstiDomenskiObjekat odo) throws SQLException, Exception {
         konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
         Statement st = konekcija.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         String upit = "SELECT * FROM " + odo.vratiImeKlase()
@@ -219,8 +219,6 @@ public class BrokerBazePodataka {
                 lista.add(odo1);
                 for (int i = 0; i < odo1.vratiBrojVezanihObjekata(); i++) {
                     OpstiDomenskiObjekat vezo = odo1.vratiVezaniObjekat(i);
-                    //postavi pk za vezo
-                    //vezo.postaviVrednostPK(odo1.vratiVrednostSK(i));
                     pronadjiSlog(vezo);
                     odo1.postaviVrednostVezanogObjekta(vezo, i);
                 }

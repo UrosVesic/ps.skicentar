@@ -9,6 +9,7 @@ import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.Staza;
 import klijent.forme.OpstaEkranskaForma;
+import klijent.forme.modeli.ModelTabeleStaza;
 import klijent.kontrolerKi.KontrolerKIPronadjiStazu;
 
 /**
@@ -127,6 +128,7 @@ public class PronadjiStazuForma extends OpstaEkranskaForma {
     private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
         // TODO add your handling code here:
         new PromeniStazuForma((Staza) kkiPronadjiStazu.getOdo()).setVisible(true);
+        kkiPronadjiStazu.isprazniGrafickiObjekat();
     }//GEN-LAST:event_btnPromeniActionPerformed
 
     /**
@@ -142,7 +144,7 @@ public class PronadjiStazuForma extends OpstaEkranskaForma {
     private javax.swing.JTextField txtBrojStaze;
     // End of variables declaration//GEN-END:variables
 
-    private void prepare()  {
+    private void prepare() {
         kkiPronadjiStazu.pripremiTabelu();
 
     }

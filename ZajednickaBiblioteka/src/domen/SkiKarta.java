@@ -158,6 +158,8 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         return skiCentar + " " + vrstaSkiKarte;
     }
 
+    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -175,5 +177,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         }
         return true;
     }
+
+    
 
 }

@@ -14,7 +14,8 @@ import java.util.Date;
  *
  * @author UrosVesic
  */
-public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
+public class SkiCentar implements OpstiDomenskiObjekat, Serializable {
+
     private long sifraSkiCentra;
     private String nazivSkiCentra;
     private String nazivPlanine;
@@ -26,8 +27,8 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
         nazivPlanine = "";
         radnoVreme = "00-00";
     }
-    
-    public SkiCentar(long sifraSkiCentra){
+
+    public SkiCentar(long sifraSkiCentra) {
         this.sifraSkiCentra = sifraSkiCentra;
     }
 
@@ -72,13 +73,13 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
 
     @Override
     public String vratiVrednostiAtributa() {
-        return sifraSkiCentra + ", " + (nazivSkiCentra == null ? null : "'" +nazivSkiCentra +"'") + ", " 
-                + (nazivPlanine == null ? null : "'" +nazivPlanine +"'") + ", "+(radnoVreme == null ? null : "'" +radnoVreme +"'");
+        return sifraSkiCentra + ", " + (nazivSkiCentra == null ? null : "'" + nazivSkiCentra + "'") + ", "
+                + (nazivPlanine == null ? null : "'" + nazivPlanine + "'") + ", " + (radnoVreme == null ? null : "'" + radnoVreme + "'");
     }
 
     @Override
     public String postaviVrednostiAtributa() {
-        return "sifraSkiCentra = "+sifraSkiCentra + ", " + "nazivSkiCentra = " + (nazivSkiCentra == null ? null : "'" +nazivSkiCentra +"'") + ", " + "nazivPlanine = " + (nazivPlanine == null ? null : "'" +nazivPlanine +"'") + ", "+ "radnoVreme = " +(radnoVreme == null ? null : "'" +radnoVreme +"'");
+        return "sifraSkiCentra = " + sifraSkiCentra + ", " + "nazivSkiCentra = " + (nazivSkiCentra == null ? null : "'" + nazivSkiCentra + "'") + ", " + "nazivPlanine = " + (nazivPlanine == null ? null : "'" + nazivPlanine + "'") + ", " + "radnoVreme = " + (radnoVreme == null ? null : "'" + radnoVreme + "'");
     }
 
     @Override
@@ -88,10 +89,8 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
 
     @Override
     public String vratiUslovZaNadjiSlog() {
-        return "sifraSkiCentra = "+sifraSkiCentra;
+        return "sifraSkiCentra = " + sifraSkiCentra;
     }
-
-    
 
     @Override
     public void napuni(ResultSet rs) throws SQLException {
@@ -105,7 +104,7 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
 
     @Override
     public String toString() {
-        return  nazivSkiCentra;//super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return nazivSkiCentra;//super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -114,13 +113,13 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
     }
 
     @Override
-    public void povecajBroj(ResultSet rs) throws SQLException{
-        this.setSifraSkiCentra(rs.getLong(vratiNazivPK())+1);
+    public void povecajBroj(ResultSet rs) throws SQLException {
+        this.setSifraSkiCentra(rs.getLong(vratiNazivPK()) + 1);
     }
 
     @Override
     public void postaviPocetniBroj() {
-       this.setSifraSkiCentra(1);
+        this.setSifraSkiCentra(1);
     }
 
     @Override
@@ -138,8 +137,6 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
         return null;
     }
 
-    
-
     @Override
     public void postaviVrednostPK(Object pk) {
         sifraSkiCentra = (long) pk;
@@ -155,8 +152,22 @@ public class SkiCentar implements OpstiDomenskiObjekat,Serializable{
         return null;
     }
 
-    
-    
-    
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SkiCentar other = (SkiCentar) obj;
+        if (this.sifraSkiCentra != other.sifraSkiCentra) {
+            return false;
+        }
+        return true;
+    }
+
 }
