@@ -6,14 +6,12 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
-import java.util.List;
 import server.broker.BrokerBazePodataka;
 import server.so.OpstaSo;
-import server.so.OpstaSo1;
 
 /**
  *
- * @author UrosVesic
+ * @author draskovesic
  */
 public class PretraziSkiKarteSo extends OpstaSo {
 

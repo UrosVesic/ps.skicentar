@@ -26,8 +26,8 @@ import server.so.impl.KreirajSkiPasSO;
 import server.so.impl.KreirajStazuSO;
 import server.so.impl.KreirajZicaruSO;
 import server.so.impl.PretraziSkiCentarSO;
-import server.so.impl.PretraziSkiKarteSO;
-import server.so.impl.PretraziSkiPasSO;
+import server.so.impl.PretraziSkiKarteSo;
+import server.so.impl.PretraziSkiPasSo;
 import server.so.impl.PretraziStazuSO;
 import server.so.impl.UcitajListuSkiCentaraSO;
 import server.so.impl.UcitajListuSkiKarataSO;
@@ -139,7 +139,7 @@ public class Kontroler {
     }
 
     public void pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
-        OpstaSo so = new PretraziSkiKarteSO(b);
+        OpstaSo so = new PretraziSkiKarteSo(b);
         so.opsteIzvrsenjeSo(skiKarta);
     }
 
@@ -159,7 +159,7 @@ public class Kontroler {
     }
 
     public void pronadjiSkiPas(SkiPas skiPas) throws Exception {
-        OpstaSo so = new PretraziSkiPasSO(b);
+        OpstaSo so = new PretraziSkiPasSo(b);
         so.opsteIzvrsenjeSo(skiPas);
     }
 
