@@ -141,7 +141,7 @@ public class BrokerBazePodataka {
                     odo.postaviVrednostVezanogObjekta(vezo, i);
                 }
             } else {
-                throw new Exception();
+                throw new Exception("Slog nije pronadjen\n");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -191,18 +191,26 @@ public class BrokerBazePodataka {
 
             }
         }
+        else{
+            //ne postoji slog u bazi
+        }
     }
 
     public void vratiMaxID(OpstiDomenskiObjekat odo) throws SQLException {
-        String upit;
-        upit = "SELECT Max(" + odo.vratiNazivPK() + ") AS " + odo.vratiNazivPK() + " FROM " + odo.vratiImeKlase();
-        Connection konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
-        Statement statement = konekcija.createStatement();
-        ResultSet rs = statement.executeQuery(upit);
-        if (rs.next() == false) {
-            odo.postaviPocetniBroj();
-        } else {
-            odo.povecajBroj(rs);
+        try {
+            String upit;
+            upit = "SELECT Max(" + odo.vratiNazivPK() + ") AS " + odo.vratiNazivPK() + " FROM " + odo.vratiImeKlase();
+            Connection konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
+            Statement statement = konekcija.createStatement();
+            ResultSet rs = statement.executeQuery(upit);
+            if (rs.next() == false) {
+                odo.postaviPocetniBroj();
+            } else {
+                odo.povecajBroj(rs);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BrokerBazePodataka.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
     }
 

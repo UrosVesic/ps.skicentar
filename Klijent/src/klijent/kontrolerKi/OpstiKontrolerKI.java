@@ -13,12 +13,9 @@ import domen.Staza;
 import domen.Zicara;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
-import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.komunikacija.Komunikacija;
 import komunikacija.Odgovor;
 import komunikacija.Operacije;
@@ -41,6 +38,8 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
