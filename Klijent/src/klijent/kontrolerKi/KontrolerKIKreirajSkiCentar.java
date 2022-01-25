@@ -6,8 +6,15 @@
 package klijent.kontrolerKi;
 
 import domen.SkiCentar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -23,10 +30,12 @@ public class KontrolerKIKreirajSkiCentar extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
         SkiCentar skiCentar = (SkiCentar) odo;
-        if (!"".equals(kscf.getTxtSifraSkiCentra().getText())) {
-            skiCentar.setSifraSkiCentra(Long.parseLong(kscf.getTxtSifraSkiCentra().getText()));
-        }
+        //if (!"".equals(kscf.getTxtSifraSkiCentra().getText())) {
+        skiCentar.setSifraSkiCentra(Long.parseLong(kscf.getTxtSifraSkiCentra().getText()));
+        //}
         skiCentar.setNazivPlanine(kscf.getTxtNazivPlanine().getText());
+        /*String radnoVreme = kscf.getTxtRadnoVreme().getText();
+        proveriFormatRadnogVremena(radnoVreme);*/
         skiCentar.setRadnoVreme(kscf.getTxtRadnoVreme().getText());
         skiCentar.setNazivSkiCentra(kscf.getTxtNazivSkiCentra().getText());
     }
@@ -35,7 +44,7 @@ public class KontrolerKIKreirajSkiCentar extends OpstiKontrolerKI {
     public void KonvertujObjekatUGrafickeKomponente() {
         KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
         SkiCentar skiCentar = (SkiCentar) odo;
-        kscf.getTxtSifraSkiCentra().setText(skiCentar.getSifraSkiCentra()+"");
+        kscf.getTxtSifraSkiCentra().setText(skiCentar.getSifraSkiCentra() + "");
         kscf.getTxtNazivPlanine().setText(skiCentar.getNazivPlanine());
         kscf.getTxtNazivSkiCentra().setText(skiCentar.getNazivSkiCentra());
         kscf.getTxtRadnoVreme().setText(skiCentar.getRadnoVreme());
@@ -44,10 +53,36 @@ public class KontrolerKIKreirajSkiCentar extends OpstiKontrolerKI {
     @Override
     public void isprazniGrafickiObjekat() {
         KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
-        kscf.getTxtSifraSkiCentra().setText("0");
+        kscf.getTxtSifraSkiCentra().setText("");
         kscf.getTxtNazivPlanine().setText("");
         kscf.getTxtNazivSkiCentra().setText("");
-        kscf.getTxtRadnoVreme().setText("00-00");
+        kscf.getTxtRadnoVreme().setText("");
+    }
+
+//    private void proveriFormatRadnogVremena(String radnoVreme) {
+//        
+//
+//    }
+    @Override
+    public void omoguciPamcenje() {
+        KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
+        kscf.getBtnZapamti().setEnabled(true);
+    }
+
+    @Override
+    public void onemoguciPamcenje() {
+        KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
+        kscf.getBtnZapamti().setEnabled(false);
+    }
+
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(kscf.getTxtSifraSkiCentra().getText(), "Morate prvo kreirati ski centar")
+                .validateNotNullOrEmpty(kscf.getTxtNazivPlanine().getText(), "Naziv planine je obavezan")
+                .validateNotNullOrEmpty(kscf.getTxtNazivSkiCentra().getText(), "Naziv ski centra je obavezan")
+                .validateNotNullOrEmpty(kscf.getTxtRadnoVreme().getText(), "Radno vreme je obavezno")
+                .validirajFormatRadnogVremena(kscf.getTxtRadnoVreme().getText(), "Format radnog vremena mora biti HH-HH").throwIfInvalide();
     }
 
 }

@@ -12,6 +12,8 @@ import java.util.List;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStaza;
 import klijent.forme.staza.PronadjiStazuForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -36,9 +38,9 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
 
     @Override
     public void KonvertujObjekatUGrafickeKomponente() {
-        Staza staza = (Staza) odo;
+        //Staza staza = (Staza) odo;
         PronadjiStazuForma psf = (PronadjiStazuForma) oef;
-        napuniGrafickiObjekatIzDOmenskog(staza, psf);
+        napuniGrafickiObjekatIzDOmenskog(/*staza,*/psf);
     }
 
     @Override
@@ -49,15 +51,19 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
     }
 
     private void napuniDomenskiObjekat(Staza staza, PronadjiStazuForma psf) {
-        if (!"".equals(psf.getTxtBrojStaze().getText())) {
-            staza.setBrojStaze(Long.parseLong(psf.getTxtBrojStaze().getText()));
-        }
+        //if (!"".equals(psf.getTxtTezina().getText())) {
+        staza.setTipStaze(psf.getTxtTezina().getText()/*Long.parseLong(psf.getTxtTezina().getText())*/);
+        //}
     }
 
-    private void napuniGrafickiObjekatIzDOmenskog(Staza staza, PronadjiStazuForma psf) {
-        psf.getTxtBrojStaze().setText(staza.getBrojStaze() + "");
+    private void napuniGrafickiObjekatIzDOmenskog(/*Staza staza,*/PronadjiStazuForma psf) {
+        /*psf.getTxtTezina().setText(staza.getBrojStaze() + "");*/
         ModelTabeleStaza model = (ModelTabeleStaza) psf.getTblStaze().getModel();
-        model.dodaj(staza);
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
+            Staza staza = (Staza) opstiDomenskiObjekat;
+            model.dodaj(staza);
+        }
+
     }
 
     public void pripremiTabelu() {
@@ -68,10 +74,26 @@ public class KontrolerKIPronadjiStazu extends OpstiKontrolerKI {
 
     }
 
-    public void azurirajTabelu() {
+    public void azurirajTabelu(Staza staza) {
         PronadjiStazuForma psf = (PronadjiStazuForma) oef;
         ModelTabeleStaza model = (ModelTabeleStaza) psf.getTblStaze().getModel();
-        model.fireTableDataChanged();
+        model.azurirajStazu(staza);
+    }
+
+    public Staza vratiIzabranuStazu() throws Exception {
+        PronadjiStazuForma psf = (PronadjiStazuForma) oef;
+        ModelTabeleStaza model = (ModelTabeleStaza) psf.getTblStaze().getModel();
+        if (psf.getTblStaze().getSelectedRow() == -1) {
+            throw new Exception("Niste izabrali red za promenu");
+        }
+        Staza staza = model.getStaze().get(psf.getTblStaze().getSelectedRow());
+        return staza;
+    }
+
+    @Override
+    public void validirajPretragu() throws ValidationException {
+        PronadjiStazuForma psf = (PronadjiStazuForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(psf.getTxtTezina().getText(), "Tezina staze je obavezna").throwIfInvalide();
     }
 
 }

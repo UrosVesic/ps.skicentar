@@ -7,6 +7,7 @@ package klijent.forme.skiCentar;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
+import javax.swing.JButton;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.kontrolerKi.KontrolerKIKreirajSkiCentar;
 
@@ -63,6 +64,7 @@ public class KreirajSkiCentarForma extends OpstaEkranskaForma {
         });
 
         BtnZapamti.setText("zapamti");
+        BtnZapamti.setEnabled(false);
         BtnZapamti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnZapamtiActionPerformed(evt);
@@ -184,4 +186,9 @@ public class KreirajSkiCentarForma extends OpstaEkranskaForma {
     public javax.swing.JTextField getTxtSifraSkiCentra() {
         return txtSifraSkiCentra;
     }
+
+    public JButton getBtnZapamti() {
+        return BtnZapamti;
+    }
+
 }

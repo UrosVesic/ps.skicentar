@@ -7,6 +7,7 @@ package klijent.forme.staza;
 
 import domen.OpstiDomenskiObjekat;
 import domen.Staza;
+import javax.swing.JButton;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.kontrolerKi.KontrolerKIKreirajStazu;
 
@@ -60,8 +61,6 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
 
         jLabel4.setText("Ski Centar: ");
 
-        cmbSkiCentar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         txtBrojStaze.setEditable(false);
 
         btnKreiraj.setText("kreiraj");
@@ -72,6 +71,7 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
         });
 
         btnZapamti.setText("zapamti");
+        btnZapamti.setEnabled(false);
         btnZapamti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZapamtiActionPerformed(evt);
@@ -163,12 +163,9 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
     private javax.swing.JTextField txtNazivStaze;
     // End of variables declaration//GEN-END:variables
 
-    
-    
     private void prepare() {
         kkiKreirajStazu.pripremiKomboBox();
     }
-
 
     @Override
     public OpstiDomenskiObjekat kreirajObjekat() {
@@ -205,6 +202,10 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
 
     public void setTxtNazivStaze(javax.swing.JTextField txtNazivStaze) {
         this.txtNazivStaze = txtNazivStaze;
+    }
+
+    public JButton getBtnZapamti() {
+        return btnZapamti;
     }
 
 }

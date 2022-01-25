@@ -77,4 +77,8 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
 
     }
 
+    public OpstiDomenskiObjekat getOdo() {
+        return odo;
+    }
+
 }

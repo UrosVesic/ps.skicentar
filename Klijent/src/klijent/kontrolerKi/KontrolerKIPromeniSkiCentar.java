@@ -8,6 +8,8 @@ package klijent.kontrolerKi;
 import domen.SkiCentar;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -44,10 +46,39 @@ public class KontrolerKIPromeniSkiCentar extends OpstiKontrolerKI {
     @Override
     public void isprazniGrafickiObjekat() {
         PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
-        pscf.getTxtSifraSkiCentra().setText("0");
+        pscf.getTxtSifraSkiCentra().setText("");
         pscf.getTxtNazivPlanine().setText("");
         pscf.getTxtNazivSkiCentra().setText("");
-        pscf.getTxtRadnoVreme().setText("00-00");
+        pscf.getTxtRadnoVreme().setText("");
     }
-    
+
+    @Override
+    public void omoguciPamcenje() {
+        PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
+        pscf.getTxtNazivPlanine().setEditable(true);
+        pscf.getTxtNazivSkiCentra().setEditable(true);
+        pscf.getTxtRadnoVreme().setEditable(true);
+        pscf.getTxtSifraSkiCentra().setEditable(false);
+        pscf.getBtnZapamti().setEnabled(true);
+    }
+
+    @Override
+    public void onemoguciPamcenje() {
+        PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
+        pscf.getTxtNazivPlanine().setEditable(false);
+        pscf.getTxtNazivSkiCentra().setEditable(false);
+        pscf.getTxtRadnoVreme().setEditable(false);
+        pscf.getTxtSifraSkiCentra().setEditable(true);
+        pscf.getBtnZapamti().setEnabled(false);
+    }
+
+    @Override
+    public void validirajPretragu() throws ValidationException {
+        PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(pscf.getTxtSifraSkiCentra().getText(), "Morate uneti sifru ski centra")
+                .validateValueIsNumber(pscf.getTxtSifraSkiCentra().getText(), "Sifra ski centra mora biti broj")
+                .throwIfInvalide();
+
+    }
+
 }

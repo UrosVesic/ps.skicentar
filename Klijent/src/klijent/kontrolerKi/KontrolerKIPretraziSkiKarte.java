@@ -6,14 +6,14 @@
 package klijent.kontrolerKi;
 
 import domen.OpstiDomenskiObjekat;
-import domen.SkiCentar;
 import domen.SkiKarta;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleSkiKarte;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -29,31 +29,41 @@ public class KontrolerKIPretraziSkiKarte extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         SkiKarta skiKarta = (SkiKarta) odo;
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
-        if (!"".equals(pskf.getTxtSifraSkiKarte().getText())) {
-            skiKarta.setSifraSkiKarte(Long.parseLong(pskf.getTxtSifraSkiKarte().getText()));
-        }
+        //if (!"".equals(pskf.getTxtGornjaCena().getText())) {
+        skiKarta.setCenaSkiKarte(new BigDecimal(pskf.getTxtGornjaCena().getText()));
+        //}
     }
 
     @Override
     public void KonvertujObjekatUGrafickeKomponente() {
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
-        SkiKarta skiKarta = (SkiKarta) odo;
-        pskf.getTxtCenaSkiKArte().setText(skiKarta.getCenaSkiKarte() + "");
-        pskf.getCmbVrstaSkiKarte().setSelectedItem(skiKarta.getVrstaSkiKarte());
-        pskf.getCmbSkiCentar().setSelectedItem(skiKarta.getSkiCentar());
+        ModelTabeleSkiKarte model = (ModelTabeleSkiKarte) pskf.getTblSkiKarte().getModel();
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
+            SkiKarta skiKarta = (SkiKarta) opstiDomenskiObjekat;
+            model.add(skiKarta);
+        }
+
     }
 
     @Override
     public void isprazniGrafickiObjekat() {
+        PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
+        ModelTabeleSkiKarte model = (ModelTabeleSkiKarte) pskf.getTblSkiKarte().getModel();
+        model.setSkiKarte(new ArrayList<>());
     }
 
-    public void pripremiKomboBox() {
+    public void pripremiTabelu() {
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
-        SOUcitajListuSkiCentara();
-        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            SkiCentar skiCentar = (SkiCentar) opstiDomenskiObjekat;
-            pskf.getCmbSkiCentar().addItem(skiCentar);
-        }
+        ModelTabeleSkiKarte model = new ModelTabeleSkiKarte();
+        pskf.getTblSkiKarte().setModel(model);
+
+    }
+
+    @Override
+    public void validirajPretragu() throws ValidationException {
+        PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(pskf.getTxtGornjaCena().getText(), "Cena je obavezna")
+                .validateValueIsNumber(pskf.getTxtGornjaCena().getText(), "Cena mora biti broj").throwIfInvalide();
     }
 
 }

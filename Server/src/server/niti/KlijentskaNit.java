@@ -151,9 +151,9 @@ public class KlijentskaNit extends Thread {
         Staza staza = (Staza) zahtev.getParametar();
         Odgovor odgovor = new Odgovor();
         try {
-            Kontroler.getInstanca().pronadjiStaze(staza);
+            List<OpstiDomenskiObjekat> lista = Kontroler.getInstanca().pronadjiStaze(staza);
             odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_STAZU);
-            odgovor.setRezultat(staza);
+            odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
@@ -279,9 +279,9 @@ public class KlijentskaNit extends Thread {
         SkiKarta skiKarta = (SkiKarta) zahtev.getParametar();
         Odgovor odgovor = new Odgovor();
         try {
-            Kontroler.getInstanca().pretraziSkiKarte(skiKarta);
+            List<OpstiDomenskiObjekat> lista = Kontroler.getInstanca().pretraziSkiKarte(skiKarta);
             odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_KARTE);
-            odgovor.setRezultat(skiKarta);
+            odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);

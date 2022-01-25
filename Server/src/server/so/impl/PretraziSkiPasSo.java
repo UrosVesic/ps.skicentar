@@ -15,12 +15,12 @@ import server.so.OpstaSo;
  */
 public class PretraziSkiPasSo extends OpstaSo {
 
-    public PretraziSkiPasSo(BrokerBazePodataka b) {
-        super(b);
+    public PretraziSkiPasSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
     @Override
-    public void izvrsenjeSo(OpstiDomenskiObjekat odo) throws Exception {
+    public void izvrsenjeSo() throws Exception {
         b.pronadjiSlozenSlog(odo);
     }
 

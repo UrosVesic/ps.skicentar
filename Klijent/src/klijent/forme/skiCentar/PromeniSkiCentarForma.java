@@ -42,7 +42,7 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
         jLabel2 = new javax.swing.JLabel();
         txtNazivPlanine = new javax.swing.JTextField();
         btnNadji = new javax.swing.JButton();
-        btnPromeni = new javax.swing.JButton();
+        btnZapamti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,11 +67,11 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
             }
         });
 
-        btnPromeni.setText("Promeni");
-        btnPromeni.setEnabled(false);
-        btnPromeni.addActionListener(new java.awt.event.ActionListener() {
+        btnZapamti.setText("Zapamti");
+        btnZapamti.setEnabled(false);
+        btnZapamti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPromeniActionPerformed(evt);
+                btnZapamtiActionPerformed(evt);
             }
         });
 
@@ -97,7 +97,7 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtRadnoVreme, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(btnPromeni)
+                                    .addComponent(btnZapamti)
                                     .addGap(91, 91, 91)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -129,7 +129,7 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
                     .addComponent(jLabel3)
                     .addComponent(txtRadnoVreme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(btnPromeni)
+                .addComponent(btnZapamti)
                 .addGap(28, 28, 28))
         );
 
@@ -141,16 +141,16 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
         kkipsc.SOPretraziSkiCentar();
     }//GEN-LAST:event_btnNadjiActionPerformed
 
-    private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
+    private void btnZapamtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiActionPerformed
         // TODO add your handling code here:
         kkipsc.SOZapamtiSkiCentar();
-    }//GEN-LAST:event_btnPromeniActionPerformed
+    }//GEN-LAST:event_btnZapamtiActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNadji;
-    private javax.swing.JButton btnPromeni;
+    private javax.swing.JButton btnZapamti;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -182,8 +182,8 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
         return txtSifraSkiCentra;
     }
 
-    public JButton getBtnPromeni() {
-        return btnPromeni;
+    public JButton getBtnZapamti() {
+        return btnZapamti;
     }
     
     

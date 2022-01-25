@@ -87,6 +87,11 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
+    public String vratiUslovZaNadjiSlogove() {
+        return "cenaSkiKarte <= " + cenaSkiKarte;
+    }
+
+    @Override
     public void postaviVrednostPK(Object pk) {
         sifraSkiKarte = (long) pk;
     }
@@ -158,8 +163,6 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         return skiCentar + " " + vrstaSkiKarte;
     }
 
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -177,7 +180,5 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         }
         return true;
     }
-
-    
 
 }

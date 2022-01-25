@@ -43,7 +43,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtRadnoVreme" min="-2" pref="182" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnPromeni" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnZapamti" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -87,7 +87,7 @@
                   <Component id="txtRadnoVreme" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="btnPromeni" min="-2" max="-2" attributes="0"/>
+              <Component id="btnZapamti" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -139,13 +139,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNadjiActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPromeni">
+    <Component class="javax.swing.JButton" name="btnZapamti">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Promeni"/>
+        <Property name="text" type="java.lang.String" value="Zapamti"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromeniActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnZapamtiActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

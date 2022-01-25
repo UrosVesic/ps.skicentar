@@ -9,9 +9,13 @@ import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.Staza;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.staza.KreirajStazuForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -27,7 +31,7 @@ public class KontrolerKIKreirajStazu extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         Staza staza = (Staza) odo;
         KreirajStazuForma ksf = (KreirajStazuForma) oef;
-         if (!"".equals(ksf.getTxtBrojStaze().getText())) {
+        if (!"".equals(ksf.getTxtBrojStaze().getText())) {
             staza.setBrojStaze(Long.parseLong(ksf.getTxtBrojStaze().getText()));
         }
         staza.setNazivStaze(ksf.getTxtNazivStaze().getText());
@@ -48,8 +52,6 @@ public class KontrolerKIKreirajStazu extends OpstiKontrolerKI {
             ksf.getCmbTipStaze().setSelectedItem(staza.getTipStaze());
         }
     }
-
-    
 
     @Override
     public void isprazniGrafickiObjekat() {
@@ -73,6 +75,26 @@ public class KontrolerKIKreirajStazu extends OpstiKontrolerKI {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(ksf, "Sistem ne moze da vrati listu ski centara");
         }
+    }
+
+    @Override
+    public void omoguciPamcenje() {
+        KreirajStazuForma ksf = (KreirajStazuForma) oef;
+        ksf.getBtnZapamti().setEnabled(true);
+
+    }
+
+    @Override
+    public void onemoguciPamcenje() {
+        KreirajStazuForma ksf = (KreirajStazuForma) oef;
+        ksf.getBtnZapamti().setEnabled(false);
+    }
+
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        KreirajStazuForma ksf = (KreirajStazuForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(ksf.getTxtBrojStaze().getText(), "Morate prvo kreirati stazu")
+                .validateNotNullOrEmpty(ksf.getTxtNazivStaze().getText(), "Naziv staze je obavezan").throwIfInvalide();
     }
 
 }

@@ -8,21 +8,26 @@ package server.so.impl;
 import domen.OpstiDomenskiObjekat;
 import java.util.List;
 import server.broker.BrokerBazePodataka;
-import server.so.OpstaSo1;
+import server.so.OpstaSo;
 
 /**
  *
  * @author draskovesic
  */
-public class UcitajListuSkiKarataSO extends OpstaSo1 {
+public class UcitajListuSkiKarataSO extends OpstaSo {
 
-    public UcitajListuSkiKarataSO(BrokerBazePodataka b) {
-        super(b);
+    public UcitajListuSkiKarataSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
+        super(b, odo, lista);
     }
 
     @Override
-    public void izvrsenjeSo(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws Exception {
+    public void izvrsenjeSo() throws Exception {
         b.vratiSve(lista, odo);
+    }
+
+    @Override
+    public void proveriPreduslove(OpstiDomenskiObjekat odo) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

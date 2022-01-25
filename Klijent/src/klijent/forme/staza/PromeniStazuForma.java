@@ -16,15 +16,17 @@ import klijent.kontrolerKi.KontrolerKIPromeniStazu;
  *
  * @author draskovesic
  */
-public class PromeniStazuForma extends OpstaEkranskaForma{
+public class PromeniStazuForma extends OpstaEkranskaForma {
 
     private final KontrolerKIPromeniStazu kkiPromeniStazu;
-    
-    public PromeniStazuForma(Staza staza) {
+    PronadjiStazuForma psf;
+
+    public PromeniStazuForma(Staza staza, PronadjiStazuForma psf) {
         initComponents();
-        kkiPromeniStazu = new KontrolerKIPromeniStazu(this,staza);
+        kkiPromeniStazu = new KontrolerKIPromeniStazu(this, staza);
+        this.psf = psf;
         pripremiKomboBox();
-        
+
     }
 
     /**
@@ -130,6 +132,7 @@ public class PromeniStazuForma extends OpstaEkranskaForma{
     private void btnZapamtiPromeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiPromeneActionPerformed
         // TODO add your handling code here:
         kkiPromeniStazu.SOZapamtiStazu();
+        psf.azurirajTabelu((Staza) kkiPromeniStazu.getOdo());
     }//GEN-LAST:event_btnZapamtiPromeneActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -178,6 +181,5 @@ public class PromeniStazuForma extends OpstaEkranskaForma{
     private void pripremiKomboBox() {
         kkiPromeniStazu.pripremiKomboBox();
     }
-    
-    
+
 }

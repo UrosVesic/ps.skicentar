@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author UrosVesic
@@ -85,12 +84,12 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
     @Override
     public String vratiUslovZaNadjiSlog() {
         return "brojStaze = " + brojStaze;
-        //return "nazivStaze LIKE '"+nazivStaze+"'";
     }
 
-    
-    
-    
+    @Override
+    public String vratiUslovZaNadjiSlogove() {
+        return "tipStaze LIKE '" + tipStaze + "'";
+    }
 
     @Override
     public void napuni(ResultSet rs) throws SQLException {
@@ -138,8 +137,6 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
         return null;
     }
 
-    
-
     @Override
     public void postaviVrednostPK(Object pk) {
         brojStaze = (long) pk;
@@ -147,19 +144,35 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
-        if(i==0){
+        if (i == 0) {
             this.setSkiCentar((SkiCentar) vezo);
         }
     }
 
     @Override
     public Object vratiVrednostSK(int i) {
-        if(i==0){
+        if (i == 0) {
             return skiCentar.getSifraSkiCentra();
         }
         return null;
     }
 
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Staza other = (Staza) obj;
+        if (this.brojStaze != other.brojStaze) {
+            return false;
+        }
+        return true;
+    }
 
 }

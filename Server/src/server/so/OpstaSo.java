@@ -7,6 +7,7 @@ package server.so;
 
 import domen.OpstiDomenskiObjekat;
 import java.sql.SQLException;
+import java.util.List;
 import server.broker.BrokerBazePodataka;
 
 /**
@@ -15,36 +16,29 @@ import server.broker.BrokerBazePodataka;
  */
 public abstract class OpstaSo {
 
-    /*public void template(OpstiDomenskiObjekat odo, BrokerBazePodataka r) throws SQLException {
-        r.connect();
-        try {
-            izvrsenjeSo(r, odo);
-            r.commit();
-        } catch (SQLException ex) {
-            r.rollback();
-            throw ex;
-        } finally {
-            r.disconnect();
-        }
-
-    }*/
-    
     public BrokerBazePodataka b;
+    protected OpstiDomenskiObjekat odo;
+    protected List<OpstiDomenskiObjekat> lista;
 
-    public OpstaSo(BrokerBazePodataka b) {
+    public OpstaSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
         this.b = b;
+        this.odo = odo;
     }
-    
-    
 
-    public void opsteIzvrsenjeSo(OpstiDomenskiObjekat odo) throws Exception {
-        
+    public OpstaSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
+        this.b = b;
+        this.odo = odo;
+        this.lista = lista;
+    }
+
+    public void opsteIzvrsenjeSo() throws Exception {
+
         b.connect();
         try {
             //proveriPreduslove(odo);
-           izvrsenjeSo(odo);
+            izvrsenjeSo();
             b.commit();
-            
+
         } catch (SQLException ex) {
             b.rollback();
             throw ex;
@@ -54,7 +48,7 @@ public abstract class OpstaSo {
 
     }
 
-    public abstract void izvrsenjeSo(OpstiDomenskiObjekat odo) throws Exception;
+    public abstract void izvrsenjeSo() throws Exception;
 
     public abstract void proveriPreduslove(OpstiDomenskiObjekat odo) throws Exception;
 }

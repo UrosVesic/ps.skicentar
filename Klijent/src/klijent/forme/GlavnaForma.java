@@ -11,6 +11,7 @@ import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
+import klijent.forme.skiKarta.PretraziSkiKarteForma;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.forme.zicara.KreirajZicaruForma;

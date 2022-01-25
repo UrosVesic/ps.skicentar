@@ -13,6 +13,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -74,6 +76,26 @@ public class KontrolerKIKreirajSkiKartu extends OpstiKontrolerKI {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da vrati listu ski centara");
         }
+    }
+
+    @Override
+    public void omoguciPamcenje() {
+        KreirajSkiKartuForma kskf = (KreirajSkiKartuForma) oef;
+        kskf.getBtnZapamti().setEnabled(true);
+    }
+
+    @Override
+    public void onemoguciPamcenje() {
+        KreirajSkiKartuForma kskf = (KreirajSkiKartuForma) oef;
+        kskf.getBtnZapamti().setEnabled(false);
+    }
+
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        KreirajSkiKartuForma kskf = (KreirajSkiKartuForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(kskf.getTxtCenaSkiKarte().getText(), "Cena ski karte je obavezna")
+                .validateValueIsNumber(kskf.getTxtCenaSkiKarte().getText(), "Cena mora biti broj")
+                .throwIfInvalide();
     }
 
 }

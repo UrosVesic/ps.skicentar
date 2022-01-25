@@ -32,8 +32,6 @@ public class ModelTabeleStaza extends AbstractTableModel {
         this.staze = staze;
         fireTableDataChanged();
     }
-    
-    
 
     @Override
     public int getRowCount() {
@@ -100,8 +98,8 @@ public class ModelTabeleStaza extends AbstractTableModel {
         }
         return false;
     }
-    
-    public void removeAll(){
+
+    public void removeAll() {
         /*for (Staza staza : staze) {
             int i = 0;
             staze.remove(i);
@@ -110,6 +108,19 @@ public class ModelTabeleStaza extends AbstractTableModel {
         staze = new ArrayList<>();
         fireTableDataChanged();
     }
-    
-    
+
+    public void azurirajStazu(Staza staza) {
+        for (Staza staza1 : staze) {
+            if (staza.equals(staza1)) {
+                staze.remove(staza1);
+                if (staza.getTipStaze().equals(staza1.getTipStaze())) {
+                    staze.add(staza);
+                }
+                //staza1 = staza;
+                fireTableDataChanged();
+                return;
+            }
+        }
+    }
+
 }

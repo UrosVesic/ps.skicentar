@@ -15,12 +15,12 @@ import server.so.OpstaSo;
  */
 public class ZapamtiZicaruSO extends OpstaSo {
 
-    public ZapamtiZicaruSO(BrokerBazePodataka b) {
-        super(b);
+    public ZapamtiZicaruSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
     @Override
-    public void izvrsenjeSo(OpstiDomenskiObjekat odo) throws Exception {
+    public void izvrsenjeSo() throws Exception {
         b.promeniSlog(odo);
     }
 

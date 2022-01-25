@@ -168,13 +168,13 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     }
 
     @Override
-    public void omoguciPamcenjeSkiPasa() {
+    public void omoguciPamcenje() {
         KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
         kspf.getBtnZapamtiSkiPas().setEnabled(true);
     }
 
     @Override
-    public void onemoguciPamcenjeSkiPasa() {
+    public void onemoguciPamcenje() {
         KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
         kspf.getBtnZapamtiSkiPas().setEnabled(false);
     }

@@ -13,10 +13,14 @@ import domen.Staza;
 import domen.Zicara;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.komunikacija.Komunikacija;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 import komunikacija.Odgovor;
 import komunikacija.Operacije;
 import komunikacija.Zahtev;
@@ -53,6 +57,8 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara");
@@ -61,7 +67,7 @@ public abstract class OpstiKontrolerKI {
 
     public void SOKreirajStazu() {
         odo = oef.kreirajObjekat();
-        KonvertujGrafickiObjekatUDomenskiObjekat();
+        //KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.KREIRAJ_STAZU, odo);
         Odgovor odgovor;
         try {
@@ -70,6 +76,9 @@ public abstract class OpstiKontrolerKI {
                 odo = (Staza) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao stazu");
+                omoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira stazu");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira stazu");
@@ -78,6 +87,12 @@ public abstract class OpstiKontrolerKI {
 
     public void SOZapamtiStazu() {
         odo = oef.kreirajObjekat();
+        try {
+            validirajPamcenje();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja staze:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_STAZU, odo);
         Odgovor odgovor;
@@ -87,6 +102,10 @@ public abstract class OpstiKontrolerKI {
                 odo = (Staza) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
+                onemoguciPamcenje();
+                isprazniGrafickiObjekat();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -97,13 +116,19 @@ public abstract class OpstiKontrolerKI {
     public void SOPretraziStaze() {
         isprazniGrafickiObjekat();
         odo = oef.kreirajObjekat();
+        try {
+            validirajPretragu();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja staze:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZU, odo);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                odo = (Staza) odgovor.getRezultat();
+                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao stazu po zadatom kriterijumu");
 
@@ -117,7 +142,7 @@ public abstract class OpstiKontrolerKI {
 
     public void SOKreirajZicaru() {
         odo = oef.kreirajObjekat();
-        KonvertujGrafickiObjekatUDomenskiObjekat();
+        //KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.KREIRAJ_ZICARU, odo);
         Odgovor odgovor;
         try {
@@ -126,6 +151,9 @@ public abstract class OpstiKontrolerKI {
                 odo = (Zicara) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao zicaru");
+                omoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira zicaru");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira zicaru");
@@ -134,6 +162,12 @@ public abstract class OpstiKontrolerKI {
 
     public void SOZapamtiZicaru() {
         odo = oef.kreirajObjekat();
+        try {
+            validirajPamcenje();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja zicare:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_ZICARU, odo);
         Odgovor odgovor;
@@ -143,7 +177,10 @@ public abstract class OpstiKontrolerKI {
                 odo = (Zicara) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio zicaru");
+                onemoguciPamcenje();
                 isprazniGrafickiObjekat();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru");
@@ -153,7 +190,7 @@ public abstract class OpstiKontrolerKI {
     public void SOKreirajSkiKartu() {
 
         odo = oef.kreirajObjekat();
-        KonvertujGrafickiObjekatUDomenskiObjekat();
+        //KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.KREIRAJ_SKI_KARTU, odo);
         Odgovor odgovor;
         try {
@@ -162,6 +199,10 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiKarta) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao ski kartu");
+                omoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski kartu");
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski kartu");
@@ -170,6 +211,12 @@ public abstract class OpstiKontrolerKI {
 
     public void SOZapamtiSkiKartu() {
         odo = oef.kreirajObjekat();
+        try {
+            validirajPamcenje();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja ski karte:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_KARTU, odo);
         Odgovor odgovor;
@@ -180,6 +227,9 @@ public abstract class OpstiKontrolerKI {
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski kartu");
                 isprazniGrafickiObjekat();
+                onemoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski kartu");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski kartu");
@@ -187,14 +237,21 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void SOPretraziKarte() {
+        isprazniGrafickiObjekat();
         odo = oef.kreirajObjekat();
+        try {
+            validirajPretragu();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pretrage ski karte:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_KARTE, odo);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                odo = (SkiKarta) odgovor.getRezultat();
+                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski kartu po zadatom kriterijumu");
             } else {
@@ -208,7 +265,7 @@ public abstract class OpstiKontrolerKI {
 
     public void SOKreirajSkiCentar() {
         odo = oef.kreirajObjekat();
-        KonvertujGrafickiObjekatUDomenskiObjekat();
+        //KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.KREIRAJ_SKI_CENTAR, odo);
         Odgovor odgovor;
         try {
@@ -217,6 +274,9 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiCentar) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao ski centar");
+                omoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira centar");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira centar");
@@ -225,6 +285,12 @@ public abstract class OpstiKontrolerKI {
 
     public void SOZapamtiSkiCentar() {
         odo = oef.kreirajObjekat();
+        try {
+            validirajPamcenje();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja ski centra:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, odo);
         Odgovor odgovor;
@@ -235,9 +301,10 @@ public abstract class OpstiKontrolerKI {
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
                 isprazniGrafickiObjekat();
-                if (oef instanceof PromeniSkiCentarForma) {
-                    onemoguciPromenu();
-                }
+                onemoguciPamcenje();
+
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar");
@@ -246,6 +313,12 @@ public abstract class OpstiKontrolerKI {
 
     public void SOPretraziSkiCentar() {
         odo = oef.kreirajObjekat();
+        try {
+            validirajPretragu();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pretrage ski centra:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_CENTAR, odo);
         Odgovor odgovor;
@@ -255,7 +328,7 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiCentar) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski centar po zadatom kriterijumu");
-                omoguciPromenu();
+                omoguciPamcenje();
 
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu");
@@ -268,7 +341,7 @@ public abstract class OpstiKontrolerKI {
 
     public void SOKreirajSkiPas() {
         odo = oef.kreirajObjekat();
-        KonvertujGrafickiObjekatUDomenskiObjekat();
+        //KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.KREIRAJ_SKI_PAS, odo);
         Odgovor odgovor;
         try {
@@ -277,7 +350,9 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiPas) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao ski pas");
-                omoguciPamcenjeSkiPasa();
+                omoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira pas");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira pas");
@@ -296,7 +371,9 @@ public abstract class OpstiKontrolerKI {
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
                 isprazniGrafickiObjekat();
-                onemoguciPamcenjeSkiPasa();
+                onemoguciPamcenje();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas");
@@ -306,6 +383,7 @@ public abstract class OpstiKontrolerKI {
     public void SOPretraziSkiPas() {
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
+
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_PAS, odo);
         Odgovor odgovor;
         try {
@@ -314,7 +392,7 @@ public abstract class OpstiKontrolerKI {
                 odo = (SkiPas) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pas po zadatom kriterijumu");
-                omoguciPamcenjeSkiPasa();
+                omoguciPamcenje();
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu");
             }
@@ -330,31 +408,22 @@ public abstract class OpstiKontrolerKI {
 
     public abstract void isprazniGrafickiObjekat();
 
-    private void omoguciPromenu() {
-        PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
-        pscf.getTxtNazivPlanine().setEditable(true);
-        pscf.getTxtNazivSkiCentra().setEditable(true);
-        pscf.getTxtRadnoVreme().setEditable(true);
-        pscf.getTxtSifraSkiCentra().setEditable(false);
-        pscf.getBtnPromeni().setEnabled(true);
+    public void omoguciPamcenje() {
+
     }
 
-    private void onemoguciPromenu() {
-        PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
-        pscf.getTxtNazivPlanine().setEditable(false);
-        pscf.getTxtNazivSkiCentra().setEditable(false);
-        pscf.getTxtRadnoVreme().setEditable(false);
-        pscf.getTxtSifraSkiCentra().setEditable(true);
-        pscf.getBtnPromeni().setEnabled(false);
-    }
+    public void onemoguciPamcenje() {
 
-    public void omoguciPamcenjeSkiPasa() {
     }
 
     public void promeniCenu() {
     }
 
-    public void onemoguciPamcenjeSkiPasa() {
+    public void validirajPamcenje() throws ValidationException {
+
     }
 
+    public void validirajPretragu() throws ValidationException {
+
+    }
 }

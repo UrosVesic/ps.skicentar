@@ -103,12 +103,14 @@ public class BrokerBazePodataka {
         statement.close();
     }
 
-    public void promeniSlog(OpstiDomenskiObjekat odo) throws SQLException {
+    public void promeniSlog(OpstiDomenskiObjekat odo) throws SQLException, Exception {
         try {
             String upit = "UPDATE " + odo.vratiImeKlase() + " SET " + odo.postaviVrednostiAtributa() + " WHERE " + odo.vratiUslovZaPromeniSlog();
             konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
             Statement statement = konekcija.createStatement();
-            statement.executeUpdate(upit);
+            if (statement.executeUpdate(upit) == 0) {
+                throw new Exception();
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw ex;
@@ -190,9 +192,9 @@ public class BrokerBazePodataka {
                 }
 
             }
-        }
-        else{
+        } else {
             //ne postoji slog u bazi
+            throw new Exception();
         }
     }
 
@@ -217,7 +219,7 @@ public class BrokerBazePodataka {
     public void pronadjiSlogove(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws Exception {
         int j = 0;
         try {
-            String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
+            String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlogove();
             konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
             Statement statement = konekcija.createStatement();
             ResultSet rs = statement.executeQuery(upit);

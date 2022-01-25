@@ -7,6 +7,7 @@ package klijent.forme.zicara;
 
 import domen.OpstiDomenskiObjekat;
 import domen.Zicara;
+import javax.swing.JButton;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.kontrolerKi.KontrolerKIKreirajZicaru;
 
@@ -80,6 +81,7 @@ public class KreirajZicaruForma extends OpstaEkranskaForma {
         });
 
         btnZapamti.setText("Zapamti");
+        btnZapamti.setEnabled(false);
         btnZapamti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZapamtiActionPerformed(evt);
@@ -191,7 +193,7 @@ public class KreirajZicaruForma extends OpstaEkranskaForma {
     private javax.swing.JTextField txtRadnoVreme;
     private javax.swing.JTextField txtSifraZicare;
     // End of variables declaration//GEN-END:variables
-    
+
     private void prepare() {
         kkiKreirajZicaru.pripremiKomboBoks();
     }
@@ -224,4 +226,9 @@ public class KreirajZicaruForma extends OpstaEkranskaForma {
     public javax.swing.JTextField getTxtSifraZicare() {
         return txtSifraZicare;
     }
+
+    public JButton getBtnZapamti() {
+        return btnZapamti;
+    }
+
 }

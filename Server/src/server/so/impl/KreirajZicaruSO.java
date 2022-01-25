@@ -15,12 +15,14 @@ import server.so.OpstaSo;
  */
 public class KreirajZicaruSO extends OpstaSo {
 
-    public KreirajZicaruSO(BrokerBazePodataka b) {
-        super(b);
+    public KreirajZicaruSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
+    
+
     @Override
-    public void izvrsenjeSo(OpstiDomenskiObjekat odo) throws Exception {
+    public void izvrsenjeSo() throws Exception {
         b.kreirajSlog(odo);
     }
 

@@ -23,8 +23,7 @@ public class Zicara implements OpstiDomenskiObjekat, Serializable {
     private SkiCentar skiCentar;
 
     public Zicara() {
-        nazivZicare="n/a";
-        radnoVreme="00-00";
+        
     }
 
     public Zicara(long SifraZicare, String NazivZicare, String RadnoVreme, int Kapacitet, boolean UFunkciji, SkiCentar skiCentar) {

@@ -129,7 +129,7 @@ public class ServerForm extends javax.swing.JFrame {
         try {
             Kontroler.getInstanca().pokreniServer(this);
         } catch (IOException ex) {
-            JOptionPane.showConfirmDialog(this, "Neuspesno pokretanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Neuspesno pokretanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokreniActionPerformed
 
@@ -138,7 +138,7 @@ public class ServerForm extends javax.swing.JFrame {
         try {
             Kontroler.getInstanca().zaustaviServer(this);
         } catch (IOException ex) {
-            JOptionPane.showConfirmDialog(this, "Neuspesno zaustavljanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Neuspesno zaustavljanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnZaustaviActionPerformed
 

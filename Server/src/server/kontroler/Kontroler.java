@@ -14,12 +14,12 @@ import domen.Zicara;
 import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import server.broker.BrokerBazePodataka;
 import server.forme.ServerForm;
 import server.niti.ServerskaNit;
 import server.so.OpstaSo;
-import server.so.OpstaSo1;
 import server.so.impl.KreirajSkiCentarSO;
 import server.so.impl.KreirajSkiKartuSO;
 import server.so.impl.KreirajSkiPasSO;
@@ -77,90 +77,88 @@ public class Kontroler {
     }
 
     public void pronadjiSkiCentar(SkiCentar skiCentar) throws SQLException, Exception {
-        OpstaSo so = new PretraziSkiCentarSO(b);
-        so.opsteIzvrsenjeSo(skiCentar);
+        OpstaSo so = new PretraziSkiCentarSO(b, skiCentar);
+        so.opsteIzvrsenjeSo();
     }
 
     public void zapamtiSkiCentar(SkiCentar skiCentar) throws SQLException, Exception {
-        OpstaSo so = new ZapamtiSkiCentarSO(b);
-        try {
-
-            so.opsteIzvrsenjeSo(skiCentar);
-        } catch (SQLException ex) {
-            throw ex;
-
-        }
+        OpstaSo so = new ZapamtiSkiCentarSO(b, skiCentar);
+        so.opsteIzvrsenjeSo();
     }
 
     public void ucitajListuSkiCentara(List<OpstiDomenskiObjekat> skiCentri) throws SQLException, Exception {
-        OpstaSo1 so = new UcitajListuSkiCentaraSO(b);
-        so.opsteIzvrsenjeSo(skiCentri, new SkiCentar());
+        OpstaSo so = new UcitajListuSkiCentaraSO(b, new SkiCentar(), skiCentri);
+        so.opsteIzvrsenjeSo();
     }
 
     public void zapamtiStazu(Staza staza) throws SQLException, Exception {
-        OpstaSo so = new ZapamtiStazuSO(b);
-        so.opsteIzvrsenjeSo(staza);
+        OpstaSo so = new ZapamtiStazuSO(b, staza);
+        so.opsteIzvrsenjeSo();
 
     }
 
-    public void pronadjiStaze(Staza staza) throws SQLException, Exception {
-        OpstaSo so = new PretraziStazuSO(b);
-        so.opsteIzvrsenjeSo(staza);
+    public List<OpstiDomenskiObjekat> pronadjiStaze(Staza staza) throws SQLException, Exception {
+        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
+        OpstaSo so = new PretraziStazuSO(b, staza, lista);
+        so.opsteIzvrsenjeSo();
+        return lista;
     }
 
     public void kreirajStazu(Staza staza) throws SQLException, Exception {
-        OpstaSo so = new KreirajStazuSO(b);
-        so.opsteIzvrsenjeSo(staza);
+        OpstaSo so = new KreirajStazuSO(b, staza);
+        so.opsteIzvrsenjeSo();
     }
 
     public void kreirajSkiCentar(SkiCentar skiCentar) throws SQLException, Exception {
-        OpstaSo so = new KreirajSkiCentarSO(b);
-        so.opsteIzvrsenjeSo(skiCentar);
+        OpstaSo so = new KreirajSkiCentarSO(b, skiCentar);
+        so.opsteIzvrsenjeSo();
     }
 
     public void kreirajZicaru(Zicara zicara) throws Exception {
-        OpstaSo so = new KreirajZicaruSO(b);
-        so.opsteIzvrsenjeSo(zicara);
+        OpstaSo so = new KreirajZicaruSO(b, zicara);
+        so.opsteIzvrsenjeSo();
     }
 
     public void zapamtiZicaru(Zicara zicara) throws Exception {
-        OpstaSo so = new ZapamtiZicaruSO(b);
-        so.opsteIzvrsenjeSo(zicara);
+        OpstaSo so = new ZapamtiZicaruSO(b, zicara);
+        so.opsteIzvrsenjeSo();
     }
 
     public void kreirajSkiKartu(SkiKarta skiKarta) throws Exception {
-        OpstaSo so = new KreirajSkiKartuSO(b);
-        so.opsteIzvrsenjeSo(skiKarta);
+        OpstaSo so = new KreirajSkiKartuSO(b, skiKarta);
+        so.opsteIzvrsenjeSo();
     }
 
     public void zapamtiSkiKartu(SkiKarta skiKarta) throws Exception {
-        OpstaSo so = new ZapamtiSkiKartuSO(b);
-        so.opsteIzvrsenjeSo(skiKarta);
+        OpstaSo so = new ZapamtiSkiKartuSO(b, skiKarta);
+        so.opsteIzvrsenjeSo();
     }
 
-    public void pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
-        OpstaSo so = new PretraziSkiKarteSo(b);
-        so.opsteIzvrsenjeSo(skiKarta);
+    public List<OpstiDomenskiObjekat> pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
+        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
+        OpstaSo so = new PretraziSkiKarteSo(b, skiKarta, lista);
+        so.opsteIzvrsenjeSo();
+        return lista;
     }
 
     public void kreirajSkiPas(SkiPas skiPas) throws Exception {
-        OpstaSo so = new KreirajSkiPasSO(b);
-        so.opsteIzvrsenjeSo(skiPas);
+        OpstaSo so = new KreirajSkiPasSO(b, skiPas);
+        so.opsteIzvrsenjeSo();
     }
 
     public void ucitajListuSkiKarata(List<OpstiDomenskiObjekat> skiKarte) throws Exception {
-        OpstaSo1 so = new UcitajListuSkiKarataSO(b);
-        so.opsteIzvrsenjeSo(skiKarte, new SkiKarta());
+        OpstaSo so = new UcitajListuSkiKarataSO(b, new SkiKarta(), skiKarte);
+        so.opsteIzvrsenjeSo();
     }
 
     public void zapamtiSkiPas(SkiPas skiPas) throws Exception {
-        OpstaSo so = new ZapamtiSkiPasSo(b);
-        so.opsteIzvrsenjeSo(skiPas);
+        OpstaSo so = new ZapamtiSkiPasSo(b, skiPas);
+        so.opsteIzvrsenjeSo();
     }
 
     public void pronadjiSkiPas(SkiPas skiPas) throws Exception {
-        OpstaSo so = new PretraziSkiPasSo(b);
-        so.opsteIzvrsenjeSo(skiPas);
+        OpstaSo so = new PretraziSkiPasSo(b, skiPas);
+        so.opsteIzvrsenjeSo();
     }
 
 }

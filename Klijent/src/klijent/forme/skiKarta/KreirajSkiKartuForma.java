@@ -7,6 +7,7 @@ package klijent.forme.skiKarta;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiKarta;
+import javax.swing.JButton;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.kontrolerKi.KontrolerKIKreirajSkiKartu;
 
@@ -61,6 +62,7 @@ public class KreirajSkiKartuForma extends OpstaEkranskaForma{
         });
 
         btnZapamti.setText("zapamti");
+        btnZapamti.setEnabled(false);
         btnZapamti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZapamtiActionPerformed(evt);
@@ -187,6 +189,10 @@ public class KreirajSkiKartuForma extends OpstaEkranskaForma{
     @Override
     public OpstiDomenskiObjekat kreirajObjekat() {
         return new SkiKarta();
+    }
+
+    public JButton getBtnZapamti() {
+        return btnZapamti;
     }
     
     

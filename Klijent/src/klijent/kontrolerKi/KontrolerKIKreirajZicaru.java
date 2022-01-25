@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.zicara.KreirajZicaruForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -28,13 +30,13 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         Zicara zicara = (Zicara) odo;
         KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
-        if (!"".equals(kzf.getTxtSifraZicare().getText())) {
-            zicara.setSifraZicare(Long.parseLong(kzf.getTxtSifraZicare().getText()));
-        }
+        //if (!"".equals(kzf.getTxtSifraZicare().getText())) {
+        zicara.setSifraZicare(Long.parseLong(kzf.getTxtSifraZicare().getText()));
+        //}
         zicara.setNazivZicare(kzf.getTxtNazivZicare().getText());
-        if (!"".equals(kzf.getTxtKapacitet().getText())) {
-            zicara.setKapacitet(Integer.parseInt(kzf.getTxtKapacitet().getText()));
-        }
+        //if (!"".equals(kzf.getTxtKapacitet().getText())) {
+        zicara.setKapacitet(Integer.parseInt(kzf.getTxtKapacitet().getText()));
+        //}
         zicara.setRadnoVreme(kzf.getTxtRadnoVreme().getText());
         zicara.setSkiCentar((SkiCentar) kzf.getCmbSkiCentri().getSelectedItem());
         if (kzf.getCmbUfunkciji().getSelectedItem().equals("DA")) {
@@ -64,10 +66,10 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
     @Override
     public void isprazniGrafickiObjekat() {
         KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
-        kzf.getTxtSifraZicare().setText("0");
-        kzf.getTxtKapacitet().setText("0");
+        kzf.getTxtSifraZicare().setText("");
+        kzf.getTxtKapacitet().setText("");
         kzf.getTxtNazivZicare().setText("");
-        kzf.getTxtRadnoVreme().setText("00-00");
+        kzf.getTxtRadnoVreme().setText("");
         kzf.getCmbSkiCentri().setSelectedIndex(0);
     }
 
@@ -83,6 +85,28 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
         } catch (Exception ex) {
             Logger.getLogger(KreirajZicaruForma.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void omoguciPamcenje() {
+        KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
+        kzf.getBtnZapamti().setEnabled(true);
+    }
+
+    @Override
+    public void onemoguciPamcenje() {
+        KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
+        kzf.getBtnZapamti().setEnabled(false);
+    }
+
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(kzf.getTxtNazivZicare().getText(), "Naziv zicare je obavezan")
+                .validateNotNullOrEmpty(kzf.getTxtRadnoVreme().getText(), "Radno vreme je obavezno")
+                .validateNotNullOrEmpty(kzf.getTxtKapacitet().getText(), "Kapcitet je obavezan")
+                .validirajFormatRadnogVremena(kzf.getTxtRadnoVreme().getText(), "Format radnog vremena mora biti HH-HH")
+                .validateValueIsNumber(kzf.getTxtKapacitet().getText(), "Kapacitet mora biti broj").throwIfInvalide();
     }
 
 }
