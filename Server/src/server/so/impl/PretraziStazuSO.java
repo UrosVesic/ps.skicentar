@@ -16,13 +16,13 @@ import server.so.OpstaSo;
  */
 public class PretraziStazuSO extends OpstaSo {
 
-    public PretraziStazuSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
-        super(b, odo, lista);
+    public PretraziStazuSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
     @Override
     public void izvrsenjeSo() throws Exception {
-        b.pronadjiSlogove(lista, odo);
+        lista = b.pronadjiSlogove(odo);
     }
 
     @Override

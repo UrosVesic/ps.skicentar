@@ -7,6 +7,7 @@ package server.so;
 
 import domen.OpstiDomenskiObjekat;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import server.broker.BrokerBazePodataka;
 
@@ -23,13 +24,10 @@ public abstract class OpstaSo {
     public OpstaSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
         this.b = b;
         this.odo = odo;
+        lista = new ArrayList<>();
     }
 
-    public OpstaSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
-        this.b = b;
-        this.odo = odo;
-        this.lista = lista;
-    }
+   
 
     public void opsteIzvrsenjeSo() throws Exception {
 
@@ -39,13 +37,18 @@ public abstract class OpstaSo {
             izvrsenjeSo();
             b.commit();
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             b.rollback();
+            ex.printStackTrace();
             throw ex;
         } finally {
             b.disconnect();
         }
 
+    }
+
+    public List<OpstiDomenskiObjekat> getLista() {
+        return lista;
     }
 
     public abstract void izvrsenjeSo() throws Exception;

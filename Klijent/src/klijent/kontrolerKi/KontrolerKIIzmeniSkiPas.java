@@ -34,17 +34,22 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
 
     private List<StavkaSkiPasa> dodateStavke;
 
-    public KontrolerKIIzmeniSkiPas(OpstaEkranskaForma oef) {
+    public KontrolerKIIzmeniSkiPas(OpstaEkranskaForma oef, SkiPas skiPas) {
         this.oef = oef;
+        this.odo = skiPas;
         dodateStavke = new ArrayList<>();
+    }
+
+    public OpstiDomenskiObjekat getOdo() {
+        return odo;
     }
 
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
-        if (!"".equals(kspf.getTxtSifraSkiPasaZaPretragu().getText())) {
-            skiPas.setSifraSkiPasa(Long.parseLong(kspf.getTxtSifraSkiPasaZaPretragu().getText()));
+        if (!"".equals(kspf.getTxtSifraSkiPasa().getText())) {
+            skiPas.setSifraSkiPasa(Long.parseLong(kspf.getTxtSifraSkiPasa().getText()));
         }
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         try {

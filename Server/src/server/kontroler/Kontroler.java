@@ -86,9 +86,10 @@ public class Kontroler {
         so.opsteIzvrsenjeSo();
     }
 
-    public void ucitajListuSkiCentara(List<OpstiDomenskiObjekat> skiCentri) throws SQLException, Exception {
-        OpstaSo so = new UcitajListuSkiCentaraSO(b, new SkiCentar(), skiCentri);
+    public List<OpstiDomenskiObjekat> ucitajListuSkiCentara() throws SQLException, Exception {
+        OpstaSo so = new UcitajListuSkiCentaraSO(b, new SkiCentar());
         so.opsteIzvrsenjeSo();
+        return so.getLista();
     }
 
     public void zapamtiStazu(Staza staza) throws SQLException, Exception {
@@ -98,10 +99,9 @@ public class Kontroler {
     }
 
     public List<OpstiDomenskiObjekat> pronadjiStaze(Staza staza) throws SQLException, Exception {
-        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
-        OpstaSo so = new PretraziStazuSO(b, staza, lista);
+        OpstaSo so = new PretraziStazuSO(b, staza);
         so.opsteIzvrsenjeSo();
-        return lista;
+        return so.getLista();
     }
 
     public void kreirajStazu(Staza staza) throws SQLException, Exception {
@@ -135,10 +135,9 @@ public class Kontroler {
     }
 
     public List<OpstiDomenskiObjekat> pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
-        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
-        OpstaSo so = new PretraziSkiKarteSo(b, skiKarta, lista);
+        OpstaSo so = new PretraziSkiKarteSo(b, skiKarta);
         so.opsteIzvrsenjeSo();
-        return lista;
+        return so.getLista();
     }
 
     public void kreirajSkiPas(SkiPas skiPas) throws Exception {
@@ -146,9 +145,10 @@ public class Kontroler {
         so.opsteIzvrsenjeSo();
     }
 
-    public void ucitajListuSkiKarata(List<OpstiDomenskiObjekat> skiKarte) throws Exception {
-        OpstaSo so = new UcitajListuSkiKarataSO(b, new SkiKarta(), skiKarte);
+    public List<OpstiDomenskiObjekat> ucitajListuSkiKarata() throws Exception {
+        OpstaSo so = new UcitajListuSkiKarataSO(b, new SkiKarta());
         so.opsteIzvrsenjeSo();
+        return so.getLista();
     }
 
     public void zapamtiSkiPas(SkiPas skiPas) throws Exception {
@@ -156,9 +156,10 @@ public class Kontroler {
         so.opsteIzvrsenjeSo();
     }
 
-    public void pronadjiSkiPas(SkiPas skiPas) throws Exception {
+    public List<OpstiDomenskiObjekat> pronadjiSkiPas(SkiPas skiPas) throws Exception {
         OpstaSo so = new PretraziSkiPasSo(b, skiPas);
         so.opsteIzvrsenjeSo();
+        return so.getLista();
     }
 
 }

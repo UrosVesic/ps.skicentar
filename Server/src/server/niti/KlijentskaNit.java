@@ -163,11 +163,11 @@ public class KlijentskaNit extends Thread {
     }
 
     private Odgovor ucitajListuSkiCentara(Zahtev zahtev) {
-        List<OpstiDomenskiObjekat> lista = (List<OpstiDomenskiObjekat>) zahtev.getParametar();
+        List<OpstiDomenskiObjekat> lista;//(List<OpstiDomenskiObjekat>) zahtev.getParametar();
         Odgovor odgovor = new Odgovor();
 
         try {
-            Kontroler.getInstanca().ucitajListuSkiCentara(lista);
+            lista = Kontroler.getInstanca().ucitajListuSkiCentara();
             odgovor.setIzvrsenaOperacija(Operacije.UCITAJ_LISTU_SKI_CENTARA);
             odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
@@ -307,17 +307,17 @@ public class KlijentskaNit extends Thread {
     }
 
     private Odgovor ucitajListuSkiKarata(Zahtev zahtev) {
-        List<OpstiDomenskiObjekat> skiKarteOdo = new ArrayList<>();
-        List<SkiKarta> skiKarte = new ArrayList<>();
+        List<OpstiDomenskiObjekat> lista;// = new ArrayList<>();
+        //List<SkiKarta> skiKarte = new ArrayList<>();
         Odgovor odgovor = new Odgovor();
 
         try {
-            Kontroler.getInstanca().ucitajListuSkiKarata(skiKarteOdo);
-            for (OpstiDomenskiObjekat opstiDomenskiObjekat : skiKarteOdo) {
+            lista = Kontroler.getInstanca().ucitajListuSkiKarata();
+            /*for (OpstiDomenskiObjekat opstiDomenskiObjekat : skiKarteOdo) {
                 skiKarte.add((SkiKarta) opstiDomenskiObjekat);
-            }
+            }*/
             odgovor.setIzvrsenaOperacija(Operacije.UCITAJ_LISTU_SKI_KARATA);
-            odgovor.setRezultat(skiKarte);
+            odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
@@ -358,12 +358,13 @@ public class KlijentskaNit extends Thread {
     }
 
     private Odgovor pretraziSkiPas(Zahtev zahtev) {
+        List<OpstiDomenskiObjekat> lista;
         SkiPas skiPas = (SkiPas) zahtev.getParametar();
         Odgovor odgovor = new Odgovor();
         try {
-            Kontroler.getInstanca().pronadjiSkiPas(skiPas);
+            lista = Kontroler.getInstanca().pronadjiSkiPas(skiPas);
             odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_PAS);
-            odgovor.setRezultat(skiPas);
+            odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);

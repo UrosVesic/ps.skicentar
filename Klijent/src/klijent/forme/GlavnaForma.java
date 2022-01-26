@@ -14,6 +14,7 @@ import klijent.forme.skiKarta.PretraziSkiKarteForma;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
+import klijent.forme.skiPas.PronadjiSkiPasoveForma;
 import klijent.forme.zicara.KreirajZicaruForma;
 
 /**
@@ -206,7 +207,8 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiIzmeniSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiPasActionPerformed
         // TODO add your handling code here:
-        new IzmeniSkiPasForma().setVisible(true);
+        //new IzmeniSkiPasForma().setVisible(true);
+        new PronadjiSkiPasoveForma().setVisible(true);
     }//GEN-LAST:event_jmiIzmeniSkiPasActionPerformed
 
     /**

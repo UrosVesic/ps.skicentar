@@ -16,15 +16,15 @@ import server.so.OpstaSo;
  */
 public class UcitajListuSkiCentaraSO extends OpstaSo {
 
-    public UcitajListuSkiCentaraSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
-        super(b, odo, lista);
+    public UcitajListuSkiCentaraSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
     
 
     @Override
     public void izvrsenjeSo() throws Exception {
-        b.vratiSve(lista, odo);
+        lista = b.vratiSve(odo);
     }
 
     @Override

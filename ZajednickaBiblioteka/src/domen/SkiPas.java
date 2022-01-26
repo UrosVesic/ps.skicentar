@@ -110,6 +110,11 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
+    public String vratiUslovZaNadjiSlogove() {
+        return "imePrezimeKupca LIKE '" + imePrezimeKupca + "'";
+    }
+
+    @Override
     public void postaviVrednostPK(Object pk) {
         sifraSkiPasa = (long) pk;
     }
@@ -211,5 +216,32 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
 
         stavkeSkiPasa.get(brojSloga).setVrednostStavke(ukupnaCena);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + (int) (this.sifraSkiPasa ^ (this.sifraSkiPasa >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SkiPas other = (SkiPas) obj;
+        if (this.sifraSkiPasa != other.sifraSkiPasa) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }

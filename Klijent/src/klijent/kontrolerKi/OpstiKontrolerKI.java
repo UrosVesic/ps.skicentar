@@ -100,7 +100,7 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 odo = (Staza) odgovor.getRezultat();
-                KonvertujObjekatUGrafickeKomponente();
+                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
                 onemoguciPamcenje();
                 isprazniGrafickiObjekat();
@@ -175,7 +175,7 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 odo = (Zicara) odgovor.getRezultat();
-                KonvertujObjekatUGrafickeKomponente();
+                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio zicaru");
                 onemoguciPamcenje();
                 isprazniGrafickiObjekat();
@@ -224,7 +224,7 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 odo = (SkiKarta) odgovor.getRezultat();
-                KonvertujObjekatUGrafickeKomponente();
+                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski kartu");
                 isprazniGrafickiObjekat();
                 onemoguciPamcenje();
@@ -298,7 +298,7 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 odo = (SkiCentar) odgovor.getRezultat();
-                KonvertujObjekatUGrafickeKomponente();
+                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
                 isprazniGrafickiObjekat();
                 onemoguciPamcenje();
@@ -368,10 +368,10 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 odo = (SkiPas) odgovor.getRezultat();
-                KonvertujObjekatUGrafickeKomponente();
+                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
                 isprazniGrafickiObjekat();
-                onemoguciPamcenje();
+                //onemoguciPamcenje();
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas");
             }
@@ -381,15 +381,15 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void SOPretraziSkiPas() {
+        isprazniGrafickiObjekat();
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
-
         Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_PAS, odo);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                odo = (SkiPas) odgovor.getRezultat();
+                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pas po zadatom kriterijumu");
                 omoguciPamcenje();

@@ -24,13 +24,22 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
     /**
      * Creates new form IzmeniSkiPasForma
      */
-    KontrolerKIIzmeniSkiPas kkiisp;
+    private final KontrolerKIIzmeniSkiPas kkiisp;
+    private PronadjiSkiPasoveForma pspf;
     
-    public IzmeniSkiPasForma() {
+    /* public IzmeniSkiPasForma() {
         initComponents();
         kkiisp = new KontrolerKIIzmeniSkiPas(this);
         pripremiTabelu();
         pripremiKomboBoks();
+    }*/
+    IzmeniSkiPasForma(SkiPas skiPas, PronadjiSkiPasoveForma pspf) {
+        initComponents();
+        kkiisp = new KontrolerKIIzmeniSkiPas(this, skiPas);
+        this.pspf = pspf;
+        pripremiTabelu();
+        pripremiKomboBoks();
+
     }
 
     /**
@@ -49,7 +58,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
         btnZapamtiSkiPas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtSifraSkiPasa = new javax.swing.JTextField();
-        btnNadji = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtUkupnaCena = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -64,10 +72,13 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
         jLabel8 = new javax.swing.JLabel();
         cmbSkiKarte = new javax.swing.JComboBox();
         btnDodaj = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        txtSifraSkiPasaZaPretragu = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel4.setText("Datum izdavanja: ");
 
@@ -85,7 +96,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
         jScrollPane1.setViewportView(tblStavkeSkiPasa);
 
         btnZapamtiSkiPas.setText("Zapamti ski pas");
-        btnZapamtiSkiPas.setEnabled(false);
         btnZapamtiSkiPas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZapamtiSkiPasActionPerformed(evt);
@@ -95,13 +105,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
         jLabel1.setText("Sifra ski pasa:");
 
         txtSifraSkiPasa.setEditable(false);
-
-        btnNadji.setText("Nadji");
-        btnNadji.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNadjiActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Ukupna cena: ");
 
@@ -188,8 +191,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jLabel9.setText("Unesite sifru ski pasa za pretragu:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,12 +210,7 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtSifraSkiPasaZaPretragu, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnNadji))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
@@ -243,11 +239,8 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNadji)
-                    .addComponent(jLabel9)
-                    .addComponent(txtSifraSkiPasaZaPretragu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUkupnaCena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,12 +266,8 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
     private void btnZapamtiSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiSkiPasActionPerformed
         // TODO add your handling code here:
         kkiisp.SOZapamitSkiPas();
+        pspf.azurirajTabelu((SkiPas) kkiisp.getOdo());
     }//GEN-LAST:event_btnZapamtiSkiPasActionPerformed
-
-    private void btnNadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNadjiActionPerformed
-        // TODO add your handling code here:
-        kkiisp.SOPretraziSkiPas();
-    }//GEN-LAST:event_btnNadjiActionPerformed
 
     private void cmbSkiKarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSkiKarteActionPerformed
         // TODO add your handling code here:
@@ -291,10 +280,14 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
         kkiisp.dodajStavkuUTabelu();
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        kkiisp.KonvertujObjekatUGrafickeKomponente();
+    }//GEN-LAST:event_formWindowOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
-    private javax.swing.JButton btnNadji;
     private javax.swing.JButton btnZapamtiSkiPas;
     private javax.swing.JComboBox cmbSkiKarte;
     private javax.swing.JLabel jLabel1;
@@ -305,7 +298,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblStavkeSkiPasa;
@@ -313,7 +305,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
     private javax.swing.JTextField txtImePrezimeKupca;
     private javax.swing.JTextField txtPocetakVazenja;
     private javax.swing.JTextField txtSifraSkiPasa;
-    private javax.swing.JTextField txtSifraSkiPasaZaPretragu;
     private javax.swing.JTextField txtUkupnaCena;
     private javax.swing.JTextField txtVrednostStavke;
     private javax.swing.JTextField txtZavrsetakVazenja;
@@ -327,16 +318,13 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
     private void pripremiKomboBoks() {
         kkiisp.pripremiKomboBoks();
     }
-    
+
     @Override
     public OpstiDomenskiObjekat kreirajObjekat() {
         return new SkiPas();
     }
 
-    public javax.swing.JButton getBtnNadji() {
-        return btnNadji;
-    }
-
+    
     public javax.swing.JButton getBtnZapamtiSkiPas() {
         return btnZapamtiSkiPas;
     }
@@ -377,9 +365,6 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
         return txtZavrsetakVazenja;
     }
 
-    public JTextField getTxtSifraSkiPasaZaPretragu() {
-        return txtSifraSkiPasaZaPretragu;
-    }
+   
 
-    
 }

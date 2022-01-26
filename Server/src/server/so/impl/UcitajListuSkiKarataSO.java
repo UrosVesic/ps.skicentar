@@ -16,13 +16,13 @@ import server.so.OpstaSo;
  */
 public class UcitajListuSkiKarataSO extends OpstaSo {
 
-    public UcitajListuSkiKarataSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
-        super(b, odo, lista);
+    public UcitajListuSkiKarataSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
     @Override
     public void izvrsenjeSo() throws Exception {
-        b.vratiSve(lista, odo);
+        lista = b.vratiSve(odo);
     }
 
     @Override

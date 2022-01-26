@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,8 +39,8 @@ public class BrokerBazePodataka {
         DbFabrikaKonekcije.getInstanca().getKonekcija().rollback();
     }
 
-    public void vratiSve(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws SQLException, Exception {
-
+    public List<OpstiDomenskiObjekat> vratiSve(OpstiDomenskiObjekat odo) throws SQLException, Exception {
+        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
         try {
             String upit = "SELECT * FROM " + odo.vratiImeKlase();
             konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
@@ -59,6 +60,7 @@ public class BrokerBazePodataka {
         } catch (SQLException ex) {
             throw ex;
         }
+        return lista;
     }
 
     public void kreirajSlog(OpstiDomenskiObjekat odo) throws SQLException {
@@ -198,6 +200,49 @@ public class BrokerBazePodataka {
         }
     }
 
+    public List<OpstiDomenskiObjekat> pronadjiSlozeneSlogove(OpstiDomenskiObjekat odo) throws SQLException, Exception {
+        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
+        konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
+        Statement st = konekcija.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        Statement st1 = konekcija.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        Statement st2 = konekcija.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        String upit = "SELECT * FROM " + odo.vratiImeKlase()
+                + " WHERE " + odo.vratiUslovZaNadjiSlogove();
+        ResultSet rs = st.executeQuery(upit);
+        while (rs.next()) {
+            OpstiDomenskiObjekat odo1 = odo.kreirajInstancu();
+            odo1.napuni(rs);
+            for (int i = 0; i < odo1.vratiBrojVezanihObjekata(); i++) {
+                OpstiDomenskiObjekat vezo = odo1.vratiVezaniObjekat(i);
+                upit = "SELECT COUNT(*) as brojStavki FROM " + vezo.vratiImeKlase() + " WHERE " + vezo.vratiUslovZaNadjiSlogove();
+                ResultSet rs1 = st1.executeQuery(upit);
+                rs1.next();
+                int brojStavki = rs1.getInt("brojStavki");
+                odo1.kreirajVezaniObjekat(brojStavki, i);
+                //rs1.close();
+                upit = "SELECT * FROM " + vezo.vratiImeKlase() + " WHERE " + vezo.vratiUslovZaNadjiSlogove();
+                ResultSet rs2 = st2.executeQuery(upit);
+                int brojSloga = 0;
+                while (rs2.next()) {
+                    odo1.napuni(rs2, brojSloga, i);
+                    brojSloga++;
+                }
+                //rs2.close();
+                for (int j = 0; j < brojSloga; j++) {
+                    vezo = odo1.vratiSlogVezanogObjekta(i, j);
+                    pronadjiSlog(vezo);
+                }
+
+            }
+
+            lista.add(odo1);
+        }
+        if (lista.isEmpty()) {
+            throw new Exception();
+        }
+        return lista;
+    }
+
     public void vratiMaxID(OpstiDomenskiObjekat odo) throws SQLException {
         try {
             String upit;
@@ -216,7 +261,8 @@ public class BrokerBazePodataka {
         }
     }
 
-    public void pronadjiSlogove(List<OpstiDomenskiObjekat> lista, OpstiDomenskiObjekat odo) throws Exception {
+    public List<OpstiDomenskiObjekat> pronadjiSlogove(OpstiDomenskiObjekat odo) throws Exception {
+        List<OpstiDomenskiObjekat> lista = new ArrayList<>();
         int j = 0;
         try {
             String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlogove();
@@ -241,5 +287,6 @@ public class BrokerBazePodataka {
         } catch (SQLException ex) {
             throw ex;
         }
+        return lista;
     }
 }

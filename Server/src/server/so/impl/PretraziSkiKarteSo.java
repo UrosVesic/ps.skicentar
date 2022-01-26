@@ -16,22 +16,18 @@ import server.so.OpstaSo;
  */
 public class PretraziSkiKarteSo extends OpstaSo {
 
-    public PretraziSkiKarteSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo, List<OpstiDomenskiObjekat> lista) {
-        super(b, odo, lista);
+    public PretraziSkiKarteSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+        super(b, odo);
     }
 
     @Override
     public void izvrsenjeSo() throws Exception {
-        b.pronadjiSlogove(lista, odo);
+        lista = b.pronadjiSlogove(odo);
     }
 
     @Override
     public void proveriPreduslove(OpstiDomenskiObjekat odo) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
-
-    
 
 }
