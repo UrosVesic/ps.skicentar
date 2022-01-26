@@ -43,6 +43,8 @@ public class ServerForm extends javax.swing.JFrame {
         btnZaustavi = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jmiKonfBaze = new javax.swing.JMenuItem();
+        jmiKonfServera = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +93,23 @@ public class ServerForm extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Konfiguracija");
+
+        jmiKonfBaze.setText("Konfiguracija baze");
+        jmiKonfBaze.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiKonfBazeActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiKonfBaze);
+
+        jmiKonfServera.setText("Konfiguracija servera");
+        jmiKonfServera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiKonfServeraActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiKonfServera);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -128,7 +147,8 @@ public class ServerForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Kontroler.getInstanca().pokreniServer(this);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Neuspesno pokretanje servera", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPokreniActionPerformed
@@ -142,6 +162,16 @@ public class ServerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnZaustaviActionPerformed
 
+    private void jmiKonfBazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKonfBazeActionPerformed
+        // TODO add your handling code here:
+        new KonfiguracijaBazeForma().setVisible(true);
+    }//GEN-LAST:event_jmiKonfBazeActionPerformed
+
+    private void jmiKonfServeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKonfServeraActionPerformed
+        // TODO add your handling code here:
+        new KonfiguracijaServeraForma().setVisible(true);
+    }//GEN-LAST:event_jmiKonfServeraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPokreni;
@@ -150,6 +180,8 @@ public class ServerForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jmiKonfBaze;
+    private javax.swing.JMenuItem jmiKonfServera;
     private javax.swing.JLabel lblStatusServera;
     // End of variables declaration//GEN-END:variables
 

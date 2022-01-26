@@ -20,9 +20,8 @@ public class KreirajStazuSO extends OpstaSo {
         super(b, odo);
     }
 
-    
     @Override
-    public void izvrsenjeSo() throws SQLException {
+    public void izvrsenjeSo() throws Exception {
         b.kreirajSlog(odo);
 
     }

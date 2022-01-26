@@ -12,12 +12,19 @@ import domen.SkiPas;
 import domen.Staza;
 import domen.Zicara;
 import java.awt.Color;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import server.broker.BrokerBazePodataka;
+import server.forme.KonfiguracijaBazeForma;
+import server.forme.KonfiguracijaServeraForma;
 import server.forme.ServerForm;
+import server.konstante.ServerskeKonstante;
 import server.niti.ServerskaNit;
 import server.so.OpstaSo;
 import server.so.impl.KreirajSkiCentarSO;
@@ -59,8 +66,16 @@ public class Kontroler {
         return instanca;
     }
 
-    public void pokreniServer(ServerForm serverskaForma) throws IOException {
-        serverskaNit = new ServerskaNit();
+    public void pokreniServer(ServerForm serverskaForma) throws IOException, Exception {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(ServerskeKonstante.SERVER_CONFIG_PATH));
+        int port = -1;
+        if (!"".equals(properties.getProperty("port"))) {
+            port = Integer.parseInt(properties.getProperty("port"));
+        } else {
+            throw new Exception();
+        }
+        serverskaNit = new ServerskaNit(port);
         serverskaNit.start();
         serverskaForma.getBtnPokreni().setEnabled(false);
         serverskaForma.getBtnZaustavi().setEnabled(true);
@@ -160,6 +175,35 @@ public class Kontroler {
         OpstaSo so = new PretraziSkiPasSo(b, skiPas);
         so.opsteIzvrsenjeSo();
         return so.getLista();
+    }
+
+    public void konfigurisiBazu(String url, String username, String password) throws IOException {
+        Properties properties = new Properties();
+        properties.setProperty("url", url);
+        properties.setProperty("username", username);
+        properties.setProperty("password", password);
+        properties.store(new FileOutputStream(ServerskeKonstante.DB_CONFIG_PATH), "");
+    }
+
+    public void procitajKonfiguracijuBaze(KonfiguracijaBazeForma kbf) throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(ServerskeKonstante.DB_CONFIG_PATH));
+        kbf.getTxtURL().setText(properties.getProperty("url"));
+        kbf.getTxtUsername().setText(properties.getProperty("username"));
+        kbf.getTxtPassword().setText(properties.getProperty("password"));
+    }
+
+    public void konfigurisiServer(String port) throws IOException {
+        Properties properties = new Properties();
+        properties.setProperty("port", port);
+        properties.store(new FileOutputStream(ServerskeKonstante.SERVER_CONFIG_PATH), port);
+
+    }
+
+    public void procitajKonfiguracijuServera(KonfiguracijaServeraForma ksf) throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(ServerskeKonstante.SERVER_CONFIG_PATH));
+        ksf.getTxtPort().setText(properties.getProperty("port"));
     }
 
 }

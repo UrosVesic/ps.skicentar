@@ -6,6 +6,7 @@
 package server.niti;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -22,9 +23,9 @@ public class ServerskaNit extends Thread{
     ServerSocket serverSocket;
     List<KlijentskaNit> klijentskeNiti;
 
-    public ServerskaNit() throws IOException {
+    public ServerskaNit(int port) throws IOException,ConnectException {
         klijentskeNiti = new ArrayList<>();
-        serverSocket = new ServerSocket(9000);
+        serverSocket = new ServerSocket(port);
     }
 
     @Override

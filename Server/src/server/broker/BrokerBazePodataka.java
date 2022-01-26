@@ -23,19 +23,19 @@ public class BrokerBazePodataka {
 
     private Connection konekcija;
 
-    public void connect() throws SQLException {
+    public void connect() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija();
     }
 
-    public void disconnect() throws SQLException {
+    public void disconnect() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija().close();
     }
 
-    public void commit() throws SQLException {
+    public void commit() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija().commit();
     }
 
-    public void rollback() throws SQLException {
+    public void rollback() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija().rollback();
     }
 
@@ -63,7 +63,7 @@ public class BrokerBazePodataka {
         return lista;
     }
 
-    public void kreirajSlog(OpstiDomenskiObjekat odo) throws SQLException {
+    public void kreirajSlog(OpstiDomenskiObjekat odo) throws Exception {
         String upit;
         vratiMaxID(odo);
         try {
@@ -119,7 +119,7 @@ public class BrokerBazePodataka {
         }
     }
 
-    public void obrisiSlog(OpstiDomenskiObjekat odo) throws SQLException {
+    public void obrisiSlog(OpstiDomenskiObjekat odo) throws Exception {
         try {
             String upit = "DELETE FROM" + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
             konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
@@ -243,7 +243,7 @@ public class BrokerBazePodataka {
         return lista;
     }
 
-    public void vratiMaxID(OpstiDomenskiObjekat odo) throws SQLException {
+    public void vratiMaxID(OpstiDomenskiObjekat odo) throws Exception {
         try {
             String upit;
             upit = "SELECT Max(" + odo.vratiNazivPK() + ") AS " + odo.vratiNazivPK() + " FROM " + odo.vratiImeKlase();
