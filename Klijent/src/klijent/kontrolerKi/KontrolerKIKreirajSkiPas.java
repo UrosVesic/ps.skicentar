@@ -97,7 +97,12 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
         try {
             Date pocetakVazenja = sdf.parse(kspf.getTxtPocetakVazenja().getText());
             Date zavrsetakVazenja = sdf.parse(kspf.getTxtZavrsetakVazenja().getText());
-            StavkaSkiPasa stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(kspf.getTxtVrednostStavke().getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
+            StavkaSkiPasa stavka;
+            if (kspf.getTxtVrednostStavke().getText() != "") {
+                stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(kspf.getTxtVrednostStavke().getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
+            } else {
+                stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(0), pocetakVazenja, zavrsetakVazenja, (SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
+            }
             model.dodaj(stavka);
             kspf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
         } catch (ParseException ex) {

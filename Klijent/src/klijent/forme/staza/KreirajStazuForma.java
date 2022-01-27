@@ -50,6 +50,7 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
         btnZapamti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Kreiraj stazu");
 
         jLabel1.setText("Broj staze: ");
 
@@ -105,7 +106,7 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
                         .addComponent(btnKreiraj)
                         .addGap(65, 65, 65)
                         .addComponent(btnZapamti)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

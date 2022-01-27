@@ -49,6 +49,7 @@ public class KreirajSkiCentarForma extends OpstaEkranskaForma {
         txtSifraSkiCentra = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Kreiraj ski centar");
 
         jLabel1.setText("Naziv ski centra: ");
 
@@ -106,7 +107,7 @@ public class KreirajSkiCentarForma extends OpstaEkranskaForma {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txtSifraSkiCentra, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

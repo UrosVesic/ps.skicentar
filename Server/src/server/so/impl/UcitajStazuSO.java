@@ -13,16 +13,16 @@ import server.so.OpstaSo;
  *
  * @author draskovesic
  */
-public class PretraziSkiCentarSO extends OpstaSo {
+public class UcitajStazuSO extends OpstaSo {
 
-    public PretraziSkiCentarSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+    public UcitajStazuSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
         super(b, odo);
     }
 
     @Override
     public void izvrsenjeSo() throws Exception {
         b.pronadjiSlog(odo);
-
+        
     }
 
     @Override

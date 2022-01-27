@@ -23,9 +23,9 @@ public class ServerskaNit extends Thread{
     ServerSocket serverSocket;
     List<KlijentskaNit> klijentskeNiti;
 
-    public ServerskaNit(int port) throws IOException,ConnectException {
+    public ServerskaNit(ServerSocket serverSocket) {
         klijentskeNiti = new ArrayList<>();
-        serverSocket = new ServerSocket(port);
+        this.serverSocket = serverSocket;
     }
 
     @Override

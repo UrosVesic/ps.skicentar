@@ -83,16 +83,29 @@ public class Validator {
     }
 
     public Validator validirajFormatRadnogVremena(String radnoVreme, String poruka) {
+        int i = 0;
         String[] sati = radnoVreme.split("-");
         if (sati.length != 2) {
             this.validationErros.add(poruka);
             return this;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("HH");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         try {
             sdf.parse(sati[0]);
             sdf.parse(sati[1]);
         } catch (ParseException ex) {
+            i++;
+            //this.validationErros.add(poruka);
+        }
+        sdf = new SimpleDateFormat("HH");
+        try {
+            sdf.parse(sati[0]);
+            sdf.parse(sati[1]);
+        } catch (ParseException ex) {
+            i++;
+            //this.validationErros.add(poruka);
+        }
+        if (i == 2) {
             this.validationErros.add(poruka);
         }
         return this;

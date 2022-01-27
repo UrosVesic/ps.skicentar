@@ -13,21 +13,20 @@ import server.so.OpstaSo;
  *
  * @author draskovesic
  */
-public class PretraziSkiCentarSO extends OpstaSo {
+public class UcitajSkiPasSO extends OpstaSo{
 
-    public PretraziSkiCentarSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+    public UcitajSkiPasSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
         super(b, odo);
     }
 
     @Override
     public void izvrsenjeSo() throws Exception {
-        b.pronadjiSlog(odo);
-
+        b.pronadjiSlozenSlog(odo);
     }
 
     @Override
     public void proveriPreduslove(OpstiDomenskiObjekat odo) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

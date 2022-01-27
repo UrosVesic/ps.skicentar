@@ -43,6 +43,7 @@ public class PretraziSkiKarteForma extends OpstaEkranskaForma {
         btnPretrazi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pretraži ski karte");
 
         jLabel1.setText("Unesite gornju granicu cene: ");
 

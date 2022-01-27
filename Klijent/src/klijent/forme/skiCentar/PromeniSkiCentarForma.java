@@ -45,6 +45,7 @@ public class PromeniSkiCentarForma extends OpstaEkranskaForma {
         btnZapamti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Promeni ski centar");
 
         txtRadnoVreme.setEditable(false);
 

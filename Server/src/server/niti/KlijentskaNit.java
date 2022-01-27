@@ -108,6 +108,12 @@ public class KlijentskaNit extends Thread {
             case Operacije.PRETRAZI_SKI_PAS:
                 odgovor = pretraziSkiPas(zahtev);
                 break;
+            case Operacije.UCITAJ_SKI_PAS:
+                odgovor = ucitajSkiPas(zahtev);
+                break;
+            case Operacije.UCITAJ_STAZU:
+                odgovor = ucitajStazu(zahtev);
+                break;
             default:
                 break;
         }
@@ -369,6 +375,36 @@ public class KlijentskaNit extends Thread {
         } catch (Exception ex) {
             odgovor.setUspesno(false);
             ex.printStackTrace();
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor ucitajSkiPas(Zahtev zahtev) {
+        SkiPas skiPas = (SkiPas) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().ucitajSkiPas(skiPas);
+            odgovor.setIzvrsenaOperacija(Operacije.UCITAJ_SKI_PAS);
+            odgovor.setRezultat(skiPas);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor ucitajStazu(Zahtev zahtev) {
+        Staza staza = (Staza) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().ucitajStazu(staza);
+            odgovor.setIzvrsenaOperacija(Operacije.UCITAJ_SKI_PAS);
+            odgovor.setRezultat(staza);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
             odgovor.setException(ex);
         }
         return odgovor;

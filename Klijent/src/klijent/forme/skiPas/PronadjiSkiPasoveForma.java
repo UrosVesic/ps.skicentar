@@ -48,7 +48,8 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
         btnPronadji = new javax.swing.JButton();
         btnIzmeni = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pretraži ski pas");
 
         jLabel1.setText("Unesite ime i prezime kupca: ");
 
@@ -72,7 +73,7 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
             }
         });
 
-        btnIzmeni.setText("Izmeni");
+        btnIzmeni.setText("Detalji");
         btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzmeniActionPerformed(evt);
@@ -107,9 +108,9 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
                     .addComponent(btnPronadji))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))
+                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(btnIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)

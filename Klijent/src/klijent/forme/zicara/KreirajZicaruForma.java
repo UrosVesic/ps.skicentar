@@ -54,6 +54,7 @@ public class KreirajZicaruForma extends OpstaEkranskaForma {
         btnZapamti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Kreiraj žičaru");
 
         jLabel1.setText("Sifra zicare: ");
 

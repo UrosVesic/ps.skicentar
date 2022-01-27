@@ -67,6 +67,7 @@ public class KreirajSkiPasForma extends OpstaEkranskaForma {
         btnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Kreiraj ski pas");
 
         jLabel1.setText("Sifra ski pasa");
 
@@ -77,8 +78,6 @@ public class KreirajSkiPasForma extends OpstaEkranskaForma {
         txtUkupnaCena.setEditable(false);
 
         jLabel3.setText("Ime i prezime kupca:");
-
-        txtImePrezimeKupca.setText("Pera Peric");
 
         jLabel4.setText("Datum izdavanja: ");
 
@@ -227,9 +226,9 @@ public class KreirajSkiPasForma extends OpstaEkranskaForma {
                                     .addComponent(txtDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnZapamtiSkiPas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnKreirajSkiPas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54))
+                            .addComponent(btnKreirajSkiPas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnZapamtiSkiPas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)

@@ -49,6 +49,7 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
         btnZapamtiPromene = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Promeni stazu");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -137,15 +138,11 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        kkiPromeniStazu.KonvertujObjekatUGrafickeKomponente();
+        kkiPromeniStazu.SOUcitajStazu();
     }//GEN-LAST:event_formWindowOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnKreiraj;
-    private javax.swing.JButton btnKreiraj1;
-    private javax.swing.JButton btnKreiraj2;
-    private javax.swing.JButton btnKreiraj3;
     private javax.swing.JButton btnZapamtiPromene;
     private javax.swing.JComboBox cmbSkiCentar;
     private javax.swing.JComboBox<String> cmbTipStaze;

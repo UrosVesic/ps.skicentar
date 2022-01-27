@@ -6,7 +6,6 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
-import java.util.List;
 import server.broker.BrokerBazePodataka;
 import server.so.OpstaSo;
 

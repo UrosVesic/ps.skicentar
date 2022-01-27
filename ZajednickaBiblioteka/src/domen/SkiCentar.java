@@ -22,10 +22,7 @@ public class SkiCentar implements OpstiDomenskiObjekat, Serializable {
     private String radnoVreme;
 
     public SkiCentar() {
-        sifraSkiCentra = 0;
-        nazivSkiCentra = "";
-        nazivPlanine = "";
-        radnoVreme = "00-00";
+        
     }
 
     public SkiCentar(long sifraSkiCentra) {

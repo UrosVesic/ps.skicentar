@@ -44,6 +44,10 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         return odo;
     }
 
+    public void setOdo(OpstiDomenskiObjekat odo) {
+        this.odo = odo;
+    }
+
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;

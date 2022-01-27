@@ -5,14 +5,14 @@
  */
 package klijent.forme;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
 import klijent.forme.staza.PronadjiStazuForma;
 import klijent.forme.staza.KreirajStazuForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
-import klijent.forme.skiKarta.PretraziSkiKarteForma;
-import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.forme.skiPas.PronadjiSkiPasoveForma;
 import klijent.forme.zicara.KreirajZicaruForma;
@@ -28,6 +28,7 @@ public class GlavnaForma extends javax.swing.JFrame {
      */
     public GlavnaForma() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -155,11 +156,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
 
         pack();

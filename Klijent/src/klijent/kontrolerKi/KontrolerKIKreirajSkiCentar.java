@@ -6,11 +6,6 @@
 package klijent.kontrolerKi;
 
 import domen.SkiCentar;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.validator.ValidationException;
@@ -30,9 +25,9 @@ public class KontrolerKIKreirajSkiCentar extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         KreirajSkiCentarForma kscf = (KreirajSkiCentarForma) oef;
         SkiCentar skiCentar = (SkiCentar) odo;
-        //if (!"".equals(kscf.getTxtSifraSkiCentra().getText())) {
+        if (!"".equals(kscf.getTxtSifraSkiCentra().getText())) {
         skiCentar.setSifraSkiCentra(Long.parseLong(kscf.getTxtSifraSkiCentra().getText()));
-        //}
+        }
         skiCentar.setNazivPlanine(kscf.getTxtNazivPlanine().getText());
         /*String radnoVreme = kscf.getTxtRadnoVreme().getText();
         proveriFormatRadnogVremena(radnoVreme);*/
@@ -82,7 +77,7 @@ public class KontrolerKIKreirajSkiCentar extends OpstiKontrolerKI {
                 .validateNotNullOrEmpty(kscf.getTxtNazivPlanine().getText(), "Naziv planine je obavezan")
                 .validateNotNullOrEmpty(kscf.getTxtNazivSkiCentra().getText(), "Naziv ski centra je obavezan")
                 .validateNotNullOrEmpty(kscf.getTxtRadnoVreme().getText(), "Radno vreme je obavezno")
-                .validirajFormatRadnogVremena(kscf.getTxtRadnoVreme().getText(), "Format radnog vremena mora biti HH-HH").throwIfInvalide();
+                .validirajFormatRadnogVremena(kscf.getTxtRadnoVreme().getText(), "Format radnog vremena mora biti HH(:mm)-HH(:mm) ").throwIfInvalide();
     }
 
 }

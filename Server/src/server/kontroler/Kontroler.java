@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ConnectException;
+import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,8 @@ import server.so.impl.PretraziSkiPasSo;
 import server.so.impl.PretraziStazuSO;
 import server.so.impl.UcitajListuSkiCentaraSO;
 import server.so.impl.UcitajListuSkiKarataSO;
+import server.so.impl.UcitajSkiPasSO;
+import server.so.impl.UcitajStazuSO;
 import server.so.impl.ZapamtiSkiCentarSO;
 import server.so.impl.ZapamtiSkiKartuSO;
 import server.so.impl.ZapamtiSkiPasSo;
@@ -75,7 +78,8 @@ public class Kontroler {
         } else {
             throw new Exception();
         }
-        serverskaNit = new ServerskaNit(port);
+        ServerSocket serverSocket = new ServerSocket(port);
+        serverskaNit = new ServerskaNit(serverSocket);
         serverskaNit.start();
         serverskaForma.getBtnPokreni().setEnabled(false);
         serverskaForma.getBtnZaustavi().setEnabled(true);
@@ -204,6 +208,16 @@ public class Kontroler {
         Properties properties = new Properties();
         properties.load(new FileInputStream(ServerskeKonstante.SERVER_CONFIG_PATH));
         ksf.getTxtPort().setText(properties.getProperty("port"));
+    }
+
+    public void ucitajSkiPas(SkiPas skiPas) throws Exception {
+        OpstaSo so = new UcitajSkiPasSO(b, skiPas);
+        so.opsteIzvrsenjeSo();
+    }
+
+    public void ucitajStazu(Staza staza) throws Exception {
+        OpstaSo so = new UcitajStazuSO(b, staza);
+        so.opsteIzvrsenjeSo();
     }
 
 }

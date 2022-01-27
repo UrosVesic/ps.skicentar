@@ -30,13 +30,13 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         Zicara zicara = (Zicara) odo;
         KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
-        //if (!"".equals(kzf.getTxtSifraZicare().getText())) {
+        if (!"".equals(kzf.getTxtSifraZicare().getText())) {
         zicara.setSifraZicare(Long.parseLong(kzf.getTxtSifraZicare().getText()));
-        //}
+        }
         zicara.setNazivZicare(kzf.getTxtNazivZicare().getText());
-        //if (!"".equals(kzf.getTxtKapacitet().getText())) {
+        if (!"".equals(kzf.getTxtKapacitet().getText())) {
         zicara.setKapacitet(Integer.parseInt(kzf.getTxtKapacitet().getText()));
-        //}
+        }
         zicara.setRadnoVreme(kzf.getTxtRadnoVreme().getText());
         zicara.setSkiCentar((SkiCentar) kzf.getCmbSkiCentri().getSelectedItem());
         if (kzf.getCmbUfunkciji().getSelectedItem().equals("DA")) {
@@ -55,7 +55,9 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
         kzf.getTxtKapacitet().setText(zicara.getKapacitet() + "");
         kzf.getTxtNazivZicare().setText(zicara.getNazivZicare());
         kzf.getTxtRadnoVreme().setText(zicara.getRadnoVreme());
-        kzf.getCmbSkiCentri().setSelectedItem(zicara.getSkiCentar());
+        if (zicara.getSkiCentar() != null) {
+            kzf.getCmbSkiCentri().setSelectedItem(zicara.getSkiCentar());
+        }
         if (zicara.isUFunkciji()) {
             kzf.getCmbUfunkciji().setSelectedIndex(0);
         } else {

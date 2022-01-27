@@ -49,7 +49,9 @@ public class KontrolerKIKreirajSkiKartu extends OpstiKontrolerKI {
         if (skiKarta.getCenaSkiKarte() != null) {
             kskf.getTxtCenaSkiKarte().setText(String.valueOf(skiKarta.getCenaSkiKarte()));
         }
-        kskf.getCmbSkiCentar().setSelectedItem(skiKarta.getSkiCentar());
+        if (skiKarta.getSkiCentar() != null) {
+            kskf.getCmbSkiCentar().setSelectedItem(skiKarta.getSkiCentar());
+        }
         kskf.getCmbVrstaSkiKarte().setSelectedItem(skiKarta.getVrstaSkiKarte());
 
     }

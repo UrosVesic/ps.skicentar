@@ -22,8 +22,7 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
     private SkiCentar skiCentar;
 
     public SkiKarta() {
-        vrstaSkiKarte = "n/a";
-
+        cenaSkiKarte = new BigDecimal(0);
     }
 
     public SkiKarta(long sifraSkiKarte, String vrstaSkiKarte, BigDecimal cenaSkiKarte, SkiCentar skiCentar) {
