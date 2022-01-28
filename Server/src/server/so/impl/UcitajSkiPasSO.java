@@ -6,7 +6,7 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
-import server.broker.BrokerBazePodataka;
+import server.broker.BrokerBP;
 import server.so.OpstaSo;
 
 /**
@@ -15,12 +15,12 @@ import server.so.OpstaSo;
  */
 public class UcitajSkiPasSO extends OpstaSo{
 
-    public UcitajSkiPasSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+    public UcitajSkiPasSO(BrokerBP b, OpstiDomenskiObjekat odo) {
         super(b, odo);
     }
 
     @Override
-    public void izvrsenjeSo() throws Exception {
+    public void izvrsiOperaciju() throws Exception {
         b.pronadjiSlozenSlog(odo);
     }
 

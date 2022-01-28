@@ -15,12 +15,17 @@ import java.sql.SQLException;
 public interface OpstiDomenskiObjekat {
 
     String vratiVrednostiAtributa();
-
     String postaviVrednostiAtributa();
-
     String vratiImeKlase();
-
     String vratiUslovZaNadjiSlog();
+    void napuni(ResultSet rs) throws SQLException;
+    String vratiNazivPK();
+    void povecajBroj(ResultSet rs) throws SQLException;
+    void postaviPocetniBroj();
+    public OpstiDomenskiObjekat kreirajInstancu();
+    public int vratiBrojVezanihObjekata();
+    public OpstiDomenskiObjekat vratiVezaniObjekat(int i);
+    public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i);
 
     default String vratiUslovZaPromeniSlog() {
         return vratiUslovZaNadjiSlog();
@@ -30,40 +35,19 @@ public interface OpstiDomenskiObjekat {
         return 1;
     }
 
-    //Object vratiVrednostSK();
-    void postaviVrednostPK(Object pk);
-
-    void napuni(ResultSet rs) throws SQLException;
-
-    String vratiNazivPK();
-
-    void povecajBroj(ResultSet rs) throws SQLException;
-
-    void postaviPocetniBroj();
-
-    public OpstiDomenskiObjekat kreirajInstancu();
-
-    public int vratiBrojVezanihObjekata();
-
-    public OpstiDomenskiObjekat vratiVezaniObjekat(int i);
-
-    public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i);
-
-    public Object vratiVrednostSK(int i);
-
-    default OpstiDomenskiObjekat vratiSlogVezanogObjekta(int i, int j){
+    default OpstiDomenskiObjekat vratiSlogVezanogObjekta(int i, int j) {
         return null;
     }
 
-    public default String vratiUslovZaNadjiSlogove(){
+    public default String vratiUslovZaNadjiSlogove() {
         return vratiUslovZaNadjiSlog();
     }
 
-    public default void kreirajVezaniObjekat(int brojStavki, int i){
-        
+    public default void kreirajVezaniObjekat(int brojStavki, int i) {
+
     }
 
-    public default void napuni(ResultSet rs, int brojSloga, int i) throws Exception{
-        
+    public default void napuni(ResultSet rs, int brojSloga, int i) throws Exception {
+
     }
 }

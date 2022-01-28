@@ -19,23 +19,23 @@ import java.util.logging.Logger;
  *
  * @author UrosVesic
  */
-public class BrokerBazePodataka {
+public class BrokerBP {
 
     private Connection konekcija;
 
-    public void connect() throws Exception {
+    public void uspostaviKonekciju() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija();
     }
 
-    public void disconnect() throws Exception {
+    public void raskiniKonekciju() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija().close();
     }
 
-    public void commit() throws Exception {
+    public void potvrdiTransakciju() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija().commit();
     }
 
-    public void rollback() throws Exception {
+    public void ponistiTransakciju() throws Exception {
         DbFabrikaKonekcije.getInstanca().getKonekcija().rollback();
     }
 
@@ -258,7 +258,7 @@ public class BrokerBazePodataka {
                 odo.povecajBroj(rs);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(BrokerBazePodataka.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BrokerBP.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;
         }
     }

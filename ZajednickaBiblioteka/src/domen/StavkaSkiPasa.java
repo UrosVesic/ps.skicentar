@@ -19,7 +19,6 @@ import java.util.Objects;
  */
 public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
 
-    //VrednostStavke, PocetakVazenja, ZavrsetakVazenja, SifraSkiKarte
     private SkiPas skiPas;
     private long redniBroj;
     private BigDecimal vrednostStavke;
@@ -35,7 +34,8 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
 
     }
 
-    public StavkaSkiPasa(SkiPas skiPas, long redniBroj, BigDecimal vrednostStavke, Date pocetakVazenja, Date zavrsetakVazenja, SkiKarta skiKarta) {
+    public StavkaSkiPasa(SkiPas skiPas, long redniBroj, BigDecimal vrednostStavke, Date pocetakVazenja,
+            Date zavrsetakVazenja, SkiKarta skiKarta) {
         this.skiPas = skiPas;
         this.redniBroj = redniBroj;
         this.vrednostStavke = vrednostStavke;
@@ -134,11 +134,6 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
-    public void postaviVrednostPK(Object pk) {
-        redniBroj = (long) pk;
-    }
-
-    @Override
     public void napuni(ResultSet rs) throws SQLException {
         skiPas.setSifraSkiPasa(rs.getLong("sifraSkiPasa"));
         redniBroj = rs.getLong("RB");
@@ -191,17 +186,6 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
             skiKarta = (SkiKarta) vezo;
         }
 
-    }
-
-    @Override
-    public Object vratiVrednostSK(int i) {
-        if (i == 0) {
-            return skiPas.getSifraSkiPasa();
-        }
-        if (i == 1) {
-            return skiKarta.getSifraSkiKarte();
-        }
-        return null;
     }
 
     @Override

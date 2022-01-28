@@ -7,21 +7,21 @@ package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
 import java.util.List;
-import server.broker.BrokerBazePodataka;
+import server.broker.BrokerBP;
 import server.so.OpstaSo;
 
 /**
  *
  * @author draskovesic
  */
-public class PretraziStazuSO extends OpstaSo {
+public class PretraziStazeSO extends OpstaSo {
 
-    public PretraziStazuSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+    public PretraziStazeSO(BrokerBP b, OpstiDomenskiObjekat odo) {
         super(b, odo);
     }
 
     @Override
-    public void izvrsenjeSo() throws Exception {
+    public void izvrsiOperaciju() throws Exception {
         lista = b.pronadjiSlogove(odo);
     }
 

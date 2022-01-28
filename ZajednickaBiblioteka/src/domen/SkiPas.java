@@ -27,17 +27,15 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
     private List<StavkaSkiPasa> stavkeSkiPasa;
 
     public SkiPas() {
-        imePrezimeKupca = "";
         ukupnaCena = new BigDecimal(0);
-
         SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
         Date dDatum = new Date();
         datumIzdavanja = java.sql.Date.valueOf(sm.format(dDatum));
-
         stavkeSkiPasa = new ArrayList<>();
     }
 
-    public SkiPas(long sifraSkiPasa, BigDecimal ukupnaCena, String imePrezimeKupca, Date datumIzdavanja, List<StavkaSkiPasa> stavkeSkiPasa) {
+    public SkiPas(long sifraSkiPasa, BigDecimal ukupnaCena, String imePrezimeKupca, Date datumIzdavanja
+            , List<StavkaSkiPasa> stavkeSkiPasa) {
         this.sifraSkiPasa = sifraSkiPasa;
         this.ukupnaCena = ukupnaCena;
         this.imePrezimeKupca = imePrezimeKupca;
@@ -115,11 +113,6 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
-    public void postaviVrednostPK(Object pk) {
-        sifraSkiPasa = (long) pk;
-    }
-
-    @Override
     public void napuni(ResultSet rs) throws SQLException {
         sifraSkiPasa = rs.getLong("sifraSkiPasa");
         ukupnaCena = rs.getBigDecimal("ukupnaCena");
@@ -168,11 +161,6 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
         if (j < stavkeSkiPasa.size()) {
             stavkeSkiPasa.set(j, (StavkaSkiPasa) vezo);
         }
-    }
-
-    @Override
-    public Object vratiVrednostSK(int i) {
-        return stavkeSkiPasa.get(i).getRedniBroj();
     }
 
     @Override

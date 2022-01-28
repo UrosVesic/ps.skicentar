@@ -150,7 +150,7 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje liste ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje liste ski karata", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         SkiKarta[] arr = new SkiKarta[skiKarte.size()];

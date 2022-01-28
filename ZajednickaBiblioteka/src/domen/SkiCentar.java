@@ -8,7 +8,7 @@ package domen;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
 
 /**
  *
@@ -135,19 +135,10 @@ public class SkiCentar implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
-    public void postaviVrednostPK(Object pk) {
-        sifraSkiCentra = (long) pk;
-    }
-
-    @Override
     public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object vratiVrednostSK(int i) {
-        return null;
-    }
 
     @Override
     public boolean equals(Object obj) {

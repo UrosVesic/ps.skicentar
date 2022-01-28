@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import server.broker.BrokerBazePodataka;
+import server.broker.BrokerBP;
 import server.forme.KonfiguracijaBazeForma;
 import server.forme.KonfiguracijaServeraForma;
 import server.forme.ServerForm;
@@ -35,8 +35,8 @@ import server.so.impl.KreirajStazuSO;
 import server.so.impl.KreirajZicaruSO;
 import server.so.impl.PretraziSkiCentarSO;
 import server.so.impl.PretraziSkiKarteSo;
-import server.so.impl.PretraziSkiPasSo;
-import server.so.impl.PretraziStazuSO;
+import server.so.impl.PretraziSkiPasoveSO;
+import server.so.impl.PretraziStazeSO;
 import server.so.impl.UcitajListuSkiCentaraSO;
 import server.so.impl.UcitajListuSkiKarataSO;
 import server.so.impl.UcitajSkiPasSO;
@@ -54,11 +54,11 @@ import server.so.impl.ZapamtiZicaruSO;
 public class Kontroler {
 
     private static Kontroler instanca;
-    private final BrokerBazePodataka b;
+    private final BrokerBP b;
     ServerskaNit serverskaNit;
 
     private Kontroler() {
-        b = new BrokerBazePodataka();
+        b = new BrokerBP();
 
     }
 
@@ -118,7 +118,7 @@ public class Kontroler {
     }
 
     public List<OpstiDomenskiObjekat> pronadjiStaze(Staza staza) throws SQLException, Exception {
-        OpstaSo so = new PretraziStazuSO(b, staza);
+        OpstaSo so = new PretraziStazeSO(b, staza);
         so.opsteIzvrsenjeSo();
         return so.getLista();
     }
@@ -176,7 +176,7 @@ public class Kontroler {
     }
 
     public List<OpstiDomenskiObjekat> pronadjiSkiPasove(SkiPas skiPas) throws Exception {
-        OpstaSo so = new PretraziSkiPasSo(b, skiPas);
+        OpstaSo so = new PretraziSkiPasoveSO(b, skiPas);
         so.opsteIzvrsenjeSo();
         return so.getLista();
     }

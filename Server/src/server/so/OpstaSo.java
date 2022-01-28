@@ -9,7 +9,7 @@ import domen.OpstiDomenskiObjekat;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import server.broker.BrokerBazePodataka;
+import server.broker.BrokerBP;
 
 /**
  *
@@ -17,11 +17,11 @@ import server.broker.BrokerBazePodataka;
  */
 public abstract class OpstaSo {
 
-    protected BrokerBazePodataka b;
+    protected BrokerBP b;
     protected OpstiDomenskiObjekat odo;
     protected List<OpstiDomenskiObjekat> lista;
 
-    public OpstaSo(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+    public OpstaSo(BrokerBP b, OpstiDomenskiObjekat odo) {
         this.b = b;
         this.odo = odo;
         lista = new ArrayList<>();
@@ -31,18 +31,18 @@ public abstract class OpstaSo {
 
     public void opsteIzvrsenjeSo() throws Exception {
 
-        b.connect();
+        b.uspostaviKonekciju();
         try {
             //proveriPreduslove(odo);
-            izvrsenjeSo();
-            b.commit();
+            izvrsiOperaciju();
+            b.potvrdiTransakciju();
 
         } catch (Exception ex) {
-            b.rollback();
+            b.ponistiTransakciju();
             ex.printStackTrace();
             throw ex;
         } finally {
-            b.disconnect();
+            b.raskiniKonekciju();
         }
 
     }
@@ -51,7 +51,7 @@ public abstract class OpstaSo {
         return lista;
     }
 
-    protected abstract void izvrsenjeSo() throws Exception;
+    protected abstract void izvrsiOperaciju() throws Exception;
 
     protected abstract void proveriPreduslove() throws Exception;
 }

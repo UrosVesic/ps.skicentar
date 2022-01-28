@@ -7,7 +7,7 @@ package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
 import java.util.List;
-import server.broker.BrokerBazePodataka;
+import server.broker.BrokerBP;
 import server.so.OpstaSo;
 
 /**
@@ -16,14 +16,14 @@ import server.so.OpstaSo;
  */
 public class UcitajListuSkiCentaraSO extends OpstaSo {
 
-    public UcitajListuSkiCentaraSO(BrokerBazePodataka b, OpstiDomenskiObjekat odo) {
+    public UcitajListuSkiCentaraSO(BrokerBP b, OpstiDomenskiObjekat odo) {
         super(b, odo);
     }
 
     
 
     @Override
-    public void izvrsenjeSo() throws Exception {
+    public void izvrsiOperaciju() throws Exception {
         lista = b.vratiSve(odo);
     }
 

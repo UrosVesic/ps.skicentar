@@ -26,7 +26,8 @@ public class Zicara implements OpstiDomenskiObjekat, Serializable {
         
     }
 
-    public Zicara(long SifraZicare, String NazivZicare, String RadnoVreme, int Kapacitet, boolean UFunkciji, SkiCentar skiCentar) {
+    public Zicara(long SifraZicare, String NazivZicare, String RadnoVreme, int Kapacitet,
+            boolean UFunkciji, SkiCentar skiCentar) {
         this.SifraZicare = SifraZicare;
         this.nazivZicare = NazivZicare;
         this.radnoVreme = RadnoVreme;
@@ -151,24 +152,13 @@ public class Zicara implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
-    public void postaviVrednostPK(Object pk) {
-        this.setSifraZicare((long) pk);
-    }
-
-    @Override
     public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
         if (i == 0) {
             this.setSkiCentar((SkiCentar) vezo);
         }
     }
 
-    @Override
-    public Object vratiVrednostSK(int i) {
-        if (i == 0) {
-            return skiCentar.getSifraSkiCentra();
-        }
-        return null;
-    }
+    
 
     
 

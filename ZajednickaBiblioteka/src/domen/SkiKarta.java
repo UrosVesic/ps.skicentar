@@ -90,10 +90,6 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         return "cenaSkiKarte <= " + cenaSkiKarte;
     }
 
-    @Override
-    public void postaviVrednostPK(Object pk) {
-        sifraSkiKarte = (long) pk;
-    }
 
     @Override
     public void napuni(ResultSet rs) throws SQLException {
@@ -142,14 +138,6 @@ public class SkiKarta implements OpstiDomenskiObjekat, Serializable {
         if (i == 0) {
             this.skiCentar = (SkiCentar) vezo;
         }
-    }
-
-    @Override
-    public Object vratiVrednostSK(int i) {
-        if (i == 0) {
-            return skiCentar.getSifraSkiCentra();
-        }
-        return null;
     }
 
     @Override

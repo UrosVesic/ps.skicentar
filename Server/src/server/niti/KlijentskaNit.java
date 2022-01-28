@@ -143,7 +143,7 @@ public class KlijentskaNit extends Thread {
         try {
             Kontroler.getInstanca().zapamtiSkiCentar(skiCentar);
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_SKI_CENTAR);
-            odgovor.setRezultat(skiCentar);
+            //odgovor.setRezultat(skiCentar);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_SKI_CENTAR);

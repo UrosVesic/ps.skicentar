@@ -5,7 +5,6 @@
  */
 package domen;
 
-import com.sun.corba.se.pept.broker.Broker;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -137,10 +136,6 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
         return null;
     }
 
-    @Override
-    public void postaviVrednostPK(Object pk) {
-        brojStaze = (long) pk;
-    }
 
     @Override
     public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
@@ -149,13 +144,6 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
         }
     }
 
-    @Override
-    public Object vratiVrednostSK(int i) {
-        if (i == 0) {
-            return skiCentar.getSifraSkiCentra();
-        }
-        return null;
-    }
 
     @Override
     public boolean equals(Object obj) {
