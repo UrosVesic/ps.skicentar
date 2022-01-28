@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.staza.PromeniStazuForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -79,6 +81,12 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
 
     public OpstiDomenskiObjekat getOdo() {
         return odo;
+    }
+
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        PromeniStazuForma f = (PromeniStazuForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(f.getTxtNazivStaze().getText(), "Naziv staze je obavezan").throwIfInvalide();
     }
 
 }

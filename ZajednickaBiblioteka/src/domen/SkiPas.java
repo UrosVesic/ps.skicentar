@@ -34,8 +34,8 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
         stavkeSkiPasa = new ArrayList<>();
     }
 
-    public SkiPas(long sifraSkiPasa, BigDecimal ukupnaCena, String imePrezimeKupca, Date datumIzdavanja
-            , List<StavkaSkiPasa> stavkeSkiPasa) {
+    public SkiPas(long sifraSkiPasa, BigDecimal ukupnaCena, String imePrezimeKupca, Date datumIzdavanja,
+             List<StavkaSkiPasa> stavkeSkiPasa) {
         this.sifraSkiPasa = sifraSkiPasa;
         this.ukupnaCena = ukupnaCena;
         this.imePrezimeKupca = imePrezimeKupca;
@@ -229,7 +229,5 @@ public class SkiPas implements OpstiDomenskiObjekat, Serializable {
         }
         return true;
     }
-    
-    
 
 }

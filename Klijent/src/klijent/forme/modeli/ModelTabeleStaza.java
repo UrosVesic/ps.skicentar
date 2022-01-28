@@ -91,20 +91,7 @@ public class ModelTabeleStaza extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex > 0) {
-            return true;
-        }
-        return false;
-    }
-
     public void removeAll() {
-        /*for (Staza staza : staze) {
-            int i = 0;
-            staze.remove(i);
-            i++;
-        }*/
         staze = new ArrayList<>();
         fireTableDataChanged();
     }
@@ -116,7 +103,6 @@ public class ModelTabeleStaza extends AbstractTableModel {
                 if (staza.getTipStaze().equals(staza1.getTipStaze())) {
                     staze.add(staza);
                 }
-                //staza1 = staza;
                 fireTableDataChanged();
                 return;
             }

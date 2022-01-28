@@ -8,7 +8,6 @@ package klijent.kontrolerKi;
 import domen.OpstiDomenskiObjekat;
 import domen.Staza;
 import java.util.ArrayList;
-import java.util.List;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStaza;
 import klijent.forme.staza.PronadjiStazuForma;

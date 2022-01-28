@@ -22,14 +22,13 @@ public class Posiljalac {
         this.socket = socket;
     }
 
-    public void posalji(Object object) throws Exception {
+    public void posalji(Object object)  {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             out.writeObject(object);
             out.flush();
         } catch (IOException ex) {
             ex.printStackTrace();
-            throw new Exception("Greska prilikom slanja objekta: " + ex.getMessage());
         }
 
     }

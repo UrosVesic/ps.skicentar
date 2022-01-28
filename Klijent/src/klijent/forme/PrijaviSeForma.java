@@ -43,7 +43,8 @@ public class PrijaviSeForma extends OpstaEkranskaForma {
         jmRegistracija = new javax.swing.JMenu();
         jmiRegistruj = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Prijavi se");
 
         jLabel1.setText("E-mail:");
 
@@ -63,6 +64,11 @@ public class PrijaviSeForma extends OpstaEkranskaForma {
         jmRegistracija.setText(" Registracija");
 
         jmiRegistruj.setText(" Registruj novog korisnika");
+        jmiRegistruj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRegistrujActionPerformed(evt);
+            }
+        });
         jmRegistracija.add(jmiRegistruj);
 
         jMenuBar1.add(jmRegistracija);
@@ -113,6 +119,13 @@ public class PrijaviSeForma extends OpstaEkranskaForma {
             new GlavnaForma().setVisible(true);
         }
     }//GEN-LAST:event_btnPrijaviSeActionPerformed
+
+    private void jmiRegistrujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRegistrujActionPerformed
+        // TODO add your handling code here:
+        RegistrujSeForma f = new RegistrujSeForma();
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+    }//GEN-LAST:event_jmiRegistrujActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

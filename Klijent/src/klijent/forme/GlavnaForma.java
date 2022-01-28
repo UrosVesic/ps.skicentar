@@ -60,7 +60,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         jmiKreirajSkiKartu = new javax.swing.JMenuItem();
         jmiPretraziSkiKarte = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Prijavljeni korisnik:");
 
@@ -108,7 +108,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
         jmStaza.setText("Staza");
 
-        jmiKreirajNovuStazu.setText("Kreiraj novi");
+        jmiKreirajNovuStazu.setText("Kreiraj novu");
         jmiKreirajNovuStazu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiKreirajNovuStazuActionPerformed(evt);

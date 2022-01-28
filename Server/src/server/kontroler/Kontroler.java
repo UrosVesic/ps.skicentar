@@ -40,6 +40,7 @@ import server.so.impl.PretraziSkiKarteSo;
 import server.so.impl.PretraziSkiPasoveSO;
 import server.so.impl.PretraziStazeSO;
 import server.so.impl.PrijaviSeSO;
+import server.so.impl.RegistujSeSO;
 import server.so.impl.UcitajListuSkiCentaraSO;
 import server.so.impl.UcitajListuSkiKarataSO;
 import server.so.impl.UcitajSkiPasSO;
@@ -245,6 +246,11 @@ public class Kontroler {
     public void izbrisiKorisnikaIzTabele(Korisnik trenutKorisnik) {
         ModelTabeleKorisnik model = (ModelTabeleKorisnik) serverForm.getTblKorisnici().getModel();
         model.obrisi(trenutKorisnik);
+    }
+
+    public void registrujSe(Korisnik korisnik) throws Exception {
+        OpstaSo so = new RegistujSeSO(b, korisnik);
+        so.opsteIzvrsenjeSo();
     }
 
 }

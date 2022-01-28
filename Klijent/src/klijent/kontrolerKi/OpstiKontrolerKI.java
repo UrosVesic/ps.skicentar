@@ -32,14 +32,42 @@ public abstract class OpstiKontrolerKI {
     OpstaEkranskaForma oef;
     List<OpstiDomenskiObjekat> lista = new ArrayList<>();
 
+    public boolean SORegistrujSe() {
+        odo = oef.kreirajObjekat();
+        try {
+            validirajRegistraciju();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom registracije:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        KonvertujGrafickiObjekatUDomenskiObjekat();
+        Zahtev zahtev = new Zahtev(Operacije.REGISTRUJ_SE, odo);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                JOptionPane.showMessageDialog(oef, "Uspesna registracija");
+                oef.dispose();
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(oef, "Neuspesna registracija", "Greska", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Neuspesna registracija", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
     public boolean SOPrijaviSe() {
         odo = oef.kreirajObjekat();
-//        try {
-//            validirajPamcenje();
-//        } catch (ValidationException ex) {
-//            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja staze:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
+        try {
+            validirajPrijavu();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom prijave:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, odo);
         Odgovor odgovor;
@@ -48,7 +76,7 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 odo = (Korisnik) odgovor.getRezultat();
                 Komunikacija.getInstanca().setTrenutniKorisnik((Korisnik) odo);
-                JOptionPane.showMessageDialog(oef, "Uspesno prijavljivanje");
+                oef.dispose();
                 return true;
             } else {
                 JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -423,6 +451,12 @@ public abstract class OpstiKontrolerKI {
 
     public void SOZapamitSkiPas() {
         odo = oef.kreirajObjekat();
+        try {
+            validirajPamcenje();
+        } catch (ValidationException ex) {
+            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja ski pasa:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         KonvertujGrafickiObjekatUDomenskiObjekat();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_PAS, odo);
         Odgovor odgovor;
@@ -482,10 +516,18 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void validirajPamcenje() throws ValidationException {
-
+        throw new UnsupportedOperationException();
     }
 
     public void validirajPretragu() throws ValidationException {
+        throw new UnsupportedOperationException();
+    }
 
+    public void validirajRegistraciju() throws ValidationException {
+        throw new UnsupportedOperationException();
+    }
+
+    public void validirajPrijavu() throws ValidationException {
+        throw new UnsupportedOperationException();
     }
 }

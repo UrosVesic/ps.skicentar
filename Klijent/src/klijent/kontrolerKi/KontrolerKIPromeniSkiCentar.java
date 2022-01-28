@@ -7,6 +7,7 @@ package klijent.kontrolerKi;
 
 import domen.SkiCentar;
 import klijent.forme.OpstaEkranskaForma;
+import klijent.forme.skiCentar.KreirajSkiCentarForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.validator.ValidationException;
 import klijent.validator.Validator;
@@ -79,6 +80,16 @@ public class KontrolerKIPromeniSkiCentar extends OpstiKontrolerKI {
                 .validateValueIsNumber(pscf.getTxtSifraSkiCentra().getText(), "Sifra ski centra mora biti broj")
                 .throwIfInvalide();
 
+    }
+
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        PromeniSkiCentarForma pscf = (PromeniSkiCentarForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(pscf.getTxtSifraSkiCentra().getText(), "Morate prvo kreirati ski centar")
+                .validateNotNullOrEmpty(pscf.getTxtNazivPlanine().getText(), "Naziv planine je obavezan")
+                .validateNotNullOrEmpty(pscf.getTxtNazivSkiCentra().getText(), "Naziv ski centra je obavezan")
+                .validateNotNullOrEmpty(pscf.getTxtRadnoVreme().getText(), "Radno vreme je obavezno")
+                .validirajFormatRadnogVremena(pscf.getTxtRadnoVreme().getText(), "Format radnog vremena mora biti HH(:mm)-HH(:mm) ").throwIfInvalide();
     }
 
 }

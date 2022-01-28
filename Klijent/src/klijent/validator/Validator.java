@@ -111,4 +111,11 @@ public class Validator {
         return this;
     }
 
+    public Validator validirajFormatMejla(String email, String poruka) {
+        if(!email.contains("@")){
+            this.validationErros.add(poruka);
+        }
+        return this;
+    }
+
 }

@@ -289,4 +289,18 @@ public class BrokerBP {
         }
         return lista;
     }
+    public void kreirajSlog1(OpstiDomenskiObjekat odo) throws Exception {
+        String upit;
+        try {
+            upit = "INSERT INTO " + odo.vratiImeKlase()
+                    + " VALUES (" + odo.vratiVrednostiAtributa() + ")";
+            konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
+            Statement statement = konekcija.createStatement();
+            statement.executeUpdate(upit);
+            statement.close();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+    }
+    
 }

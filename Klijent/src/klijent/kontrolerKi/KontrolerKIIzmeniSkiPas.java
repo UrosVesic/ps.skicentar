@@ -25,6 +25,9 @@ import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
+import klijent.forme.skiPas.PronadjiSkiPasoveForma;
+import klijent.validator.ValidationException;
+import klijent.validator.Validator;
 
 /**
  *
@@ -57,9 +60,7 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         }
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         try {
-            if (!"".equals(kspf.getTxtDatumIzdavanja().getText())) {
-                skiPas.setDatumIzdavanja(sdf.parse(kspf.getTxtDatumIzdavanja().getText()));
-            }
+            skiPas.setDatumIzdavanja(sdf.parse(kspf.getTxtDatumIzdavanja().getText()));
         } catch (ParseException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(oef, "Datum mora biti u formatu dd.MM.gggg");
@@ -194,4 +195,12 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         kspf.getBtnZapamtiSkiPas().setEnabled(false);
     }
 
+    @Override
+    public void validirajPamcenje() throws ValidationException {
+        IzmeniSkiPasForma ispf = (IzmeniSkiPasForma) oef;
+        Validator.startValidation().validateNotNullOrEmpty(ispf.getTxtImePrezimeKupca().getText(), "Ime i prezime kupca je obavezno")
+                .validateNotNullOrEmpty(ispf.getTxtDatumIzdavanja().getText(), "Datum je obavezan")
+                .validateValueIsDate(ispf.getTxtDatumIzdavanja().getText(), "dd.MM.yyyy", "Datum mora biti u formatu dd.MM.gggg")
+                .throwIfInvalide();
+    }
 }

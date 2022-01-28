@@ -28,9 +28,10 @@ public class Primalac {
         try {
             in = new ObjectInputStream(socket.getInputStream());
             return in.readObject();
-        } catch (Exception ex) {
-            //ex.printStackTrace();
-            throw new Exception("Greska prilikom prijema odgovora: " + ex.getMessage());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            socket.close();
+            throw ex;
 
         }
 

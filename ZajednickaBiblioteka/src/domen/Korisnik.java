@@ -88,7 +88,7 @@ public class Korisnik implements Serializable, OpstiDomenskiObjekat {
 
     @Override
     public String vratiVrednostiAtributa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "'"+email + "', '" + sifra + "', '" + ime + "', '" + prezime+"'";
     }
 
     @Override

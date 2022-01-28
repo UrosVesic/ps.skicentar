@@ -57,7 +57,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiKreirajNovuStazu">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Kreiraj novi"/>
+                <Property name="text" type="java.lang.String" value="Kreiraj novu"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiKreirajNovuStazuActionPerformed"/>
@@ -115,7 +115,7 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
