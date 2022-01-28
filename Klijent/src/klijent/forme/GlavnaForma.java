@@ -16,6 +16,7 @@ import klijent.forme.skiKarta.PretraziSkiKarteForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.forme.skiPas.PronadjiSkiPasoveForma;
 import klijent.forme.zicara.KreirajZicaruForma;
+import klijent.komunikacija.Komunikacija;
 
 /**
  *
@@ -29,6 +30,7 @@ public class GlavnaForma extends javax.swing.JFrame {
     public GlavnaForma() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        txtKorisnik.setText(Komunikacija.getInstanca().getTrenutniKorisnik().toString());
     }
 
     /**
@@ -40,6 +42,8 @@ public class GlavnaForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        txtKorisnik = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmSkiPas = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -57,6 +61,10 @@ public class GlavnaForma extends javax.swing.JFrame {
         jmiPretraziSkiKarte = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Prijavljeni korisnik:");
+
+        txtKorisnik.setEditable(false);
 
         jmSkiPas.setText("Ski pas");
 
@@ -156,11 +164,21 @@ public class GlavnaForma extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtKorisnik, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(867, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtKorisnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(603, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,7 +221,9 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        new KreirajSkiPasForma().setVisible(true);
+        KreirajSkiPasForma f = new KreirajSkiPasForma();
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jmiIzmeniSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiPasActionPerformed
@@ -217,6 +237,7 @@ public class GlavnaForma extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmSkiCentar;
@@ -232,5 +253,6 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiKreirajSkiKartu;
     private javax.swing.JMenuItem jmiPretraziSkiKarte;
     private javax.swing.JMenuItem jmiPronadjiIzmeniStazu;
+    private javax.swing.JTextField txtKorisnik;
     // End of variables declaration//GEN-END:variables
 }

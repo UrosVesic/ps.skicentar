@@ -5,6 +5,7 @@
  */
 package server.niti;
 
+import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.SkiKarta;
@@ -31,9 +32,16 @@ import server.kontroler.Kontroler;
 public class KlijentskaNit extends Thread {
 
     Socket socket;
+    ServerskaNit serverskaNit;
+    Korisnik trenutKorisnik;
 
-    public KlijentskaNit(Socket socket) {
+    public KlijentskaNit(Socket socket, ServerskaNit serverskaNit) {
         this.socket = socket;
+        this.serverskaNit = serverskaNit;
+    }
+
+    public Korisnik getTrenutKorisnik() {
+        return trenutKorisnik;
     }
 
     @Override
@@ -43,10 +51,16 @@ public class KlijentskaNit extends Thread {
                 Zahtev zahtev = (Zahtev) new Primalac(socket).primi();
                 obradiZahtev(zahtev);
             } catch (Exception ex) {
-                //ex.printStackTrace();
-                //System.out.println(ex.getMessage());
+                try {
+                    socket.close();
+                    //ex.printStackTrace();
+                    //System.out.println(ex.getMessage());
+                } catch (IOException ex1) {
+                    Logger.getLogger(KlijentskaNit.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
         }
+        serverskaNit.obavestiOOdjavljivanju(this);
     }
 
     void zaustavi() {
@@ -113,6 +127,9 @@ public class KlijentskaNit extends Thread {
                 break;
             case Operacije.UCITAJ_STAZU:
                 odgovor = ucitajStazu(zahtev);
+                break;
+            case Operacije.PRIJAVI_SE:
+                odgovor = prijaviSe(zahtev);
                 break;
             default:
                 break;
@@ -402,6 +419,23 @@ public class KlijentskaNit extends Thread {
             Kontroler.getInstanca().ucitajStazu(staza);
             odgovor.setIzvrsenaOperacija(Operacije.UCITAJ_SKI_PAS);
             odgovor.setRezultat(staza);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor prijaviSe(Zahtev zahtev) {
+        Korisnik korisnik = (Korisnik) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().prijaviSe(korisnik);
+            odgovor.setIzvrsenaOperacija(Operacije.PRIJAVI_SE);
+            odgovor.setRezultat(korisnik);
+            trenutKorisnik = korisnik;
+            Kontroler.getInstanca().dodajKorisnikaUTabelu(trenutKorisnik);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);

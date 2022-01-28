@@ -146,13 +146,11 @@ public class BrokerBP {
                 }
             } else {
                 throw new Exception("Slog nije pronadjen\n");
-                //return false;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw ex;
         }
-        //return true;
     }
 
     public boolean daLiPostojiSlog(OpstiDomenskiObjekat odo) throws SQLException, Exception {

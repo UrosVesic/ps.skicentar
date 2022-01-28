@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import server.kontroler.Kontroler;
 import server.niti.ServerskaNit;
 
@@ -26,6 +27,8 @@ public class ServerForm extends javax.swing.JFrame {
     public ServerForm() {
         initComponents();
         btnZaustavi.setEnabled(false);
+        Kontroler.getInstanca().setServerForm(this);
+        Kontroler.getInstanca().pripremiTabelu();
     }
 
     /**
@@ -41,6 +44,8 @@ public class ServerForm extends javax.swing.JFrame {
         lblStatusServera = new javax.swing.JLabel();
         btnZaustavi = new javax.swing.JButton();
         btnPokreni = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblKorisnici = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmiKonfBaze = new javax.swing.JMenuItem();
@@ -70,6 +75,19 @@ public class ServerForm extends javax.swing.JFrame {
             }
         });
 
+        tblKorisnici.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblKorisnici);
+
         jMenu1.setText("Konfiguracija");
 
         jmiKonfBaze.setText("Konfiguracija baze");
@@ -98,27 +116,35 @@ public class ServerForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(btnPokreni)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnZaustavi)))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblStatusServera, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(btnPokreni)
-                .addGap(39, 39, 39)
-                .addComponent(btnZaustavi))
+                .addComponent(lblStatusServera, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblStatusServera, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPokreni, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnZaustavi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,13 +186,12 @@ public class ServerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem jmiKonfBaze;
     private javax.swing.JMenuItem jmiKonfServera;
     private javax.swing.JLabel lblStatusServera;
+    private javax.swing.JTable tblKorisnici;
     // End of variables declaration//GEN-END:variables
-
-   
-    
 
     public javax.swing.JButton getBtnZaustavi() {
         return btnZaustavi;
@@ -179,6 +204,9 @@ public class ServerForm extends javax.swing.JFrame {
     public JButton getBtnPokreni() {
         return btnPokreni;
     }
-    
-    
+
+    public JTable getTblKorisnici() {
+        return tblKorisnici;
+    }
+
 }

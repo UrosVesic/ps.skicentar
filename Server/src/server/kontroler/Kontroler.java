@@ -5,6 +5,7 @@
  */
 package server.kontroler;
 
+import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.SkiKarta;
@@ -26,6 +27,7 @@ import server.forme.KonfiguracijaBazeForma;
 import server.forme.KonfiguracijaServeraForma;
 import server.forme.ServerForm;
 import server.konstante.ServerskeKonstante;
+import server.modeli.ModelTabeleKorisnik;
 import server.niti.ServerskaNit;
 import server.so.OpstaSo;
 import server.so.impl.KreirajSkiCentarSO;
@@ -37,6 +39,7 @@ import server.so.impl.PretraziSkiCentarSO;
 import server.so.impl.PretraziSkiKarteSo;
 import server.so.impl.PretraziSkiPasoveSO;
 import server.so.impl.PretraziStazeSO;
+import server.so.impl.PrijaviSeSO;
 import server.so.impl.UcitajListuSkiCentaraSO;
 import server.so.impl.UcitajListuSkiKarataSO;
 import server.so.impl.UcitajSkiPasSO;
@@ -55,7 +58,8 @@ public class Kontroler {
 
     private static Kontroler instanca;
     private final BrokerBP b;
-    ServerskaNit serverskaNit;
+    private ServerskaNit serverskaNit;
+    private ServerForm serverForm;
 
     private Kontroler() {
         b = new BrokerBP();
@@ -67,6 +71,10 @@ public class Kontroler {
             instanca = new Kontroler();
         }
         return instanca;
+    }
+
+    public void setServerForm(ServerForm serverForm) {
+        this.serverForm = serverForm;
     }
 
     public void pokreniServer(ServerForm serverskaForma) throws IOException, Exception {
@@ -218,6 +226,25 @@ public class Kontroler {
     public void ucitajStazu(Staza staza) throws Exception {
         OpstaSo so = new UcitajStazuSO(b, staza);
         so.opsteIzvrsenjeSo();
+    }
+
+    public void prijaviSe(Korisnik korisnik) throws Exception {
+        OpstaSo so = new PrijaviSeSO(b, korisnik);
+        so.opsteIzvrsenjeSo();
+    }
+
+    public void dodajKorisnikaUTabelu(Korisnik korisnik) {
+        ModelTabeleKorisnik model = (ModelTabeleKorisnik) serverForm.getTblKorisnici().getModel();
+        model.dodaj(korisnik);
+    }
+
+    public void pripremiTabelu() {
+        serverForm.getTblKorisnici().setModel(new ModelTabeleKorisnik());
+    }
+
+    public void izbrisiKorisnikaIzTabele(Korisnik trenutKorisnik) {
+        ModelTabeleKorisnik model = (ModelTabeleKorisnik) serverForm.getTblKorisnici().getModel();
+        model.obrisi(trenutKorisnik);
     }
 
 }

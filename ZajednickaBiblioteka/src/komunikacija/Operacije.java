@@ -29,5 +29,6 @@ public class Operacije {
     public static final int PRETRAZI_SKI_CENTAR = 16;
     public static final int PRETRAZI_SKI_PAS = 17;
     public static final int UCITAJ_STAZU = 18;
+    public static final int PRIJAVI_SE = 19;
 
 }

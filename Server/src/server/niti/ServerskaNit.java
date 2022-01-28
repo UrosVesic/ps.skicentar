@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.kontroler.Kontroler;
 
 /**
  *
  * @author UrosVesic
  */
-public class ServerskaNit extends Thread{
-    
+public class ServerskaNit extends Thread {
+
     ServerSocket serverSocket;
     List<KlijentskaNit> klijentskeNiti;
 
@@ -30,11 +31,11 @@ public class ServerskaNit extends Thread{
 
     @Override
     public void run() {
-        while(!serverSocket.isClosed()){
+        while (!serverSocket.isClosed()) {
             try {
                 Socket socket = serverSocket.accept();
                 System.out.println("Klijent se povezao");
-                KlijentskaNit k = new KlijentskaNit(socket);
+                KlijentskaNit k = new KlijentskaNit(socket, this);
                 k.start();
                 klijentskeNiti.add(k);
             } catch (IOException ex) {
@@ -49,10 +50,22 @@ public class ServerskaNit extends Thread{
             klijentskaNit.zaustavi();
         }
     }
-    
-    
-    public void zaustavi() throws IOException{
+
+    public void zaustavi() throws IOException {
         serverSocket.close();
     }
-    
+
+    void obavestiOOdjavljivanju() {
+
+    }
+
+    void obavestiOOdjavljivanju(KlijentskaNit klijentskaNit) {
+        for (KlijentskaNit klijentskaNit1 : klijentskeNiti) {
+            if (klijentskaNit.equals(klijentskaNit1)) {
+                klijentskeNiti.remove(klijentskaNit1);
+                Kontroler.getInstanca().izbrisiKorisnikaIzTabele(klijentskaNit.getTrenutKorisnik());
+            }
+        }
+    }
+
 }

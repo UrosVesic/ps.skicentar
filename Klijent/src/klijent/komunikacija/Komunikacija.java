@@ -5,6 +5,7 @@
  */
 package klijent.komunikacija;
 
+import domen.Korisnik;
 import java.net.Socket;
 import komunikacija.Odgovor;
 import komunikacija.Posiljalac;
@@ -19,9 +20,18 @@ public class Komunikacija {
 
     static Komunikacija instanca;
     Socket socket;
+    Korisnik trenutniKorisnik;
 
     private Komunikacija() {
 
+    }
+
+    public void setTrenutniKorisnik(Korisnik trenutniKorisnik) {
+        this.trenutniKorisnik = trenutniKorisnik;
+    }
+
+    public Korisnik getTrenutniKorisnik() {
+        return trenutniKorisnik;
     }
 
     public void setSocket(Socket socket) {

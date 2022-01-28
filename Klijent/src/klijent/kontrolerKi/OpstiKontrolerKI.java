@@ -5,6 +5,7 @@
  */
 package klijent.kontrolerKi;
 
+import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
 import domen.SkiKarta;
@@ -31,6 +32,35 @@ public abstract class OpstiKontrolerKI {
     OpstaEkranskaForma oef;
     List<OpstiDomenskiObjekat> lista = new ArrayList<>();
 
+    public boolean SOPrijaviSe() {
+        odo = oef.kreirajObjekat();
+//        try {
+//            validirajPamcenje();
+//        } catch (ValidationException ex) {
+//            JOptionPane.showMessageDialog(oef, "Greska prilikom pamcenja staze:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+        KonvertujGrafickiObjekatUDomenskiObjekat();
+        Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, odo);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                odo = (Korisnik) odgovor.getRezultat();
+                Komunikacija.getInstanca().setTrenutniKorisnik((Korisnik) odo);
+                JOptionPane.showMessageDialog(oef, "Uspesno prijavljivanje");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje", "Greska", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
     public void SOUcitajListuSkiCentara() {
         Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_CENTARA, lista);
         Odgovor odgovor;
@@ -39,10 +69,10 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -54,10 +84,10 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -72,10 +102,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je ucitao ski pas");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -90,10 +120,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je ucitao stazu ");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -110,10 +140,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao stazu");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira stazu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira stazu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira stazu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira stazu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -137,11 +167,11 @@ public abstract class OpstiKontrolerKI {
                 onemoguciPamcenje();
                 isprazniGrafickiObjekat();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -165,10 +195,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao stazu po zadatom kriterijumu");
 
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje stazu po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje stazu po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje stazu po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje stazu po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -185,10 +215,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao zicaru");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira zicaru","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira zicaru", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira zicaru","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira zicaru", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -212,10 +242,10 @@ public abstract class OpstiKontrolerKI {
                 onemoguciPamcenje();
                 isprazniGrafickiObjekat();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -287,11 +317,11 @@ public abstract class OpstiKontrolerKI {
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski kartu po zadatom kriterijumu");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski kartu po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski kartu po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski kartu po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski kartu po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -308,10 +338,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao ski centar");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski centar","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski centar", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski centar","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski centar", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -336,10 +366,10 @@ public abstract class OpstiKontrolerKI {
                 onemoguciPamcenje();
 
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -363,11 +393,11 @@ public abstract class OpstiKontrolerKI {
                 omoguciPamcenje();
 
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski centar po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -384,10 +414,10 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je kreirao ski pas");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski pas","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski pas", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski pas","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da kreira ski pas", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -405,10 +435,10 @@ public abstract class OpstiKontrolerKI {
                 isprazniGrafickiObjekat();
                 //onemoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -426,11 +456,11 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pas po zadatom kriterijumu");
                 omoguciPamcenje();
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu","Greska",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje ski pas po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
