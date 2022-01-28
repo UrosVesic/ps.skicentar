@@ -368,7 +368,7 @@ public class KlijentskaNit extends Thread {
         SkiPas skiPas = (SkiPas) zahtev.getParametar();
         Odgovor odgovor = new Odgovor();
         try {
-            lista = Kontroler.getInstanca().pronadjiSkiPas(skiPas);
+            lista = Kontroler.getInstanca().pronadjiSkiPasove(skiPas);
             odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_SKI_PAS);
             odgovor.setRezultat(lista);
             odgovor.setUspesno(true);

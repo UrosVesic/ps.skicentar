@@ -17,7 +17,7 @@ import server.broker.BrokerBazePodataka;
  */
 public abstract class OpstaSo {
 
-    public BrokerBazePodataka b;
+    protected BrokerBazePodataka b;
     protected OpstiDomenskiObjekat odo;
     protected List<OpstiDomenskiObjekat> lista;
 
@@ -51,7 +51,7 @@ public abstract class OpstaSo {
         return lista;
     }
 
-    public abstract void izvrsenjeSo() throws Exception;
+    protected abstract void izvrsenjeSo() throws Exception;
 
-    public abstract void proveriPreduslove(OpstiDomenskiObjekat odo) throws Exception;
+    protected abstract void proveriPreduslove() throws Exception;
 }

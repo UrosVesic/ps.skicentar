@@ -28,7 +28,7 @@ public class UcitajListuSkiCentaraSO extends OpstaSo {
     }
 
     @Override
-    public void proveriPreduslove(OpstiDomenskiObjekat odo) throws Exception {
+    public void proveriPreduslove() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

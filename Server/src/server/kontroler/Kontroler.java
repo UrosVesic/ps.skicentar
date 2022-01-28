@@ -175,7 +175,7 @@ public class Kontroler {
         so.opsteIzvrsenjeSo();
     }
 
-    public List<OpstiDomenskiObjekat> pronadjiSkiPas(SkiPas skiPas) throws Exception {
+    public List<OpstiDomenskiObjekat> pronadjiSkiPasove(SkiPas skiPas) throws Exception {
         OpstaSo so = new PretraziSkiPasSo(b, skiPas);
         so.opsteIzvrsenjeSo();
         return so.getLista();
