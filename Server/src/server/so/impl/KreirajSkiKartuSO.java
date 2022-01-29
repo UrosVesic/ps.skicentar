@@ -6,8 +6,12 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
+import domen.SkiCentar;
+import domen.SkiKarta;
 import server.broker.BrokerBP;
 import server.so.OpstaSo;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *
@@ -19,8 +23,6 @@ public class KreirajSkiKartuSO extends OpstaSo {
         super(b, odo);
     }
 
-    
-
     @Override
     public void izvrsiOperaciju() throws Exception {
         b.kreirajSlog(odo);
@@ -28,7 +30,17 @@ public class KreirajSkiKartuSO extends OpstaSo {
 
     @Override
     public void proveriPreduslove() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (odo == null) {
+            throw new ValidationException("Vrednost objekta za kreiranje null");
+        }
+        if (!(odo instanceof SkiKarta)) {
+            throw new ValidationException("Pogresan tip domenskog objekta");
+        }
+        SkiKarta skiKarta = (SkiKarta) odo;
+        Validator.startValidation().validateNotNull(skiKarta.getCenaSkiKarte(), "Null cena ski karte")
+                .validateNotNull(skiKarta.getSkiCentar(), "Null ski centar")
+                .validateNotNull(skiKarta.getVrstaSkiKarte(), "Null vrsta ski karte")
+                .throwIfInvalide();
     }
 
 }

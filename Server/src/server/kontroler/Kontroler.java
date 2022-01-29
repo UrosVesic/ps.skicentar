@@ -16,10 +16,8 @@ import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import server.broker.BrokerBP;
@@ -36,7 +34,7 @@ import server.so.impl.KreirajSkiPasSO;
 import server.so.impl.KreirajStazuSO;
 import server.so.impl.KreirajZicaruSO;
 import server.so.impl.PretraziSkiCentarSO;
-import server.so.impl.PretraziSkiKarteSO;
+import server.so.impl.PretraziSkiKarteSo;
 import server.so.impl.PretraziSkiPasoveSO;
 import server.so.impl.PretraziStazeSO;
 import server.so.impl.PrijaviSeSO;
@@ -163,7 +161,7 @@ public class Kontroler {
     }
 
     public List<OpstiDomenskiObjekat> pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
-        OpstaSo so = new PretraziSkiKarteSO(b, skiKarta);
+        OpstaSo so = new PretraziSkiKarteSo(b, skiKarta);
         so.opsteIzvrsenjeSo();
         return so.getLista();
     }

@@ -6,8 +6,11 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
+import domen.Staza;
 import server.broker.BrokerBP;
 import server.so.OpstaSo;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *
@@ -19,8 +22,6 @@ public class ZapamtiStazuSO extends OpstaSo {
         super(b, odo);
     }
 
-    
-
     @Override
     public void izvrsiOperaciju() throws Exception {
         b.promeniSlog(odo);
@@ -28,7 +29,18 @@ public class ZapamtiStazuSO extends OpstaSo {
 
     @Override
     public void proveriPreduslove() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (odo == null) {
+            throw new ValidationException("Vrednost objekta za kreiranje null");
+        }
+        if (!(odo instanceof Staza)) {
+            throw new ValidationException("Pogresan tip domenskog objekta");
+        }
+        Staza staza = (Staza) odo;
+        Validator.startValidation().validateNotNull(staza.getNazivStaze(), "Null naziv staze")
+                .validateNotNull(staza.getSkiCentar(), "Null ski centar")
+                .validateNotNull(staza.getTipStaze(), "Null tip staze")
+                .validateGreaterThanZero(staza.getBrojStaze(), "Broj staze manji od 1")
+                .throwIfInvalide();
     }
 
 }

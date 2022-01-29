@@ -6,20 +6,21 @@
 package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
+import domen.SkiPas;
 import server.broker.BrokerBP;
 import server.so.OpstaSo;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *
  * @author UrosVesic
  */
-public class ZapamtiSkiPasSo extends OpstaSo{
+public class ZapamtiSkiPasSo extends OpstaSo {
 
     public ZapamtiSkiPasSo(BrokerBP b, OpstiDomenskiObjekat odo) {
         super(b, odo);
     }
-
-    
 
     @Override
     public void izvrsiOperaciju() throws Exception {
@@ -28,7 +29,18 @@ public class ZapamtiSkiPasSo extends OpstaSo{
 
     @Override
     public void proveriPreduslove() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (odo == null) {
+            throw new ValidationException("Vrednost objekta za kreiranje null");
+        }
+        if (!(odo instanceof SkiPas)) {
+            throw new ValidationException("Pogresan tip domenskog objekta");
+        }
+        SkiPas skiPas = (SkiPas) odo;
+        Validator.startValidation().validateNotNull(skiPas.getDatumIzdavanja(), "Null datum izdavanja")
+                .validateNotNull(skiPas.getImePrezimeKupca(), "Null ime i prezime kupca")
+                .validateNotNull(skiPas.getUkupnaCena(), "Null ukupna cena")
+                .validateGreaterThanZero(skiPas.getSifraSkiPasa(), "Sifra ski pasa manja od 1")
+                .throwIfInvalide();
     }
-    
+
 }

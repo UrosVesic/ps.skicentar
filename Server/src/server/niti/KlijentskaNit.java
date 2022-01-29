@@ -183,7 +183,7 @@ public class KlijentskaNit extends Thread {
     }
 
     private Odgovor ucitajListuSkiCentara(Zahtev zahtev) {
-        List<OpstiDomenskiObjekat> lista;//(List<OpstiDomenskiObjekat>) zahtev.getParametar();
+        List<OpstiDomenskiObjekat> lista;
         Odgovor odgovor = new Odgovor();
 
         try {
@@ -205,7 +205,6 @@ public class KlijentskaNit extends Thread {
         try {
             Kontroler.getInstanca().zapamtiStazu(staza);
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_STAZU);
-            odgovor.setRezultat(staza);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
@@ -254,7 +253,6 @@ public class KlijentskaNit extends Thread {
         try {
             Kontroler.getInstanca().zapamtiZicaru(zicara);
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_ZICARU);
-            odgovor.setRezultat(zicara);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
@@ -286,7 +284,6 @@ public class KlijentskaNit extends Thread {
         try {
             Kontroler.getInstanca().zapamtiSkiKartu(skiKarta);
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_SKI_KARTU);
-            odgovor.setRezultat(skiKarta);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
@@ -327,15 +324,11 @@ public class KlijentskaNit extends Thread {
     }
 
     private Odgovor ucitajListuSkiKarata(Zahtev zahtev) {
-        List<OpstiDomenskiObjekat> lista;// = new ArrayList<>();
-        //List<SkiKarta> skiKarte = new ArrayList<>();
+        List<OpstiDomenskiObjekat> lista;
         Odgovor odgovor = new Odgovor();
 
         try {
             lista = Kontroler.getInstanca().ucitajListuSkiKarata();
-            /*for (OpstiDomenskiObjekat opstiDomenskiObjekat : skiKarteOdo) {
-                skiKarte.add((SkiKarta) opstiDomenskiObjekat);
-            }*/
             odgovor.setIzvrsenaOperacija(Operacije.UCITAJ_LISTU_SKI_KARATA);
             odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
@@ -353,7 +346,6 @@ public class KlijentskaNit extends Thread {
         try {
             Kontroler.getInstanca().zapamtiSkiPas(skiPas);
             odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_SKI_PAS);
-            odgovor.setRezultat(skiPas);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);

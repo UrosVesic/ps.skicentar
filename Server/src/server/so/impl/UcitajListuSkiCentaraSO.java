@@ -29,7 +29,6 @@ public class UcitajListuSkiCentaraSO extends OpstaSo {
 
     @Override
     public void proveriPreduslove() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
