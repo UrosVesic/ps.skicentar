@@ -13,8 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.zicara.KreirajZicaruForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

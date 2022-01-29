@@ -8,8 +8,8 @@ package klijent.kontrolerKi;
 import domen.SkiCentar;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

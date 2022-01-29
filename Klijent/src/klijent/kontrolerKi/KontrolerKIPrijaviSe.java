@@ -8,8 +8,8 @@ package klijent.kontrolerKi;
 import domen.Korisnik;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.PrijaviSeForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

@@ -26,8 +26,8 @@ import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
 import klijent.forme.skiPas.PronadjiSkiPasoveForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

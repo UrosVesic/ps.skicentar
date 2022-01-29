@@ -13,8 +13,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

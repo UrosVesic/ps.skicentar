@@ -17,7 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.komunikacija.Komunikacija;
-import klijent.validator.ValidationException;
+import validator.ValidationException;
 import komunikacija.Odgovor;
 import komunikacija.Operacije;
 import komunikacija.Zahtev;
@@ -189,8 +189,6 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                //odo = (Staza) odgovor.getRezultat();
-                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
                 onemoguciPamcenje();
                 isprazniGrafickiObjekat();
@@ -221,7 +219,6 @@ public abstract class OpstiKontrolerKI {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
                 KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao stazu po zadatom kriterijumu");
-
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da nadje stazu po zadataom kriterijumu", "Greska", JOptionPane.ERROR_MESSAGE);
             }
@@ -264,8 +261,6 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                //odo = (Zicara) odgovor.getRezultat();
-                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio zicaru");
                 onemoguciPamcenje();
                 isprazniGrafickiObjekat();
@@ -313,8 +308,6 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                //odo = (SkiKarta) odgovor.getRezultat();
-                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski kartu");
                 isprazniGrafickiObjekat();
                 onemoguciPamcenje();
@@ -387,8 +380,6 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                //odo = (SkiCentar) odgovor.getRezultat();
-                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
                 isprazniGrafickiObjekat();
                 onemoguciPamcenje();
@@ -463,8 +454,6 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                //odo = (SkiPas) odgovor.getRezultat();
-                //KonvertujObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
                 isprazniGrafickiObjekat();
                 //onemoguciPamcenje();
@@ -505,11 +494,9 @@ public abstract class OpstiKontrolerKI {
     public abstract void isprazniGrafickiObjekat();
 
     public void omoguciPamcenje() {
-
     }
 
     public void onemoguciPamcenje() {
-
     }
 
     public void promeniCenu() {
@@ -520,14 +507,11 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void validirajPretragu() throws ValidationException {
-        throw new UnsupportedOperationException();
     }
 
     public void validirajRegistraciju() throws ValidationException {
-        throw new UnsupportedOperationException();
     }
 
     public void validirajPrijavu() throws ValidationException {
-        throw new UnsupportedOperationException();
     }
 }

@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleSkiPas;
 import klijent.forme.skiPas.PronadjiSkiPasoveForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

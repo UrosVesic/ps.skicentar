@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleSkiKarte;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *

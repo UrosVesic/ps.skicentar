@@ -25,8 +25,8 @@ import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
-import klijent.validator.ValidationException;
-import klijent.validator.Validator;
+import validator.ValidationException;
+import validator.Validator;
 
 /**
  *
@@ -172,7 +172,12 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     public void ObrisiStavku() {
         KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
-        model.obrisi(kspf.getTblStavkeSkiPasa().getSelectedRow());
+        if (kspf.getTblStavkeSkiPasa().getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(kspf, "Izaberite red u tabeli");
+        } else {
+            model.obrisi(kspf.getTblStavkeSkiPasa().getSelectedRow());
+        }
+
     }
 
     @Override
@@ -191,7 +196,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
     public void validirajPamcenje() throws ValidationException {
         KreirajSkiPasForma kspf = (KreirajSkiPasForma) oef;
         Validator.startValidation().validateNotNullOrEmpty(kspf.getTxtImePrezimeKupca().getText(), "Ime i prezime kupca je obavezno")
-                .validateListIsNotEmpty(((ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel()).getSkiPas().getStavkeSkiPasa(), 
+                .validateListIsNotEmpty(((ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel()).getSkiPas().getStavkeSkiPasa(),
                         "Ne moze se zapamtiti ski pas bez ijedne stavke").throwIfInvalide();
     }
 
