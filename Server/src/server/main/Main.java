@@ -5,7 +5,7 @@
  */
 package server.main;
 
-import server.forme.ServerForm;
+import server.forme.ServerskaForma;
 
 
 
@@ -15,6 +15,6 @@ import server.forme.ServerForm;
  */
 public class Main {
     public static void main(String[] args) {
-        new ServerForm().setVisible(true);
+        new ServerskaForma().setVisible(true);
     }
 }

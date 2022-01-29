@@ -25,7 +25,7 @@ import java.util.Properties;
 import server.broker.BrokerBP;
 import server.forme.KonfiguracijaBazeForma;
 import server.forme.KonfiguracijaServeraForma;
-import server.forme.ServerForm;
+import server.forme.ServerskaForma;
 import server.konstante.ServerskeKonstante;
 import server.modeli.ModelTabeleKorisnik;
 import server.niti.ServerskaNit;
@@ -36,7 +36,7 @@ import server.so.impl.KreirajSkiPasSO;
 import server.so.impl.KreirajStazuSO;
 import server.so.impl.KreirajZicaruSO;
 import server.so.impl.PretraziSkiCentarSO;
-import server.so.impl.PretraziSkiKarteSo;
+import server.so.impl.PretraziSkiKarteSO;
 import server.so.impl.PretraziSkiPasoveSO;
 import server.so.impl.PretraziStazeSO;
 import server.so.impl.PrijaviSeSO;
@@ -60,7 +60,7 @@ public class Kontroler {
     private static Kontroler instanca;
     private final BrokerBP b;
     private ServerskaNit serverskaNit;
-    private ServerForm serverForm;
+    private ServerskaForma serverForm;
 
     private Kontroler() {
         b = new BrokerBP();
@@ -74,11 +74,11 @@ public class Kontroler {
         return instanca;
     }
 
-    public void setServerForm(ServerForm serverForm) {
+    public void setServerForm(ServerskaForma serverForm) {
         this.serverForm = serverForm;
     }
 
-    public void pokreniServer(ServerForm serverskaForma) throws IOException, Exception {
+    public void pokreniServer(ServerskaForma serverskaForma) throws IOException, Exception {
         Properties properties = new Properties();
         properties.load(new FileInputStream(ServerskeKonstante.SERVER_CONFIG_PATH));
         int port = -1;
@@ -96,7 +96,7 @@ public class Kontroler {
         serverskaForma.getLblStatusServera().setForeground(Color.GREEN);
     }
 
-    public void zaustaviServer(ServerForm serverskaForma) throws IOException {
+    public void zaustaviServer(ServerskaForma serverskaForma) throws IOException {
         serverskaNit.zaustavi();
         serverskaForma.getBtnPokreni().setEnabled(true);
         serverskaForma.getBtnZaustavi().setEnabled(false);
@@ -163,7 +163,7 @@ public class Kontroler {
     }
 
     public List<OpstiDomenskiObjekat> pretraziSkiKarte(SkiKarta skiKarta) throws Exception {
-        OpstaSo so = new PretraziSkiKarteSo(b, skiKarta);
+        OpstaSo so = new PretraziSkiKarteSO(b, skiKarta);
         so.opsteIzvrsenjeSo();
         return so.getLista();
     }

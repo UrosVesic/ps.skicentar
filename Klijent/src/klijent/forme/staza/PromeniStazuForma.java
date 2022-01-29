@@ -19,9 +19,9 @@ import klijent.kontrolerKi.KontrolerKIPromeniStazu;
 public class PromeniStazuForma extends OpstaEkranskaForma {
 
     private final KontrolerKIPromeniStazu kkiPromeniStazu;
-    PronadjiStazuForma psf;
+    PronadjiStazeForma psf;
 
-    public PromeniStazuForma(Staza staza, PronadjiStazuForma psf) {
+    public PromeniStazuForma(Staza staza, PronadjiStazeForma psf) {
         initComponents();
         kkiPromeniStazu = new KontrolerKIPromeniStazu(this, staza);
         this.psf = psf;

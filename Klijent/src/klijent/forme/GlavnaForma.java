@@ -7,7 +7,7 @@ package klijent.forme;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import klijent.forme.staza.PronadjiStazuForma;
+import klijent.forme.staza.PronadjiStazeForma;
 import klijent.forme.staza.KreirajStazuForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
@@ -196,7 +196,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiPronadjiIzmeniStazuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPronadjiIzmeniStazuActionPerformed
         // TODO add your handling code here:
-        new PronadjiStazuForma().setVisible(true);
+        new PronadjiStazeForma().setVisible(true);
     }//GEN-LAST:event_jmiPronadjiIzmeniStazuActionPerformed
 
     private void jmiIzmeniSkiCentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiCentarActionPerformed

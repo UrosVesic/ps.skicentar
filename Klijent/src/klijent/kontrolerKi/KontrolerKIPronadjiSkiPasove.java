@@ -19,9 +19,9 @@ import klijent.validator.Validator;
  *
  * @author draskovesic
  */
-public class KontrolerKIPronadjiSkiPas extends OpstiKontrolerKI {
+public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
 
-    public KontrolerKIPronadjiSkiPas(OpstaEkranskaForma oef) {
+    public KontrolerKIPronadjiSkiPasove(OpstaEkranskaForma oef) {
         this.oef = oef;
     }
 

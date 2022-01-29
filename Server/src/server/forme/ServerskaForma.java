@@ -17,14 +17,14 @@ import server.niti.ServerskaNit;
  *
  * @author UrosVesic
  */
-public class ServerForm extends javax.swing.JFrame {
+public class ServerskaForma extends javax.swing.JFrame {
 
     /**
-     * Creates new form ServerForm
+     * Creates new form ServerskaForma
      */
     ServerskaNit serverskaNit;
 
-    public ServerForm() {
+    public ServerskaForma() {
         initComponents();
         btnZaustavi.setEnabled(false);
         Kontroler.getInstanca().setServerForm(this);

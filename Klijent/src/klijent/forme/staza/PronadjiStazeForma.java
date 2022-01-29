@@ -13,23 +13,23 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStaza;
-import klijent.kontrolerKi.KontrolerKIPronadjiStazu;
+import klijent.kontrolerKi.KontrolerKIPronadjiStaze;
 
 /**
  *
  * @author UrosVesic
  */
-public class PronadjiStazuForma extends OpstaEkranskaForma {
+public class PronadjiStazeForma extends OpstaEkranskaForma {
 
     /**
      * Creates new form PronadjiStazuForma1
      */
     Staza staza;
-    private final KontrolerKIPronadjiStazu kkiPronadjiStazu;
+    private final KontrolerKIPronadjiStaze kkiPronadjiStazu;
 
-    public PronadjiStazuForma() {
+    public PronadjiStazeForma() {
         initComponents();
-        kkiPronadjiStazu = new KontrolerKIPronadjiStazu(this);
+        kkiPronadjiStazu = new KontrolerKIPronadjiStaze(this);
         prepare();
 
     }
@@ -202,7 +202,7 @@ public class PronadjiStazuForma extends OpstaEkranskaForma {
         return new Staza();
     }
 
-    public KontrolerKIPronadjiStazu getKkiPronadjiStazu() {
+    public KontrolerKIPronadjiStaze getKkiPronadjiStazu() {
         return kkiPronadjiStazu;
     }
 

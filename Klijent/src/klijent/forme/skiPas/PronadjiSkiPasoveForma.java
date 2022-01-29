@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontrolerKi.KontrolerKIPronadjiSkiPas;
+import klijent.kontrolerKi.KontrolerKIPronadjiSkiPasove;
 
 /**
  *
@@ -24,11 +24,11 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
     /**
      * Creates new form PronadjiSkiPasoveForma
      */
-    private final KontrolerKIPronadjiSkiPas kkipsp;
+    private final KontrolerKIPronadjiSkiPasove kkipsp;
 
     public PronadjiSkiPasoveForma() {
         initComponents();
-        kkipsp = new KontrolerKIPronadjiSkiPas(this);
+        kkipsp = new KontrolerKIPronadjiSkiPasove(this);
         kkipsp.pripremiTabelu();
     }
 
