@@ -21,7 +21,7 @@ public class PretraziSkiPasoveSO extends OpstaSo {
 
     @Override
     public void izvrsiOperaciju() throws Exception {
-        lista = b.pronadjiSlozeneSlogove(odo);
+        lista = b.pronadjiSlogove(odo);
     }
 
     @Override

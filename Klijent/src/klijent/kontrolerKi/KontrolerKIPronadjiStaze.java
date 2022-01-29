@@ -6,6 +6,7 @@
 package klijent.kontrolerKi;
 
 import domen.OpstiDomenskiObjekat;
+import domen.SkiCentar;
 import domen.Staza;
 import java.util.ArrayList;
 import klijent.forme.OpstaEkranskaForma;
@@ -51,7 +52,9 @@ public class KontrolerKIPronadjiStaze extends OpstiKontrolerKI {
 
     private void napuniDomenskiObjekat(Staza staza, PronadjiStazeForma psf) {
         //if (!"".equals(psf.getTxtTezina().getText())) {
-        staza.setTipStaze(psf.getTxtTezina().getText()/*Long.parseLong(psf.getTxtTezina().getText())*/);
+        SkiCentar skiCentar = new SkiCentar();
+        staza.setSkiCentar(skiCentar);
+        staza.getSkiCentar().setNazivSkiCentra(psf.getTxtTezina().getText());
         //}
     }
 

@@ -121,7 +121,7 @@ public class BrokerBP {
 
     public void obrisiSlog(OpstiDomenskiObjekat odo) throws Exception {
         try {
-            String upit = "DELETE FROM" + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
+            String upit = "DELETE FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
             konekcija = DbFabrikaKonekcije.getInstanca().getKonekcija();
             Statement statement = konekcija.createStatement();
             statement.executeUpdate(upit);
@@ -289,7 +289,8 @@ public class BrokerBP {
         }
         return lista;
     }
-    public void kreirajSlog1(OpstiDomenskiObjekat odo) throws Exception {
+
+    public void ubaciSlog(OpstiDomenskiObjekat odo) throws Exception {
         String upit;
         try {
             upit = "INSERT INTO " + odo.vratiImeKlase()
@@ -302,5 +303,5 @@ public class BrokerBP {
             throw ex;
         }
     }
-    
+
 }

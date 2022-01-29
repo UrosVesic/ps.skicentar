@@ -163,7 +163,9 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public OpstiDomenskiObjekat kreirajInstancu() {
-        return new StavkaSkiPasa();
+        StavkaSkiPasa stavka = new StavkaSkiPasa();
+        stavka.setSkiPas(skiPas);
+        return stavka;
     }
 
     @Override

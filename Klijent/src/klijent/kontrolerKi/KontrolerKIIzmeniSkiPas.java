@@ -181,6 +181,7 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
         model.obrisi(kspf.getTblStavkeSkiPasa().getSelectedRow());
+        kspf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
     }
 
     @Override

@@ -87,7 +87,9 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
 
     @Override
     public String vratiUslovZaNadjiSlogove() {
-        return "tipStaze LIKE '" + tipStaze + "'";
+        //return "tipStaze LIKE '" + tipStaze + "'";
+        return "sifraSkiCentra = (SELECT sifraSkiCentra FROM skiCentar WHERE NazivSkiCentra LIKE '" 
+                + skiCentar.getNazivSkiCentra() + "')";
     }
 
     @Override
@@ -136,14 +138,12 @@ public class Staza implements OpstiDomenskiObjekat, Serializable {
         return null;
     }
 
-
     @Override
     public void postaviVrednostVezanogObjekta(OpstiDomenskiObjekat vezo, int i) {
         if (i == 0) {
             this.setSkiCentar((SkiCentar) vezo);
         }
     }
-
 
     @Override
     public boolean equals(Object obj) {

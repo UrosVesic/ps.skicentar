@@ -24,7 +24,7 @@ public class RegistujSeSO extends OpstaSo {
 
     @Override
     protected void izvrsiOperaciju() throws Exception {
-        b.kreirajSlog1(odo);
+        b.ubaciSlog(odo);
     }
 
     @Override

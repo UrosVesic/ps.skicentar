@@ -7,6 +7,8 @@ package server.so.impl;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiPas;
+import domen.StavkaSkiPasa;
+import java.util.List;
 import server.broker.BrokerBP;
 import server.so.OpstaSo;
 import validator.ValidationException;
@@ -24,7 +26,24 @@ public class ZapamtiSkiPasSo extends OpstaSo {
 
     @Override
     public void izvrsiOperaciju() throws Exception {
-        b.pamtiSlozeniSlog(odo);
+        //b.pamtiSlozeniSlog(odo);
+        SkiPas skiPas = (SkiPas) odo;
+        List<OpstiDomenskiObjekat> stavkeIzBaze = b.pronadjiSlogove(skiPas.getStavkeSkiPasa().get(0));
+        b.promeniSlog(odo);
+
+        for (StavkaSkiPasa stavka : skiPas.getStavkeSkiPasa()) {
+            if (b.daLiPostojiSlog(stavka)) {
+                b.promeniSlog(stavka);
+            } else {
+                b.ubaciSlog(stavka);
+            }
+        }
+
+        for (OpstiDomenskiObjekat stavkaIzBaze : stavkeIzBaze) {
+            if (!skiPas.getStavkeSkiPasa().contains(stavkaIzBaze)) {
+                b.obrisiSlog(stavkaIzBaze);
+            }
+        }
     }
 
     @Override
@@ -40,6 +59,7 @@ public class ZapamtiSkiPasSo extends OpstaSo {
                 .validateNotNull(skiPas.getImePrezimeKupca(), "Null ime i prezime kupca")
                 .validateNotNull(skiPas.getUkupnaCena(), "Null ukupna cena")
                 .validateGreaterThanZero(skiPas.getSifraSkiPasa(), "Sifra ski pasa manja od 1")
+                .validateListIsNotEmpty(skiPas.getStavkeSkiPasa(), "Ski pas nema stavke")
                 .throwIfInvalide();
     }
 
