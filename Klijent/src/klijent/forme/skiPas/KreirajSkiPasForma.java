@@ -106,7 +106,7 @@ public class KreirajSkiPasForma extends OpstaEkranskaForma {
 
         jLabel7.setText("Zavrsetak vazenja: ");
 
-        txtZavrsetakVazenja.setText("5.2.2022");
+        txtZavrsetakVazenja.setEditable(false);
 
         jLabel8.setText("Ski karta: ");
 

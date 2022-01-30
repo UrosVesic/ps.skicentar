@@ -14,7 +14,7 @@ public class Operacije {
     public static final int UCITAJ_SKI_PAS = 1;
     public static final int KREIRAJ_SKI_CENTAR = 2;
     public static final int ZAPAMTI_SKI_CENTAR = 3;
-    public static final int PRETRAZI_STAZU = 4;
+    public static final int PRETRAZI_STAZE = 4;
     public static final int UCITAJ_LISTU_SKI_CENTARA = 5;
     public static final int ZAPAMTI_STAZU = 6;
     public static final int KREIRAJ_STAZU = 7;
@@ -31,5 +31,9 @@ public class Operacije {
     public static final int UCITAJ_STAZU = 18;
     public static final int PRIJAVI_SE = 19;
     public static final int REGISTRUJ_SE = 20;
+    public static final int PRETRAZI_ZICARE = 21;
+    public static final int OBRISI_STAZU = 22;
+    public static final int OBRISI_ZICARU = 23;
+    public static final int ZAPAMTI_SVE_PODATKE_O_SKICENTRU = 24;
 
 }

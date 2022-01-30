@@ -47,7 +47,6 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
         tblStaze = new javax.swing.JTable();
         btnPromeni = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         btnPronadji = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtTezina = new javax.swing.JTextField();
@@ -77,8 +76,6 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pretraga"));
 
-        jLabel2.setText("teska/srednja/laka");
-
         btnPronadji.setText("Pronadji");
         btnPronadji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +83,7 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
             }
         });
 
-        jLabel1.setText("Pretrazi stazu po tezini:");
+        jLabel1.setText("Unesite ski centar:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,13 +95,11 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtTezina, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(txtTezina, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(btnPronadji)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +107,7 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtTezina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(txtTezina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPronadji)
                 .addGap(19, 19, 19))
@@ -173,7 +167,6 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
     private javax.swing.JButton btnPromeni;
     private javax.swing.JButton btnPronadji;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblStaze;

@@ -53,6 +53,8 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
 
         jLabel1.setText("Unesite ime i prezime kupca: ");
 
+        txtImePrezimeKupca.setText("Uros Vesic");
+
         tblSkiPasevi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

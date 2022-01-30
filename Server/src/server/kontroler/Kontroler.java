@@ -48,6 +48,10 @@ import server.so.impl.ZapamtiSkiKartuSO;
 import server.so.impl.ZapamtiSkiPasSo;
 import server.so.impl.ZapamtiStazuSO;
 import server.so.impl.ZapamtiZicaruSO;
+import server.so.impl.dodatak.ObrisiStazuSO;
+import server.so.impl.dodatak.ObrisiZicaruSO;
+import server.so.impl.dodatak.PretraziZicareSO;
+import server.so.impl.dodatak.ZapamtiSvePodatkeOSkiCentruSO;
 
 /**
  *
@@ -248,6 +252,27 @@ public class Kontroler {
 
     public void registrujSe(Korisnik korisnik) throws Exception {
         OpstaSo so = new RegistujSeSO(b, korisnik);
+        so.opsteIzvrsenjeSo();
+    }
+
+    public List<OpstiDomenskiObjekat> pronadjiZicare(Zicara zicara) throws Exception {
+        OpstaSo so = new PretraziZicareSO(b, zicara);
+        so.opsteIzvrsenjeSo();
+        return so.getLista();
+    }
+
+    public void obrisiStazu(Staza staza) throws Exception {
+        OpstaSo so = new ObrisiStazuSO(b, staza);
+        so.opsteIzvrsenjeSo();
+    }
+
+    public void obrisiZicaru(Zicara zicara) throws Exception {
+        OpstaSo so = new ObrisiZicaruSO(b, zicara);
+        so.opsteIzvrsenjeSo();
+    }
+
+    public void zapamtiSvePodatkeOSkiCentru(SkiCentar skiCentar, List<Staza> staze, List<Zicara> zicare) throws Exception {
+        OpstaSo so = new ZapamtiSvePodatkeOSkiCentruSO(staze, zicare, b, skiCentar);
         so.opsteIzvrsenjeSo();
     }
 

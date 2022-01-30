@@ -96,28 +96,42 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
     }
 
     private void konvertujRedoveTabeleUNizStavki() {
-        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
+        IzmeniSkiPasForma ispf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
-        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
+        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
         skiPas.setStavkeSkiPasa(model.getSkiPas().getStavkeSkiPasa());
 
     }
 
     public void dodajStavkuUTabelu() {
-        IzmeniSkiPasForma kspf = (IzmeniSkiPasForma) oef;
+        IzmeniSkiPasForma ispf = (IzmeniSkiPasForma) oef;
         SkiPas skiPas = (SkiPas) odo;
-        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) kspf.getTblStavkeSkiPasa().getModel();
+        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         try {
-            Date pocetakVazenja = sdf.parse(kspf.getTxtPocetakVazenja().getText());
-            Date zavrsetakVazenja = sdf.parse(kspf.getTxtZavrsetakVazenja().getText());
-            StavkaSkiPasa stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(kspf.getTxtVrednostStavke().getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
+            Date pocetakVazenja = sdf.parse(ispf.getTxtPocetakVazenja().getText());
+            StavkaSkiPasa stavka = new StavkaSkiPasa();
+            stavka.setPocetakVazenja(pocetakVazenja);
+            stavka.setSkiKarta((SkiKarta) ispf.getCmbSkiKarte().getSelectedItem());
+            Date zavrsetakVazenja = generisiDatumZavrsetka(stavka);
+            ispf.getTxtZavrsetakVazenja().setText(sdf.format(zavrsetakVazenja));
+            if (ispf.getTxtVrednostStavke().getText() != "") {
+                stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(ispf.getTxtVrednostStavke().getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) ispf.getCmbSkiKarte().getSelectedItem());
+            } else {
+                stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(0), pocetakVazenja, zavrsetakVazenja, (SkiKarta) ispf.getCmbSkiKarte().getSelectedItem());
+            }
             model.dodaj(stavka);
-            dodateStavke.add(stavka);
-            kspf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
+            ispf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(kspf, "Datum mora biti unesen u formatu dd.MM.gggg");
+            JOptionPane.showMessageDialog(ispf, "Datum mora biti unesen u formatu dd.MM.gggg");
             Logger.getLogger(KreirajSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            //if (ex.getMessage().equals("Postoje ski karte za ovaj datum")) {
+            JOptionPane.showMessageDialog(ispf, "Vec postoje karte za izabrani period");
+            ex.printStackTrace();
+            /*} else {
+                ex.printStackTrace();
+            }*/
         }
     }
 
@@ -204,4 +218,28 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
                 .validateValueIsDate(ispf.getTxtDatumIzdavanja().getText(), "dd.MM.yyyy", "Datum mora biti u formatu dd.MM.gggg")
                 .throwIfInvalide();
     }
+
+    private Date generisiDatumZavrsetka(StavkaSkiPasa stavka) {
+        switch (stavka.getSkiKarta().getVrstaSkiKarte()) {
+            case "Jednodnevna":
+                stavka.setZavrsetakVazenja(new Date(stavka.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24));
+                return stavka.getZavrsetakVazenja();
+            case "Dvodnevna":
+                stavka.setZavrsetakVazenja(new Date(stavka.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 2));
+                return stavka.getZavrsetakVazenja();
+            case "Trodnevna":
+                stavka.setZavrsetakVazenja(new Date(stavka.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 3));
+                return stavka.getZavrsetakVazenja();
+            case "Sedmodnevna":
+                stavka.setZavrsetakVazenja(new Date(stavka.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 7));
+                return stavka.getZavrsetakVazenja();
+            case "Nocna":
+                stavka.setZavrsetakVazenja(new Date(stavka.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24));
+                return stavka.getZavrsetakVazenja();
+            default:
+                return null;
+        }
+
+    }
+
 }

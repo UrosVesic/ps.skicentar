@@ -73,7 +73,7 @@ public class KlijentskaNit extends Thread {
             case Operacije.ZAPAMTI_SKI_CENTAR:
                 odgovor = zapamtiSkiCentar(zahtev);
                 break;
-            case Operacije.PRETRAZI_STAZU:
+            case Operacije.PRETRAZI_STAZE:
                 odgovor = pronadjiStazu(zahtev);
                 break;
             case Operacije.UCITAJ_LISTU_SKI_CENTARA:
@@ -127,10 +127,22 @@ public class KlijentskaNit extends Thread {
             case Operacije.REGISTRUJ_SE:
                 odgovor = registrujSe(zahtev);
                 break;
+            case Operacije.PRETRAZI_ZICARE:
+                odgovor = pretraziZicare(zahtev);
+                break;
+            case Operacije.OBRISI_STAZU:
+                odgovor = obrisiStazu(zahtev);
+                break;
+            case Operacije.OBRISI_ZICARU:
+                odgovor = obrisiZicaru(zahtev);
+                break;
+            case Operacije.ZAPAMTI_SVE_PODATKE_O_SKICENTRU:
+                odgovor = zapamtiSvePodatkeOSkiCentru(zahtev);
+                break;
             default:
                 break;
         }
-        
+
         new Posiljalac(socket).posalji(odgovor);
     }
 
@@ -172,7 +184,7 @@ public class KlijentskaNit extends Thread {
         Odgovor odgovor = new Odgovor();
         try {
             List<OpstiDomenskiObjekat> lista = Kontroler.getInstanca().pronadjiStaze(staza);
-            odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_STAZU);
+            odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_STAZE);
             odgovor.setRezultat(lista);
             odgovor.setUspesno(true);
         } catch (Exception ex) {
@@ -442,6 +454,68 @@ public class KlijentskaNit extends Thread {
             odgovor.setUspesno(true);
         } catch (Exception ex) {
             odgovor.setUspesno(false);
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor pretraziZicare(Zahtev zahtev) {
+        List<OpstiDomenskiObjekat> lista;
+        Zicara zicara = (Zicara) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            lista = Kontroler.getInstanca().pronadjiZicare(zicara);
+            odgovor.setIzvrsenaOperacija(Operacije.PRETRAZI_ZICARE);
+            odgovor.setRezultat(lista);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            ex.printStackTrace();
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor obrisiStazu(Zahtev zahtev) {
+        Staza staza = (Staza) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().obrisiStazu(staza);
+            odgovor.setIzvrsenaOperacija(Operacije.OBRISI_STAZU);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            ex.printStackTrace();
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor obrisiZicaru(Zahtev zahtev) {
+        Zicara zicara = (Zicara) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().obrisiZicaru(zicara);
+            odgovor.setIzvrsenaOperacija(Operacije.OBRISI_ZICARU);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            ex.printStackTrace();
+            odgovor.setException(ex);
+        }
+        return odgovor;
+    }
+
+    private Odgovor zapamtiSvePodatkeOSkiCentru(Zahtev zahtev) {
+        Object[] parametar = (Object[]) zahtev.getParametar();
+        Odgovor odgovor = new Odgovor();
+        try {
+            Kontroler.getInstanca().zapamtiSvePodatkeOSkiCentru((SkiCentar) parametar[0], (List<Staza>) parametar[1], (List<Zicara>) parametar[2]);
+            odgovor.setIzvrsenaOperacija(Operacije.ZAPAMTI_SVE_PODATKE_O_SKICENTRU);
+            odgovor.setUspesno(true);
+        } catch (Exception ex) {
+            odgovor.setUspesno(false);
+            ex.printStackTrace();
             odgovor.setException(ex);
         }
         return odgovor;

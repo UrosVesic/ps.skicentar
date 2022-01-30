@@ -7,6 +7,8 @@ package validator;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
+import domen.SkiPas;
+import domen.StavkaSkiPasa;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -123,6 +125,28 @@ public class Validator {
     public Validator validateGreaterThanZero(long id, String poruka) {
         if (id <= 0) {
             this.validationErros.add(poruka);
+        }
+        return this;
+    }
+
+    public Validator validirajDaLiPostojeStavkeZaPeriod(StavkaSkiPasa stavka, SkiPas skiPas, String poruka) {
+        for (StavkaSkiPasa stavkaPostojeca : skiPas.getStavkeSkiPasa()) {
+            if (stavka.getZavrsetakVazenja() != null && stavka.getZavrsetakVazenja().after(stavkaPostojeca.getPocetakVazenja()) && stavka.getZavrsetakVazenja().before(stavkaPostojeca.getZavrsetakVazenja())) {
+                this.validationErros.add(poruka);
+                return this;
+            }
+            if (stavka.getPocetakVazenja() != null && stavka.getPocetakVazenja().after(stavkaPostojeca.getPocetakVazenja()) && stavka.getPocetakVazenja().before(stavkaPostojeca.getZavrsetakVazenja())) {
+                this.validationErros.add(poruka);
+                return this;
+            }
+            if (stavka.getPocetakVazenja() != null && stavka.getPocetakVazenja().compareTo(stavkaPostojeca.getPocetakVazenja()) == 0) {
+                this.validationErros.add(poruka);
+                return this;
+            }
+            if (stavka.getZavrsetakVazenja() != null && stavka.getZavrsetakVazenja().compareTo(stavkaPostojeca.getZavrsetakVazenja()) == 0) {
+                this.validationErros.add(poruka);
+                return this;
+            }
         }
         return this;
     }

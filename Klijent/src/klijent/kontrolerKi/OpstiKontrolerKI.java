@@ -28,10 +28,69 @@ import komunikacija.Zahtev;
  */
 public abstract class OpstiKontrolerKI {
 
-    OpstiDomenskiObjekat odo;
-    OpstaEkranskaForma oef;
-    List<OpstiDomenskiObjekat> lista = new ArrayList<>();
+    protected OpstiDomenskiObjekat odo;
+    protected OpstaEkranskaForma oef;
+    protected List<OpstiDomenskiObjekat> lista = new ArrayList<>();
 
+    //***************************************************************************************************
+    public void SOUcitajZicareZaSkiCentar() {
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_ZICARE, odo);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
+                KonvertujListuUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je ucitao zicare");
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita staze", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void SOUcitajStazeZaSkiCentar() {
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZE, odo);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
+                KonvertujListuUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je ucitao staze");
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita staze", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void SOUcitajSkiCentar() throws Exception {
+        //odo = oef.kreirajObjekat();
+        //KonvertujGrafickiObjekatUDomenskiObjekat();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_CENTAR, odo);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                odo = (SkiCentar) odgovor.getRezultat();
+                KonvertujObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je ucitao ski centar");
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski centar", "Greska", JOptionPane.ERROR_MESSAGE);
+            throw new Exception();
+        }
+    }
+
+    //******************************************************************************************************
     public boolean SORegistrujSe() {
         odo = oef.kreirajObjekat();
         try {
@@ -211,7 +270,7 @@ public abstract class OpstiKontrolerKI {
             return;
         }
         KonvertujGrafickiObjekatUDomenskiObjekat();
-        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZU, odo);
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZE, odo);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
@@ -513,5 +572,12 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void validirajPrijavu() throws ValidationException {
+    }
+
+    public void KonvertujListuUGrafickeKomponente() {
+    }
+
+    public void prikaziPorukuOGresci(String message) {
+        JOptionPane.showMessageDialog(oef, message, "Greska", JOptionPane.ERROR_MESSAGE);
     }
 }

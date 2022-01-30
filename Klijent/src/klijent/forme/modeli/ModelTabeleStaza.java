@@ -109,4 +109,21 @@ public class ModelTabeleStaza extends AbstractTableModel {
         }
     }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return (columnIndex > 0 && columnIndex < 3);
+    }
+
+    public void obrisi(int index) {
+        staze.remove(index);
+        fireTableDataChanged();
+    }
+
+    public Staza vratiPoslednju() throws Exception {
+        if (staze.size() > 0) {
+            return staze.get(staze.size() - 1);
+        }
+        throw new Exception();
+    }
+
 }

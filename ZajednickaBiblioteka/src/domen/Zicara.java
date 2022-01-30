@@ -23,7 +23,7 @@ public class Zicara implements OpstiDomenskiObjekat, Serializable {
     private SkiCentar skiCentar;
 
     public Zicara() {
-        
+
     }
 
     public Zicara(long SifraZicare, String NazivZicare, String RadnoVreme, int Kapacitet,
@@ -108,13 +108,21 @@ public class Zicara implements OpstiDomenskiObjekat, Serializable {
     }
 
     @Override
+    public String vratiUslovZaNadjiSlogove() {
+        return "sifraSkiCentra = (SELECT sifraSkiCentra FROM skiCentar WHERE NazivSkiCentra LIKE '"
+                + skiCentar.getNazivSkiCentra() + "')";
+    }
+
+    @Override
     public void napuni(ResultSet rs) throws SQLException {
         SifraZicare = rs.getLong("sifraZicare");
         nazivZicare = rs.getString("nazivZicare");
         radnoVreme = rs.getString("radnoVreme");
         kapacitet = rs.getInt("kapacitet");
         UFunkciji = rs.getBoolean("uFunkciji");
-        skiCentar.setSifraSkiCentra(rs.getLong("sifraSkiCentra"));
+        SkiCentar sc = new SkiCentar();
+        sc.setSifraSkiCentra(rs.getLong("sifraSkiCentra"));
+        skiCentar = sc;
 
     }
 
@@ -157,9 +165,5 @@ public class Zicara implements OpstiDomenskiObjekat, Serializable {
             this.setSkiCentar((SkiCentar) vezo);
         }
     }
-
-    
-
-    
 
 }

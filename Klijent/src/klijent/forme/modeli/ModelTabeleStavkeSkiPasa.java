@@ -19,6 +19,7 @@ import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.kontrolerKi.KontrolerKIKreirajSkiPas;
 import klijent.kontrolerKi.OpstiKontrolerKI;
+import validator.ValidationException;
 
 /**
  *
@@ -72,6 +73,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
             case 3:
                 sdf = new SimpleDateFormat("dd.MM.yyyy");
                 return sdf.format(stavka.getZavrsetakVazenja());
+
             case 4:
                 return stavka.getSkiKarta();
             default:
@@ -84,11 +86,18 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
         return kolone[column];
     }
 
-    public void dodaj(StavkaSkiPasa stavka) {
+    public void dodaj(StavkaSkiPasa stavka) throws Exception {
         if (skiPas.getStavkeSkiPasa().contains(stavka)) {
             return;
         }
-        stavka.setRedniBroj(skiPas.getStavkeSkiPasa().size() + 1);
+        validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
+                .throwIfInvalide();
+        if (skiPas.getStavkeSkiPasa().size() > 0) {
+            stavka.setRedniBroj(skiPas.getStavkeSkiPasa().get(skiPas.getStavkeSkiPasa().size() - 1).getRedniBroj() + 1);
+        } else {
+            stavka.setRedniBroj(1);
+        }
+
         skiPas.getStavkeSkiPasa().add(stavka);
         fireTableDataChanged();
     }
@@ -100,17 +109,27 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
         switch (columnIndex) {
             case 2:
                 try {
+                    StavkaSkiPasa stavka1 = new StavkaSkiPasa();
+                    stavka1.setPocetakVazenja(sdf.parse((String) aValue));
+                    validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka1, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
                     stavkaSkiPasa.setPocetakVazenja(sdf.parse((String) aValue));
                 } catch (ParseException ex) {
-                    Logger.getLogger(ModelTabeleStavkeSkiPasa.class.getName()).log(Level.SEVERE, null, ex);
+                    ok.prikaziPorukuOGresci("Datum mora biri u formatu dd.MM.gggg");
+                } catch (ValidationException ex) {
+                    ok.prikaziPorukuOGresci(ex.getMessage());
                 }
 
                 break;
             case 3:
                 try {
+                    StavkaSkiPasa stavka1 = new StavkaSkiPasa();
+                    stavka1.setZavrsetakVazenja(sdf.parse((String) aValue));
+                    validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka1, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
                     stavkaSkiPasa.setZavrsetakVazenja(sdf.parse((String) aValue));
                 } catch (ParseException ex) {
-                    Logger.getLogger(ModelTabeleStavkeSkiPasa.class.getName()).log(Level.SEVERE, null, ex);
+                    ok.prikaziPorukuOGresci("Datum mora biri u formatu dd.MM.gggg");
+                } catch (ValidationException ex) {
+                    ok.prikaziPorukuOGresci(ex.getMessage());
                 }
                 break;
             case 4:
