@@ -195,7 +195,6 @@ public class BrokerBP {
 
             }
         } else {
-            //ne postoji slog u bazi
             throw new Exception();
         }
     }
