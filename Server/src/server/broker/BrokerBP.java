@@ -279,9 +279,9 @@ public class BrokerBP {
                 }
                 j++;
             }
-            if (j == 0) {
+            /*if (j == 0) {
                 throw new Exception(odo.vratiImeKlase() + " nije pronadjen/a");
-            }
+            }*/
 
         } catch (SQLException ex) {
             throw ex;

@@ -88,6 +88,7 @@ public class Validator {
 
     public Validator validirajFormatRadnogVremena(String radnoVreme, String poruka) {
         int i = 0;
+        if(radnoVreme == null)return this;
         String[] sati = radnoVreme.split("-");
         if (sati.length != 2) {
             this.validationErros.add(poruka);
@@ -144,6 +145,10 @@ public class Validator {
                 return this;
             }
             if (stavka.getZavrsetakVazenja() != null && stavka.getZavrsetakVazenja().compareTo(stavkaPostojeca.getZavrsetakVazenja()) == 0) {
+                this.validationErros.add(poruka);
+                return this;
+            }
+            if (stavka.getPocetakVazenja().compareTo(stavkaPostojeca.getZavrsetakVazenja()) == 0) {
                 this.validationErros.add(poruka);
                 return this;
             }

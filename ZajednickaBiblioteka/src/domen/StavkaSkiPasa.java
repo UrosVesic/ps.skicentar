@@ -215,5 +215,28 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
         }
         return true;
     }
+    
+    public Date generisiDatumZavrsetka() {
+        switch (this.getSkiKarta().getVrstaSkiKarte()) {
+            case "Jednodnevna":
+                this.setZavrsetakVazenja(new Date(this.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24));
+                return this.getZavrsetakVazenja();
+            case "Dvodnevna":
+                this.setZavrsetakVazenja(new Date(this.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 2));
+                return this.getZavrsetakVazenja();
+            case "Trodnevna":
+                this.setZavrsetakVazenja(new Date(this.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 3));
+                return this.getZavrsetakVazenja();
+            case "Sedmodnevna":
+                this.setZavrsetakVazenja(new Date(this.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 7));
+                return this.getZavrsetakVazenja();
+            case "Nocna":
+                this.setZavrsetakVazenja(new Date(this.getPocetakVazenja().getTime() + 1000 * 60 * 60 * 24));
+                return this.getZavrsetakVazenja();
+            default:
+                return null;
+        }
+
+    }
 
 }

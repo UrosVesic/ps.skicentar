@@ -291,6 +291,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Izaberite red u tabeli");
+            ex.printStackTrace();
         }
     }
 

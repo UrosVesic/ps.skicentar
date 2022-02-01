@@ -87,9 +87,9 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
     }
 
     public void dodaj(StavkaSkiPasa stavka) throws Exception {
-        if (skiPas.getStavkeSkiPasa().contains(stavka)) {
+        /*if (skiPas.getStavkeSkiPasa().contains(stavka)) {
             return;
-        }
+        }*/
         validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
                 .throwIfInvalide();
         if (skiPas.getStavkeSkiPasa().size() > 0) {
@@ -135,6 +135,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
             case 4:
                 stavkaSkiPasa.setSkiKarta((SkiKarta) aValue);
                 stavkaSkiPasa.setVrednostStavke(((SkiKarta) aValue).getCenaSkiKarte());
+                stavkaSkiPasa.generisiDatumZavrsetka();
                 fireTableDataChanged();
                 ok.promeniCenu();
                 break;
@@ -144,7 +145,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex >= 2;
+        return columnIndex == 2 || columnIndex == 4;
     }
 
     public void obrisi(int selectedRow) {

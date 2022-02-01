@@ -41,13 +41,13 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
                 KonvertujListuUGrafickeKomponente();
-                JOptionPane.showMessageDialog(oef, "Sistem je ucitao zicare");
-            } else {
+                //JOptionPane.showMessageDialog(oef, "Sistem je ucitao zicare");
+            } /*else {
                 throw new Exception();
-            }
+            }*/
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita staze", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita zicare", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -59,10 +59,10 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 lista = (List<OpstiDomenskiObjekat>) odgovor.getRezultat();
                 KonvertujListuUGrafickeKomponente();
-                JOptionPane.showMessageDialog(oef, "Sistem je ucitao staze");
-            } else {
+                //JOptionPane.showMessageDialog(oef, "Sistem je ucitao staze");
+            } /*else {
                 throw new Exception();
-            }
+            }*/
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita staze", "Greska", JOptionPane.ERROR_MESSAGE);
