@@ -16,9 +16,9 @@ import validator.Validator;
  *
  * @author draskovesic
  */
-public class KontrolerKIPromeniSkiCentar extends OpstiKontrolerKI {
+public class KontrolerKIPromeniSkiCentarOsnovno extends OpstiKontrolerKI {
 
-    public KontrolerKIPromeniSkiCentar(OpstaEkranskaForma oef) {
+    public KontrolerKIPromeniSkiCentarOsnovno(OpstaEkranskaForma oef) {
         this.oef = oef;
     }
 

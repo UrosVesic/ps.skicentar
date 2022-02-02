@@ -8,16 +8,9 @@ package klijent.forme.modeli;
 import domen.SkiKarta;
 import domen.SkiPas;
 import domen.StavkaSkiPasa;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
-import klijent.forme.OpstaEkranskaForma;
-import klijent.forme.skiPas.IzmeniSkiPasForma;
-import klijent.kontrolerKi.KontrolerKIKreirajSkiPas;
 import klijent.kontrolerKi.OpstiKontrolerKI;
 import validator.ValidationException;
 
@@ -87,10 +80,8 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
     }
 
     public void dodaj(StavkaSkiPasa stavka) throws Exception {
-        /*if (skiPas.getStavkeSkiPasa().contains(stavka)) {
-            return;
-        }*/
         validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
+                .validirajDaLiJeDatumStavkePosleIzdavanja(stavka,skiPas,"Stavka mora biti nakon datuma izdavanja")
                 .throwIfInvalide();
         if (skiPas.getStavkeSkiPasa().size() > 0) {
             stavka.setRedniBroj(skiPas.getStavkeSkiPasa().get(skiPas.getStavkeSkiPasa().size() - 1).getRedniBroj() + 1);

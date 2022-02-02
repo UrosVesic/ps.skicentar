@@ -31,11 +31,11 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
         Zicara zicara = (Zicara) odo;
         KreirajZicaruForma kzf = (KreirajZicaruForma) oef;
         if (!"".equals(kzf.getTxtSifraZicare().getText())) {
-        zicara.setSifraZicare(Long.parseLong(kzf.getTxtSifraZicare().getText()));
+            zicara.setSifraZicare(Long.parseLong(kzf.getTxtSifraZicare().getText()));
         }
         zicara.setNazivZicare(kzf.getTxtNazivZicare().getText());
         if (!"".equals(kzf.getTxtKapacitet().getText())) {
-        zicara.setKapacitet(Integer.parseInt(kzf.getTxtKapacitet().getText()));
+            zicara.setKapacitet(Integer.parseInt(kzf.getTxtKapacitet().getText()));
         }
         zicara.setRadnoVreme(kzf.getTxtRadnoVreme().getText());
         zicara.setSkiCentar((SkiCentar) kzf.getCmbSkiCentri().getSelectedItem());
@@ -109,6 +109,8 @@ public class KontrolerKIKreirajZicaru extends OpstiKontrolerKI {
                 .validateNotNullOrEmpty(kzf.getTxtKapacitet().getText(), "Kapcitet je obavezan")
                 .validirajFormatRadnogVremena(kzf.getTxtRadnoVreme().getText(), "Format radnog vremena mora biti HH-HH")
                 .validateValueIsNumber(kzf.getTxtKapacitet().getText(), "Kapacitet mora biti broj").throwIfInvalide();
+        Validator.startValidation().validateGreaterThanZero(Long.parseLong(kzf.getTxtKapacitet().getText()), "Kapacitet mora biti veci od 0");
+
     }
 
 }

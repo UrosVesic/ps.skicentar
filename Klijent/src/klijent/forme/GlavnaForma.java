@@ -11,7 +11,7 @@ import klijent.forme.staza.PronadjiStazeForma;
 import klijent.forme.staza.KreirajStazuForma;
 import klijent.forme.skiCentar.PromeniSkiCentarForma;
 import klijent.forme.skiCentar.KreirajSkiCentarForma;
-import klijent.forme.skiCentar.dodatak.SviSkiCentriForma;
+import klijent.forme.skiCentar.SviSkiCentriForma;
 import klijent.forme.skiKarta.KreirajSkiKartuForma;
 import klijent.forme.skiKarta.PretraziSkiKarteForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;

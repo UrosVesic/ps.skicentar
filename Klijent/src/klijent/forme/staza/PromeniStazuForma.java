@@ -56,7 +56,7 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
             }
         });
 
-        jLabel3.setText("Tip staze: ");
+        jLabel3.setText("Tezina staze:");
 
         cmbTipStaze.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laka", "Srednja", "Teska" }));
 
@@ -101,7 +101,7 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtBrojStaze, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

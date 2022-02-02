@@ -48,10 +48,10 @@ import server.so.impl.ZapamtiSkiKartuSO;
 import server.so.impl.ZapamtiSkiPasSo;
 import server.so.impl.ZapamtiStazuSO;
 import server.so.impl.ZapamtiZicaruSO;
-import server.so.impl.dodatak.ObrisiStazuSO;
-import server.so.impl.dodatak.ObrisiZicaruSO;
-import server.so.impl.dodatak.PretraziZicareSO;
-import server.so.impl.dodatak.ZapamtiSvePodatkeOSkiCentruSO;
+import server.so.impl.ObrisiStazuSO;
+import server.so.impl.ObrisiZicaruSO;
+import server.so.impl.PretraziZicareSO;
+import server.so.impl.ZapamtiSvePodatkeOSkiCentruSO;
 
 /**
  *

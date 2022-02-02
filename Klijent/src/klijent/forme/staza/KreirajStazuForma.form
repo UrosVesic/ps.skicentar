@@ -106,7 +106,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tip staze: "/>
+        <Property name="text" type="java.lang.String" value="Tezina staze:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbTipStaze">

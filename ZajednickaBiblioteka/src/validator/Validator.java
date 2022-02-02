@@ -88,7 +88,9 @@ public class Validator {
 
     public Validator validirajFormatRadnogVremena(String radnoVreme, String poruka) {
         int i = 0;
-        if(radnoVreme == null)return this;
+        if (radnoVreme == null) {
+            return this;
+        }
         String[] sati = radnoVreme.split("-");
         if (sati.length != 2) {
             this.validationErros.add(poruka);
@@ -152,6 +154,14 @@ public class Validator {
                 this.validationErros.add(poruka);
                 return this;
             }
+        }
+        return this;
+    }
+
+    public Validator validirajDaLiJeDatumStavkePosleIzdavanja(StavkaSkiPasa stavka, SkiPas skiPas, String poruka) {
+        if (stavka.getPocetakVazenja().before(skiPas.getDatumIzdavanja())) {
+            this.validationErros.add(poruka);
+            return this;
         }
         return this;
     }

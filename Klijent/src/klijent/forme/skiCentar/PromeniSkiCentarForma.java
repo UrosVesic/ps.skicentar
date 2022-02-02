@@ -10,7 +10,7 @@ import domen.SkiCentar;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontrolerKi.KontrolerKIPromeniSkiCentar;
+import klijent.kontrolerKi.KontrolerKIPromeniSkiCentarOsnovno;
 
 /**
  *
@@ -18,10 +18,10 @@ import klijent.kontrolerKi.KontrolerKIPromeniSkiCentar;
  */
 public class PromeniSkiCentarForma extends OpstaEkranskaForma {
 
-    private final KontrolerKIPromeniSkiCentar kkipsc;
+    private final KontrolerKIPromeniSkiCentarOsnovno kkipsc;
     public PromeniSkiCentarForma() {
         initComponents();
-        kkipsc = new KontrolerKIPromeniSkiCentar(this);
+        kkipsc = new KontrolerKIPromeniSkiCentarOsnovno(this);
     }
 
     /**

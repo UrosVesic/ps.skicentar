@@ -33,7 +33,7 @@ public abstract class OpstaSo {
 
         b.uspostaviKonekciju();
         try {
-            //proveriPreduslove(odo);
+            //proveriPreduslove();
             izvrsiOperaciju();
             b.potvrdiTransakciju();
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package klijent.forme.skiCentar.dodatak;
+package klijent.forme.skiCentar;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
@@ -15,25 +15,25 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontrolerKi.dodatak.KontrolerKiIzmeniSkiCentar2;
+import klijent.kontrolerKi.KontrolerKiPromeniSkiCentarSve;
 
 /**
  *
  * @author UrosVesic
  */
-public class IzmeniSkiCentarForma2 extends OpstaEkranskaForma {
+public class PromeniSkiCentarSve extends OpstaEkranskaForma {
 
     /**
-     * Creates new form IzmeniSkiCentarForma2
+     * Creates new form PromeniSkiCentarSve
      */
     private SkiCentar skiCentar;
-    private final KontrolerKiIzmeniSkiCentar2 kkisc;
+    private final KontrolerKiPromeniSkiCentarSve kkisc;
     private final SviSkiCentriForma sscf;
 
-    public IzmeniSkiCentarForma2(SkiCentar skiCentar, SviSkiCentriForma sscf) {
+    public PromeniSkiCentarSve(SkiCentar skiCentar, SviSkiCentriForma sscf) {
         initComponents();
         this.skiCentar = skiCentar;
-        kkisc = new KontrolerKiIzmeniSkiCentar2(this);
+        kkisc = new KontrolerKiPromeniSkiCentarSve(this);
         kkisc.setOdo(skiCentar);
         this.sscf = sscf;
         pripremiFormu();
@@ -283,7 +283,7 @@ public class IzmeniSkiCentarForma2 extends OpstaEkranskaForma {
             kkisc.proveriStatusPoslednjeStaze();
             kkisc.proveriStatusPoslednjeZicare();
         } catch (Exception ex) {
-            Logger.getLogger(IzmeniSkiCentarForma2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PromeniSkiCentarSve.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -323,7 +323,7 @@ public class IzmeniSkiCentarForma2 extends OpstaEkranskaForma {
             kkisc.SOZapamtiSvePodatkeOSkiCentru();
             sscf.azurirajTabelu((SkiCentar) kkisc.getOdo());
         } catch (Exception ex) {
-            Logger.getLogger(IzmeniSkiCentarForma2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PromeniSkiCentarSve.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnZapamtiSveActionPerformed
 

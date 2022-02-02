@@ -53,7 +53,7 @@
                       <Component id="txtBrojStaze" min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="112" max="32767" attributes="0"/>
+              <EmptySpace pref="110" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,7 +92,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tip staze: "/>
+        <Property name="text" type="java.lang.String" value="Tezina staze:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbTipStaze">

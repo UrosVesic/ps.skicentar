@@ -56,7 +56,7 @@ public class KreirajStazuForma extends OpstaEkranskaForma {
 
         jLabel2.setText("Naziv staze: ");
 
-        jLabel3.setText("Tip staze: ");
+        jLabel3.setText("Tezina staze:");
 
         cmbTipStaze.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laka", "Srednja", "Teska" }));
 

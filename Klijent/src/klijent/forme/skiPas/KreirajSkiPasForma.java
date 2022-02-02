@@ -290,7 +290,7 @@ public class KreirajSkiPasForma extends OpstaEkranskaForma {
 
     private void btnZapamtiSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiSkiPasActionPerformed
         // TODO add your handling code here:
-        kkiksp.SOZapamitSkiPas();
+        kkiksp.SOZapamtiSkiPas();
     }//GEN-LAST:event_btnZapamtiSkiPasActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed

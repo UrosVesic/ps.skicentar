@@ -278,7 +278,7 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
 
     private void btnZapamtiSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiSkiPasActionPerformed
         // TODO add your handling code here:
-        kkiisp.SOZapamitSkiPas();
+        kkiisp.SOZapamtiSkiPas();
         pspf.azurirajTabelu((SkiPas) kkiisp.getOdo());
     }//GEN-LAST:event_btnZapamtiSkiPasActionPerformed
 

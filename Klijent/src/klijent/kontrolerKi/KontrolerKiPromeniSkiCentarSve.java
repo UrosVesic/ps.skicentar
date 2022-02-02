@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package klijent.kontrolerKi.dodatak;
+package klijent.kontrolerKi;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
@@ -20,7 +20,7 @@ import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleSkiCentri;
 import klijent.forme.modeli.ModelTabeleStaza;
 import klijent.forme.modeli.ModelTabeleZicara;
-import klijent.forme.skiCentar.dodatak.IzmeniSkiCentarForma2;
+import klijent.forme.skiCentar.PromeniSkiCentarSve;
 import klijent.komunikacija.Komunikacija;
 import klijent.kontrolerKi.OpstiKontrolerKI;
 import komunikacija.Odgovor;
@@ -33,9 +33,9 @@ import validator.Validator;
  *
  * @author UrosVesic
  */
-public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
+public class KontrolerKiPromeniSkiCentarSve extends OpstiKontrolerKI {
 
-    public KontrolerKiIzmeniSkiCentar2(OpstaEkranskaForma oef) {
+    public KontrolerKiPromeniSkiCentarSve(OpstaEkranskaForma oef) {
         this.oef = oef;
     }
 
@@ -54,7 +54,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUDomenskiObjekat() {
         SkiCentar skiCentar = (SkiCentar) odo;
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         skiCentar.setSifraSkiCentra(Long.parseLong(f.getTxtSifraSkiCentra().getText()));
         skiCentar.setNazivSkiCentra(f.getTxtNazivSkiCentra().getText());
         skiCentar.setNazivPlanine(f.getTxtNazivPlanine().getText());
@@ -63,7 +63,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
 
     @Override
     public void KonvertujObjekatUGrafickeKomponente() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         SkiCentar sc = (SkiCentar) odo;
         f.getTxtSifraSkiCentra().setText(sc.getSifraSkiCentra() + "");
         f.getTxtNazivSkiCentra().setText(sc.getNazivSkiCentra());
@@ -87,7 +87,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     public void pripremiTabele() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
 
         String[] tezine = {"Laka", "Srednja", "Teska"};
         JComboBox comboBox = new JComboBox(tezine);
@@ -105,13 +105,13 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
 //    public void pripremiPodatkeOSkiCentru(SkiCentar skiCentar) {
-//        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+//        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
 //        f.getTxtSifraSkiCentra().setText(skiCentar.getSifraSkiCentra());
 //        f.gettxt
 //    }
     @Override
     public void KonvertujListuUGrafickeKomponente() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         if (odo instanceof Staza) {
             ModelTabeleStaza model = (ModelTabeleStaza) f.getTblStaze().getModel();
             for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
@@ -182,7 +182,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     private void KonvertujObjekatURedTabele(OpstiDomenskiObjekat odo) {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         if (odo instanceof Staza) {
             Staza staza = (Staza) odo;
             ModelTabeleStaza model = (ModelTabeleStaza) f.getTblStaze().getModel();
@@ -196,7 +196,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     private Staza KonvertujRedTabeleStazaUGrafickiObjekat() throws Exception {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         ModelTabeleStaza model = (ModelTabeleStaza) f.getTblStaze().getModel();
         if (f.getTblStaze().getSelectedRow() != -1) {
             Staza staza = model.getStaze().get(f.getTblStaze().getSelectedRow());
@@ -207,7 +207,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     private Zicara KonvertujRedTabeleZicaraUGrafickiObjekat() throws Exception {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         ModelTabeleZicara model = (ModelTabeleZicara) f.getTblZicare().getModel();
         if (f.getTblZicare().getSelectedRow() != -1) {
             Zicara zicara = model.getZicare().get(f.getTblZicare().getSelectedRow());
@@ -218,7 +218,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     public void SOObrisiStazu() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         try {
             Staza staza = KonvertujRedTabeleStazaUGrafickiObjekat();
             Zahtev zahtev = new Zahtev(Operacije.OBRISI_STAZU, staza);
@@ -296,7 +296,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     public void SOObrisiZicaru() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         try {
             Zicara zicara = KonvertujRedTabeleZicaraUGrafickiObjekat();
             Zahtev zahtev = new Zahtev(Operacije.OBRISI_ZICARU, zicara);
@@ -321,7 +321,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     public void SOZapamtiSvePodatkeOSkiCentru() throws Exception {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         odo = oef.kreirajObjekat();
         KonvertujGrafickiObjekatUDomenskiObjekat();
         SkiCentar skiCentar = (SkiCentar) odo;
@@ -384,7 +384,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
         int i = 1;
         Validator validator = Validator.startValidation();
         for (Zicara zicara : zicare) {
-            Validator.startValidation().validateNotNullOrEmpty(zicara.getNazivZicare(), "Naziv zicare je obavezan - id: " + zicara.getSifraZicare())
+            validator.validateNotNullOrEmpty(zicara.getNazivZicare(), "Naziv zicare je obavezan - id: " + zicara.getSifraZicare())
                     .validateNotNullOrEmpty(zicara.getRadnoVreme(), "Radno vreme je obavezno- id: " + zicara.getSifraZicare())
                     .validateGreaterThanZero(zicara.getKapacitet(), "Kapacitet mora biti veći od 0- id: " + zicara.getSifraZicare());
             i++;
@@ -403,7 +403,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     public void proveriStatusPoslednjeZicare() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         ModelTabeleZicara model = (ModelTabeleZicara) f.getTblZicare().getModel();
         Zicara zicara;
         try {
@@ -423,7 +423,7 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     public void proveriStatusPoslednjeStaze() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         ModelTabeleStaza model = (ModelTabeleStaza) f.getTblStaze().getModel();
         Staza staza;
         try {
@@ -443,22 +443,22 @@ public class KontrolerKiIzmeniSkiCentar2 extends OpstiKontrolerKI {
     }
 
     private void onemoguciKreiranjeStaze() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         f.getBtnKreirajStazu().setEnabled(false);
     }
 
     private void omoguciKreiranjeStaze() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         f.getBtnKreirajStazu().setEnabled(true);
     }
 
     private void onemoguciKreiranjeZicare() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         f.getBtnKreirajZicaru().setEnabled(false);
     }
 
     private void omoguciKreiranjeZicare() {
-        IzmeniSkiCentarForma2 f = (IzmeniSkiCentarForma2) oef;
+        PromeniSkiCentarSve f = (PromeniSkiCentarSve) oef;
         f.getBtnKreirajZicaru().setEnabled(true);
     }
 

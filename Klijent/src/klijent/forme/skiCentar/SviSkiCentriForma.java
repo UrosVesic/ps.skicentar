@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package klijent.forme.skiCentar.dodatak;
+package klijent.forme.skiCentar;
 
 import domen.OpstiDomenskiObjekat;
 import domen.SkiCentar;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import klijent.forme.OpstaEkranskaForma;
-import klijent.kontrolerKi.dodatak.KontrolerKISviSkiCentri;
+import klijent.kontrolerKi.KontrolerKISviSkiCentri;
 
 /**
  *
@@ -121,7 +121,7 @@ public class SviSkiCentriForma extends OpstaEkranskaForma {
         try {
             // TODO add your handling code here:
             SkiCentar skiCentar = kkissc.vratiSelektovanSC();
-            IzmeniSkiCentarForma2 f = new IzmeniSkiCentarForma2(skiCentar, this);
+            PromeniSkiCentarSve f = new PromeniSkiCentarSve(skiCentar, this);
             f.setLocationRelativeTo(null);
             f.setVisible(true);
         } catch (Exception ex) {
@@ -129,7 +129,7 @@ public class SviSkiCentriForma extends OpstaEkranskaForma {
             JOptionPane.showMessageDialog(this, "Izaberite red u tabeli", "Greska", JOptionPane.ERROR_MESSAGE);
         }
         /*kkissc.SOUcitajSkiCentar();
-            IzmeniSkiCentarForma2 f = new IzmeniSkiCentarForma2((SkiCentar) kkissc.getOdo());
+            PromeniSkiCentarSve f = new PromeniSkiCentarSve((SkiCentar) kkissc.getOdo());
             f.setLocationRelativeTo(null);
             f.setVisible(true);
         } catch (Exception ex) {

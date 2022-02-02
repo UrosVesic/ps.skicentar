@@ -209,9 +209,11 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
     @Override
     public void validirajPamcenje() throws ValidationException {
         IzmeniSkiPasForma ispf = (IzmeniSkiPasForma) oef;
+        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
         Validator.startValidation().validateNotNullOrEmpty(ispf.getTxtImePrezimeKupca().getText(), "Ime i prezime kupca je obavezno")
                 .validateNotNullOrEmpty(ispf.getTxtDatumIzdavanja().getText(), "Datum je obavezan")
                 .validateValueIsDate(ispf.getTxtDatumIzdavanja().getText(), "dd.MM.yyyy", "Datum mora biti u formatu dd.MM.gggg")
+                .validateListIsNotEmpty(model.getSkiPas().getStavkeSkiPasa(), "Mora postojati bar jedna stavka")
                 .throwIfInvalide();
     }
 

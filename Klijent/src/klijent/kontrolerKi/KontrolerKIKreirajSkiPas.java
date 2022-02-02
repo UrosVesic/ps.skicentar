@@ -101,7 +101,8 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
             Date pocetakVazenja = sdf.parse(kspf.getTxtPocetakVazenja().getText());
             StavkaSkiPasa stavka = new StavkaSkiPasa();
             stavka.setPocetakVazenja(pocetakVazenja);
-            Date zavrsetakVazenja = generisiDatumZavrsetka(stavka);
+            stavka.setSkiKarta((SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
+            Date zavrsetakVazenja = stavka.generisiDatumZavrsetka();
             kspf.getTxtZavrsetakVazenja().setText(sdf.format(zavrsetakVazenja));
             if (kspf.getTxtVrednostStavke().getText() != "") {
                 stavka = new StavkaSkiPasa(skiPas, 0, new BigDecimal(kspf.getTxtVrednostStavke().getText()), pocetakVazenja, zavrsetakVazenja, (SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());
@@ -114,11 +115,8 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
             JOptionPane.showMessageDialog(kspf, "Datum mora biti unesen u formatu dd.MM.gggg");
             Logger.getLogger(KreirajSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            if (ex.getMessage().equals("Postoje ski karte za ovaj datum")) {
-                JOptionPane.showMessageDialog(kspf, "Vec postoje karte za izabrani period");
-            } else {
+                JOptionPane.showMessageDialog(kspf, ex.getMessage());
                 ex.printStackTrace();
-            }
         }
     }
 
@@ -208,28 +206,6 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
                         "Ne moze se zapamtiti ski pas bez ijedne stavke").throwIfInvalide();
     }
 
-    private Date generisiDatumZavrsetka(StavkaSkiPasa stavka) {
-        switch (stavka.getSkiKarta().getVrstaSkiKarte()) {
-            case "Jednodnevna":
-                stavka.setZavrsetakVazenja(new Date(stavka.getZavrsetakVazenja().getTime() + 1000 * 60 * 60 * 24));
-                return stavka.getZavrsetakVazenja();
-
-            case "Dvodnevna":
-                stavka.setZavrsetakVazenja(new Date(stavka.getZavrsetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 2));
-                stavka.getZavrsetakVazenja();
-            case "Trodnevna":
-                stavka.setZavrsetakVazenja(new Date(stavka.getZavrsetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 3));
-                stavka.getZavrsetakVazenja();
-            case "Sedmodnevna":
-                stavka.setZavrsetakVazenja(new Date(stavka.getZavrsetakVazenja().getTime() + 1000 * 60 * 60 * 24 * 7));
-                stavka.getZavrsetakVazenja();
-            case "Nocna":
-                stavka.setZavrsetakVazenja(new Date(stavka.getZavrsetakVazenja().getTime() + 1000 * 60 * 60 * 24));
-                stavka.getZavrsetakVazenja();
-            default:
-                return null;
-        }
-
-    }
+   
 
 }
