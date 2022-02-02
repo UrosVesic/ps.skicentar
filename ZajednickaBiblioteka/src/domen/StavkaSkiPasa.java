@@ -195,6 +195,8 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
         return "sifraSkiPasa = " + skiPas.getSifraSkiPasa();
     }
 
+   
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -207,14 +209,16 @@ public class StavkaSkiPasa implements OpstiDomenskiObjekat, Serializable {
             return false;
         }
         final StavkaSkiPasa other = (StavkaSkiPasa) obj;
-        if (!Objects.equals(this.pocetakVazenja, other.pocetakVazenja)) {
+        if (this.redniBroj != other.redniBroj) {
             return false;
         }
-        if (!Objects.equals(this.skiKarta, other.skiKarta)) {
+        if (!Objects.equals(this.skiPas, other.skiPas)) {
             return false;
         }
         return true;
     }
+
+   
     
     public Date generisiDatumZavrsetka() {
         switch (this.getSkiKarta().getVrstaSkiKarte()) {

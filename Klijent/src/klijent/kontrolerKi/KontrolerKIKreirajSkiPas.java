@@ -99,6 +99,7 @@ public class KontrolerKIKreirajSkiPas extends OpstiKontrolerKI {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         try {
             Date pocetakVazenja = sdf.parse(kspf.getTxtPocetakVazenja().getText());
+            skiPas.setDatumIzdavanja(sdf.parse(kspf.getTxtDatumIzdavanja().getText()));
             StavkaSkiPasa stavka = new StavkaSkiPasa();
             stavka.setPocetakVazenja(pocetakVazenja);
             stavka.setSkiKarta((SkiKarta) kspf.getCmbSkiKarte().getSelectedItem());

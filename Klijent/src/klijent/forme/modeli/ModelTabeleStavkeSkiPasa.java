@@ -81,7 +81,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
 
     public void dodaj(StavkaSkiPasa stavka) throws Exception {
         validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
-                .validirajDaLiJeDatumStavkePosleIzdavanja(stavka,skiPas,"Stavka mora biti nakon datuma izdavanja")
+                .validirajDaLiJeDatumStavkePosleIzdavanja(stavka, skiPas, "Stavka mora biti nakon datuma izdavanja")
                 .throwIfInvalide();
         if (skiPas.getStavkeSkiPasa().size() > 0) {
             stavka.setRedniBroj(skiPas.getStavkeSkiPasa().get(skiPas.getStavkeSkiPasa().size() - 1).getRedniBroj() + 1);
@@ -104,6 +104,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
                     stavka1.setPocetakVazenja(sdf.parse((String) aValue));
                     validator.Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka1, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
                     stavkaSkiPasa.setPocetakVazenja(sdf.parse((String) aValue));
+                    stavkaSkiPasa.generisiDatumZavrsetka();
                 } catch (ParseException ex) {
                     ok.prikaziPorukuOGresci("Datum mora biri u formatu dd.MM.gggg");
                 } catch (ValidationException ex) {

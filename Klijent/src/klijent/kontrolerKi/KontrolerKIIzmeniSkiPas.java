@@ -25,7 +25,6 @@ import klijent.forme.OpstaEkranskaForma;
 import klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import klijent.forme.skiPas.IzmeniSkiPasForma;
 import klijent.forme.skiPas.KreirajSkiPasForma;
-import klijent.forme.skiPas.PronadjiSkiPasoveForma;
 import validator.ValidationException;
 import validator.Validator;
 
@@ -110,6 +109,7 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         try {
             Date pocetakVazenja = sdf.parse(ispf.getTxtPocetakVazenja().getText());
+            skiPas.setDatumIzdavanja(sdf.parse(ispf.getTxtDatumIzdavanja().getText()));
             StavkaSkiPasa stavka = new StavkaSkiPasa();
             stavka.setPocetakVazenja(pocetakVazenja);
             stavka.setSkiKarta((SkiKarta) ispf.getCmbSkiKarte().getSelectedItem());
@@ -126,7 +126,7 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
             JOptionPane.showMessageDialog(ispf, "Datum mora biti unesen u formatu dd.MM.gggg");
             Logger.getLogger(KreirajSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(ispf, "Vec postoje karte za izabrani period");
+            JOptionPane.showMessageDialog(ispf, ex.getMessage());
             ex.printStackTrace();
         }
     }
@@ -216,7 +216,5 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
                 .validateListIsNotEmpty(model.getSkiPas().getStavkeSkiPasa(), "Mora postojati bar jedna stavka")
                 .throwIfInvalide();
     }
-
-    
 
 }
